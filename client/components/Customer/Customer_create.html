@@ -1,0 +1,21 @@
+<template name="Customer_create">
+  <div class="panel panel-default appear-first">
+    <div class="panel-heading">DATOS DE LA EMPRESA</div>
+
+    <div class="panel-body">
+      {{#autoForm collection="Actodes" id="insertCompany" type="insert"}}
+      <fieldset>
+
+        {{> afQuickField name="actodeType" value=2}}
+        {{> afQuickField name="actodeIdType" value="CUIT"}}
+        {{> afQuickField name="country" options=countryOptions value='AR'}}
+        {{> afQuickField name="name"}}
+        {{> afQuickField name="cuit"}}
+
+
+      </fieldset>
+      <button type="submit" class="btn btn-primary">CREAR</button>
+      {{/autoForm}}
+    </div>
+  </div>
+</template>

@@ -1,0 +1,11 @@
+<template name="Dashboard">
+  <h1>PANEL</h1>
+  {{> Search_actode}}
+  {{#if showCreateOptions}}
+    {{> Create_options}}
+  {{else}}
+    <button id="btn-create" class="btn btn-primary">CREAR</button>
+  {{/if}}
+
+  <!--{{> Template.dynamic template=createArea}}-->
+</template>

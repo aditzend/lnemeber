@@ -1,0 +1,40 @@
+<template name="actodeListItem">
+    <li data-action="actode-item" class="list-group-item {{selected}}" value="{{_id}}">
+      {{> genderHeaderClickable}}
+      <!--<span class="appear-first result-man">{{name}}</span>
+      <span class="appear-second result-man">{{lastName}}</span>
+      <a href="/profiles/{{_id}}"><button type='button'><i class="fa fa-user"></i></button></a>-->
+    </li>
+
+
+      <!--<span class="appear-first result-woman">{{name}}</span>
+      <span class="appear-second result-woman">{{lastName}}</span>
+      <a href="/profiles/{{_id}}"><button type='button'><i class="fa fa-user"></i></button></a>-->
+
+  {{#if isSelected}}
+  <!--<div class="btn-group-sm modify-record" role="group" aria-label="...">
+    <button type="button" class="btn btn-default appear-first" data-action="editSelectedActode"><i class="fa fa-pencil "></i></button>
+    <button type="button" class="btn btn-default appear-second" data-action="deleteSelectedActode"><i class="fa fa-trash "></i></button>
+  </div>-->
+  {{/if}}
+</template>
+<template name='genderHeaderClickable'>
+
+    {{#if isMan gender}}
+    <p id='clickable-line' class='man'>
+    <a href='../show-customer/{{_id}}' class='area-man'>
+       {{name}} {{lastName}}
+       <strong> > </strong>
+    </a>
+  </p>
+
+    {{else}}
+     <p id='clickable-line' class='woman'>
+      <a href='../show-customer/{{_id}}' class='area-woman'>
+         {{name}} {{lastName}}
+         <strong> > </strong>
+      </a>
+    </p>
+    {{/if}}
+
+</template>

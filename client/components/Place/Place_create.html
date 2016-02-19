@@ -1,0 +1,33 @@
+<template name="Place_create">
+  <div class='col-xs-12 col-md-6 col-lg-3'>
+  <div class="panel panel-default appear-second">
+  <div class="panel-heading">NUEVO LUGAR</div>
+  <div class="panel-body">
+    {{#autoForm collection="Places" id="insertPlaceForm" type="insert"}}
+    <fieldset>
+      <div>
+
+
+      </div>
+      <div class="appear-first">
+        {{> afQuickField name="placeType" options= placeTypeOptions}}
+      </div>
+      <div class="appear-second">
+      {{> afQuickField name="address" }}
+    </div>
+      <div class="appear-third">
+      {{> afQuickField name="text" }}
+    </div>
+    <div class="appear-third">
+    {{> afQuickField name="phone" }}
+    </div>
+    </fieldset>
+    <div class='appear-fourth'>
+    <button type="submit" class="btn btn-primary">CREAR</button>
+    </div>
+    {{/autoForm}}
+  </div>
+
+</div>
+</div>
+</template>

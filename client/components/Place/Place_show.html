@@ -1,0 +1,23 @@
+<template name="Place_show">
+    <div class='col-xs-12 col-md-6 col-lg-3'>
+
+  {{#if places}}
+    <h4 class='text-uppercase'>Direcciones <small></small></h4>
+  {{#each places}}
+  <div class='well well-sm' data-action='edit' id={{_id}}>
+  <p class='text-left text-info'><small>{{{convertPlaceTypeOption placeType}}}</small></p>
+  <div class='row'>
+    <div class='col-xs-8 col-md-8 col-lg-8'>
+       <i class='text-muted fa fa-map-marker'></i> {{address}} {{#if text}}- {{text}} {{/if}}
+ </div>
+ <div class='col-xs-4 col-md-4 col-lg-4'>
+   {{#if phone}}<a class='btn btn-lg btn-primary' href='tel:{{phone}}'><i class="fa fa-phone"></i></a> {{/if}}
+ </div>
+
+ </div>
+ </div>
+
+  {{/each}}
+  {{/if}}
+</div>
+</template>
