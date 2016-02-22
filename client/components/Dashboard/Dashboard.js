@@ -1,8 +1,13 @@
 Template.Dashboard.onCreated( function() {
   this.autorun( () => {
     this.subscribe('Actodes.all');
+    this.subscribe('Rels.byOwner', Meteor.userId()); // replace userId with OWNER, e.g. belongsTo
+
   });
-})
+
+});
+
+
 
 Template.Dashboard.events({
   'click #btn-create' : function() {
@@ -10,6 +15,10 @@ Template.Dashboard.events({
 
     //BlazeLayout.render('Dashboard',{createArea:'Create'})
   }
+
+
+
+
 });
 
 Template.Dashboard.helpers({

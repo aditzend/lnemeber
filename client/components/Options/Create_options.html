@@ -1,10 +1,25 @@
 <template name="Create_options">
-  <a class='btn btn-lg btn-default' href="{{pathFor 'createCustomer'}}">CLIENTE</a>
-  <hr>
-  <a class='btn btn-lg btn-default' href="{{pathFor 'createVendor'}}">PROVEEDOR</a>
-  <hr>
-  <a class='btn btn-lg btn-default' href="{{pathFor 'createSupply'}}">INSUMO</a>
-  <hr>
-  <a class='btn btn-lg btn-default' href="{{pathFor 'createProduct'}}">PRODUCTO</a>
-  <hr>
+  <div class='row'>
+
+    <div class='col-xs-12 col-md-6 col-lg-3'>
+      <a class='btn btn-primary appear-first' href="../create-company?relType=SUPL">+CLIENTE</a>
+      <hr>
+    </div>
+
+    <div class='col-xs-12 col-md-6 col-lg-3'>
+      <a class='btn btn-primary appear-second' href="{{pathFor 'createVendor'}}">+PROVEEDOR</a>
+      <hr>
+    </div>
+
+    <div class='col-xs-12 col-md-6 col-lg-3'>
+      <a class='btn btn-primary appear-third' href="{{pathFor 'createSupply'}}">+INSUMO</a>
+      <hr>
+    </div>
+
+    <div class='col-xs-12 col-md-6 col-lg-3'>
+      <a class='btn btn-primary appear-fourth' href="{{pathFor 'createProduct'}}">+PRODUCTO</a>
+      <hr>
+    </div>
+
+    </div>
 </template>

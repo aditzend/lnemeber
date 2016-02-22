@@ -18,11 +18,7 @@ var hooksObject = {
   after: {
     insert : function(error, result) {
       console.log('Relationship with customer id:  ' + result);
-      if (!error) {
-        Session.set('creating',false);
-      }else{
-        console.log(error);
-      }
+      Session.set('creating',false);
     }
   }
 }

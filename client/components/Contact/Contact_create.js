@@ -1,6 +1,6 @@
 Template.Contact_create.onCreated( function() {
   Actodes.attachSchema(Schema.Contact, {replace:true});
-  Relationships.attachSchema(Schema.RelCompanyContact, {replace:true});
+  Rels.attachSchema(Schema.RelCompanyContact, {replace:true});
   console.log('Schema.Contact attached');
   console.log('Schema.RelCompanyContact attached');
 
@@ -8,15 +8,21 @@ Template.Contact_create.onCreated( function() {
 });
 
 var hooksObject = {
+  before: {
+    insert: function(doc) {
+      doc.actodeType = 1;
+      return doc;
+    }
+  },
   after: {
     insert: function(error,result) {
       Session.set('creating',false);
       console.log('actode inserted _id: ' + result);
-      Relationships.insert({
+      Rels.insert({
         origin:result,
         destiny:FlowRouter.getParam('_id'),
         owner:Meteor.userId(),
-        type:'IS_CONTACT_OF'
+        type:'CONT'
       });
       console.log('rel created');
 

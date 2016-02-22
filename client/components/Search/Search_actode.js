@@ -1,3 +1,9 @@
+Template.Search_actode.onCreated( function() {
+  //$('#search-input').focus();
+  //console.log($('#search-input'));
+});
+
+
 Template.Search_actode.helpers({
 
   // taken from easysearch

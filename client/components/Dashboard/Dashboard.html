@@ -1,11 +1,34 @@
 <template name="Dashboard">
-  <h1>PANEL</h1>
-  {{> Search_actode}}
-  {{#if showCreateOptions}}
-    {{> Create_options}}
-  {{else}}
-    <button id="btn-create" class="btn btn-primary">CREAR</button>
-  {{/if}}
+  <div class='row'>
+    <div class='col-xs-12 col-md-12 col-lg-12'>
+      <h1 class='shadow'>PANEL</h1>
+      <hr>
+    </div>
+  </div>
+  <div class='row'>
+    <div class='col-xs-12 col-md-12 col-lg-12'>
 
-  <!--{{> Template.dynamic template=createArea}}-->
+      {{#if showCreateOptions}}
+        {{> Create_options}}
+        {{else}}
+        <button id="btn-create" class="btn btn-primary">CREAR</button>
+      {{/if}}
+    </div>
+  </div>
+  
+  <div class='row'>
+    <div class='col-xs-12 col-md-6 col-lg-4'>
+    <p class='text-left text-info'><small>BUSCAR</small></p>
+  {{> Search_actode}}
+</div>
+<div class='col-xs-12 col-md-6 col-lg-4'>
+<p class='text-left text-info'><small>NEW COMP.</small></p>
+</div>
+<div class='col-xs-12 col-md-6 col-lg-4'>
+  <p class='text-left text-info'><small>NEW COMP.</small></p>
+
+</div>
+</div>
+
+<!--{{> Template.dynamic template=createArea}}-->
 </template>

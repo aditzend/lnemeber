@@ -1,3 +1,52 @@
+Template.registerHelper("deleting", function(){
+  return Session.get('deleting');
+});
+
+Template.registerHelper("editing", function(){
+  return Session.get('editing');
+});
+
+Template.registerHelper("editingId", function(id){
+  return (Session.get('editing') === id) ? true : false ;
+});
+
+Template.registerHelper("thisId", function(){
+  return this._id;
+});
+Template.registerHelper("relTypeTranslate", function(relType){
+    switch (relType) {
+      case 'SUPL' :
+        return 'CLIENTE';
+        break;
+      case 'CONT' :
+        return 'CONTACTO';
+        break;
+      default:
+       return '';
+       break;
+    }
+
+});
+
+Template.registerHelper("getRelType", function(){
+  return FlowRouter.getQueryParam('relType');
+});
+
+Template.registerHelper("relTypeLink", function(relType){
+    switch (relType) {
+      case 'SUPL' :
+        return 'show-customer';
+        break;
+      case 'CONT' :
+        return 'show-contact';
+        break;
+      default:
+       return '';
+       break;
+    }
+
+});
+
 Template.registerHelper("placeTypeOptions", function(){
   return [
     {label:'la oficina principal', value: 1},

@@ -1,0 +1,101 @@
+<template name="Contact_show_profile">
+  {{#momentum plugin='left-to-right'}}
+    <div class='container-fluid'>
+      <div class='row'>
+        <div class='col-xs-12 col-md-6 col-lg-8'>
+          {{#with actode}}
+            <h1 class='shadow'>{{treatedAs}}</h1>
+
+          {{/with}}
+          <hr>
+        </div>
+        <div class='col-xs-12 col-md-6 col-lg-4'>
+
+      <!--    <button id="rel-create-btn" class='btn btn-primary' data-action='rel-create'>
+            <i class='fa fa-2x fa-link'></i>
+            <i class='fa fa-plus'></i>
+          </button>-->
+
+        </div>
+      </div>
+      {{#if deleting}}<br>
+        <div class='alert alert-danger shake' role='alert'>
+          <p>CUIDADO! MODO DE BORRADO.</p>
+          <p>Tocar la X para borrar elemento.</p>
+          <br>
+          <button id="exit-delete-btn" class='btn btn-danger' data-action='exit-delete'>SALIR</button>
+        </div>
+      {{/if}}
+      {{#if editing}}<br>
+        <div class='alert alert-warning appear-first' role='alert'>
+          <p>MODO DE EDICION
+            <button id="exit-edit-btn" class='btn btn-warning' data-action='exit-edit'>SALIR</button>
+          </p>
+        </div>
+      {{/if}}
+      {{#if creating}}<br>
+        <div class='alert alert-success appear-first' role='alert'>
+          <p>MODO DE CREACION
+            <button id="exit-create-btn" class='btn btn-success' data-action='exit-create'>SALIR</button>
+          </p>
+        </div>
+        <div class='row'>
+          <div class='col-xs-12 col-md-6 col-lg-3'>
+            {{> Template.dynamic template=create}}
+          </div>
+        </div>
+      {{/if}}
+      <div class='row'>
+        <div class='col-xs-12 col-md-6 col-lg-3'>
+          <h4 class='text-uppercase'>Datos</h4>
+          {{#with actode}}
+          {{#if editingId 'actode'}}
+            {{> Contact_edit}}
+          {{else}}
+            <div class='well well-sm well-clickable' data-action='edit-actode' >
+              <p><small class='text-muted'>
+                {{#if isMale}}
+                  <i class='fa fa-mars'> </i>{{else}}
+                  <i class='fa fa-venus'> </i>
+                {{/if}}
+
+              </small>
+            </p>
+                <p>NOMBRE:
+                  {{name}}
+                  {{middleName}}
+                </p>
+                  <p>APELLIDO:
+                    {{lastName}}</p>
+                  <p>EMAIL :
+                    {{email}}</p>
+                  <p>CELULAR:
+                    {{mobile}}</p>
+                  <p>TRATAMIENTO:
+                    {{treatedAs}}
+                    {{#if formalTreatment}}
+                      <span class='label label-warning'>FORMAL</span>
+                    {{/if}}
+                  </p>
+
+              </div>
+            {{/if}}
+            {{/with}}
+          </div>
+          {{#if rels}}
+              <div class='col-xs-12 col-md-6 col-lg-3'>
+                <h4 class='text-uppercase'>Relaciones</h4>
+                <button id="delete-btn" class='btn btn-danger' data-action='delete'>
+                  <i class='fa fa-2x fa-trash'></i>
+                </button>
+              {{#each rels}}
+                  {{> Contact_rel_show}}
+              {{/each}}
+            </div>
+        {{/if}}
+        </div>
+      </div>
+
+
+    {{/momentum}}
+  </template>

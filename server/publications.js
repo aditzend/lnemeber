@@ -1,3 +1,5 @@
+
+//------------------------ACTODES---------------------
 Meteor.publish('Actodes.byId',
  function(actodeId) {
    if (this.userId) {
@@ -15,6 +17,9 @@ Meteor.publish('Actodes.all', function () {
   }
 });
 
+//------------------------PLACES---------------------
+
+
 Meteor.publish('Places.byRelatedActode',
   function (actodeId) {
     if (this.userId) {
@@ -31,10 +36,13 @@ Meteor.publish('Places.all',
       this.ready();
     }
 });
-Meteor.publish('Relationships.byDestiny',
+//------------------------RELS---------------------
+
+//To get suppliers and customers
+Meteor.publish('Rels.byDestiny',
  function (origin,destiny) {
   if (this.userId) {
-    return Relationships.find({
+    return Rels.find({
       origin: origin,
       destiny: destiny,
       owner: this.userId
@@ -43,48 +51,58 @@ Meteor.publish('Relationships.byDestiny',
     this.ready();
   }
 });
-/*
-Meteor.publish('Contacts.byDestiny',
-  function (destiny,owner) {
-    if (this.userId) {
-      return Relationships.find({
-        destiny: destiny,
-        owner: owner,
-        type: 'IS_CONTACT_OF'
-      }
-      );
-    }
+
+//To get rels of a contact
+Meteor.publish('Rels.byOrigin',
+ function (origin) {
+  if (this.userId) {
+    return Rels.find({
+      origin: origin,
+      owner: this.userId //belongsTo
+    });
+  }else{
+    this.ready();
+  }
 });
-*/
+
+
+
+//To get the company/companies to with a contact belongs
+Meteor.publish('CompanyContacts',
+ function (origin) {
+  if (this.userId) {
+    return Rels.find({
+      origin: origin,
+      destiny: destiny,
+      type:'CONT',
+      owner: this.userId
+    });
+  }else{
+    this.ready();
+  }
+});
+
+Meteor.publish('Rels.byOwner',
+ function (owner) {
+  if (this.userId) {
+    return Rels.find({
+      owner: owner
+    });
+  }else{
+    this.ready();
+  }
+});
+
 Meteor.publish('Contacts.byDestiny',
   function (destiny,owner) {
     if (this.userId) {
-      return Relationships.find({
+      return Rels.find({
                 destiny: destiny,
                 owner: owner,
-                type: 'IS_CONTACT_OF'
+                type: 'CONT'
               });
       }else{
         this.ready();
       }
   }
 );
-
-/*Meteor.publish('Relationships.byOwner',
- function () {
-  if (this.userId) {
-    return Relationships.find({
-      //owner: "sdd5JEgfDjoBr8iHm"
-    });
-  }else{
-    this.ready();
-  }
-});*/
-
-/*Meteor.publish('Relationships.all', function () {
-  if (this.userId) {
-    return Relationships.find();
-  }else{
-    this.ready();
-  }
-});*/

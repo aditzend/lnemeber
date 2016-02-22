@@ -1,0 +1,62 @@
+<template name="Search_fast_result">
+  <!-- FAST VIEW, NOT PROFILE, USER HAS TO CLICK ON THE NAME TO GO TO PROFILE PAGE -->
+  <div class='appear-first'>
+    <br>
+    {{#if rel}}
+      <h3>{{name}}</h3>
+      <p>
+        <span class='label label-default'>
+          {{relTypeTranslate rel.type}}</span>
+      </p>
+      <a class='btn btn-primary' href='../show-{{actodeType}}/{{rel.destiny}}'>VER real</a>
+    {{/if}}
+    {{#if cont}}
+      <h3>{{treatedAs}}</h3>
+      <p>
+        <span class='label label-default'>
+          {{relTypeTranslate cont.type}}</span>
+        </p>
+        <div class='row'>
+          <div class='col-xs-6 col-md-6 col-lg-4'>
+            <p class='text text-muted'>
+              <small class='text-muted'>
+                {{#if isMale}}
+                  <i class='fa fa-mars'> </i>{{else}}
+                  <i class='fa fa-venus'> </i>
+                {{/if}}
+
+              </small>
+              {{#if formalTreatment}}
+                <span class='label label-warning'>FORMAL</span>
+              {{/if}}
+            </p>
+          </div>
+
+          <div class='col-xs-3 col-md-3 col-lg-4'>
+            {{#if email}}
+
+              <a class='btn btn-lg btn-primary' href='mailto:{{email}}' data-action='email'>
+                <i class='fa fa-envelope'></i>
+              </a>
+
+            {{/if}}
+
+          </div>
+          <div class='col-xs-3 col-md-3 col-lg-4'>
+
+            {{#if mobile}}
+              <a class='btn btn-lg btn-primary' href='tel:{{mobile}}' data-action='mobile'>
+                <i class='fa fa-whatsapp'></i>
+              </a>
+            {{/if}}
+
+          </div>
+
+        </div>
+          <a class='btn btn-primary' href='../show-{{actodeType}}/{{cont.origin}}'>VER PERFIL</a>
+        {{/if}}
+      </div>
+
+      <br/>
+
+    </template>

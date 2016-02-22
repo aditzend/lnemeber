@@ -1,0 +1,86 @@
+<template name="Company_show">
+
+  {{#momentum plugin='left-to-right'}}
+
+  <div class='container-fluid'>
+    <div class='row'>
+      <div class='col-xs-12 col-md-8 col-lg-9'>
+        {{#with company}}
+          <h1 class='shadow'>{{name}} </h1>
+          <p><span class='label label-default'>{{relTypeTranslate getRelType}}</span></p>
+
+          {{#if cuit}}
+            <h5>CUIT:
+              {{cuit}}</h5>
+          {{/if}}
+        {{/with}}
+
+
+      </div>
+      <div class='col-xs-12 col-md-4 col-lg-3'>
+        <button id="Place_create" class='btn btn-primary' data-action='showPlace_create'>
+          <i class='fa fa-2x fa-map-marker'></i>
+          <i class='fa fa-plus'></i>
+        </button>
+        <button id="Contact_create" class='btn btn-primary' data-action='showContact_create'>
+          <i class='fa fa-2x fa-user'></i>
+          <i class='fa fa-plus'></i>
+        </button>
+        <button id="delete-btn" class='btn btn-danger' data-action='delete'>
+          <i class='fa fa-2x fa-trash'></i>
+        </button>
+
+
+      </div>
+      <div class='col-xs-12 col-md-12 col-lg-12'>
+        <hr>
+      </div>
+
+    </div>
+    {{#if deleting}}
+    <br>
+      <div class='alert alert-danger shake' role='alert'>
+        <p>CUIDADO! MODO DE BORRADO. </p>
+        <p>Tocar la X para borrar elemento. </p>
+        <br>
+      <button id="exit-delete-btn" class='btn btn-danger' data-action='exit-delete'>
+        SALIR
+      </button>
+      </div>
+    {{/if}}
+    {{#if editing}}
+    <br>
+      <div class='alert alert-warning appear-first' role='alert'>
+        <p>MODO DE EDICION   <button id="exit-edit-btn" class='btn btn-warning' data-action='exit-edit'>
+        SALIR
+      </button>
+    </p>
+      </div>
+    {{/if}}
+    {{#if creating}}
+    <br>
+      <div class='alert alert-success appear-first' role='alert'>
+        <p>MODO DE CREACION   <button id="exit-create-btn" class='btn btn-success' data-action='exit-create'>
+        SALIR
+      </button>
+    </p>
+      </div>
+      <div class='row'>
+        <div class='col-xs-12 col-md-12 col-lg-12'>
+
+          {{> Template.dynamic template=create}}
+        </div>
+      </div>
+    {{/if}}
+    <div class='row'>
+
+        {{> Rel_show}}
+        {{> Place_show}}
+        {{> Contact_show }}
+
+    </div>
+
+  </div>
+  {{/momentum}}
+
+</template>

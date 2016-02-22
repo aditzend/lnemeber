@@ -1,4 +1,45 @@
 <template name="Contact_create">
-  <h4>Crear Contacto <small></small></h4>
-  {{> quickForm collection='Actodes' id='insertContactForm' type='insert'}}
+  <br>
+  <div class='panel panel-default'>
+
+    <div class='panel-heading'>
+      NUEVO CONTACTO
+    </div>
+    <div class='panel-body'>
+    {{# autoForm collection='Actodes' id='insertContactForm' type='insert'}}
+      <fieldset>
+        {{#momentum plugin='fade'}}
+          <div class='row'>
+            <div class='col-xs-12 col-sm-6 col-md-4 col-lg-3'>
+              {{> afQuickField name='name'}}
+            </div>
+            <div class='col-xs-12 col-sm-6 col-md-4 col-lg-3'>
+              {{> afQuickField name='middleName'}}
+            </div>
+            <div class='col-xs-12 col-sm-6 col-md-4 col-lg-3'>
+              {{> afQuickField name='lastName'}}
+            </div>
+            <div class='col-xs-12 col-sm-6 col-md-4 col-lg-3'>
+              {{> afQuickField name='treatedAs'}}
+            </div>
+            <div class='col-xs-12 col-sm-6 col-md-4 col-lg-3'>
+              {{> afQuickField name='isMale'}}
+            </div>
+            <div class='col-xs-12 col-sm-6 col-md-4 col-lg-3'>
+              {{> afQuickField name='formalTreatment'}}
+            </div>
+            <div class='col-xs-12 col-sm-6 col-md-4 col-lg-3'>
+              {{> afQuickField name='email'}}
+            </div>
+            <div class='col-xs-12 col-sm-6 col-md-4 col-lg-3'>
+              {{> afQuickField name='mobile'}}
+            </div>
+
+        </div>
+        {{/momentum}}
+      </fieldset>
+      <button type='submit' class='btn btn-primary'>CREAR</button>
+    {{/autoForm}}
+</div>
+  </div>
 </template>
