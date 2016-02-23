@@ -21,8 +21,15 @@ Template.Contact_show.helpers({
 });
 
 Template.Contact_show.events({
+  "click [data-action=click-override]" : function() {
+    Session.set('btn',true);
+    setTimeout(function(){
+    Session.set('btn',false);
+    }, 100);
+  },
 
-"click [data-action=mobile]" : function() {
+
+/*"click [data-action=mobile]" : function() {
   Session.set('btn',true);
   setTimeout(function(){
   Session.set('btn',false);
@@ -35,7 +42,7 @@ Template.Contact_show.events({
   Session.set('btn',false);
   console.log('btn UNCLICK');
 }, 100);
-},
+},*/
 "click [data-action=show-profile]" : function() {
   if (Session.get('btn')) {
     console.log('btn tocado, no hago nada');

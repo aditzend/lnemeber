@@ -23,9 +23,22 @@ Template.Place_show.helpers({
 
 
 Template.Place_show.events({
+  "click [data-action=phone]" : function() {
+    Session.set('btn',true);
+    setTimeout(function(){
+    Session.set('btn',false);
+    }, 100);
+  },
   'click [data-action=edit]' : function(e) {
-    console.log('editing');
-    Session.set('editing',this._id);
+//
+if (Session.get('btn')) {
+  console.log('btn tocado, no hago nada');
+}else{
+  console.log('editing');
+  Session.set('editing',this._id);
+}
+//
+
   },
   'click [data-action=delete-item]' : function() {
     Session.set('btn',true);

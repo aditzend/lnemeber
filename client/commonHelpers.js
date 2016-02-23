@@ -21,6 +21,8 @@ Template.registerHelper("relTypeTranslate", function(relType){
       case 'CONT' :
         return 'CONTACTO';
         break;
+      case 'CUST' :
+        return 'PROVEEDOR';
       default:
        return '';
        break;
