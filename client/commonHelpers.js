@@ -1,3 +1,5 @@
+console.log("Loading commonHelpers.js");
+
 Template.registerHelper("deleting", function(){
   return Session.get('deleting');
 });
