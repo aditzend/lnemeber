@@ -16,15 +16,20 @@ var hooksObject = {
   },
   after: {
     insert: function(error,result) {
-      Session.set('creating',false);
-      console.log('actode inserted _id: ' + result);
-      Rels.insert({
-        origin:result,
-        destiny:FlowRouter.getParam('_id'),
-        owner:Meteor.userId(),
-        type:'CONT'
-      });
-      console.log('rel created');
+      if (error) {
+        console.log(error);
+      }else{
+        Session.set('creating',false);
+        console.log('actode inserted _id: ' + result);
+        Rels.insert({
+          origin:result,
+          destiny:FlowRouter.getParam('_id'),
+          owner:Meteor.userId(),
+          type:'CONT'
+        });
+        console.log('rel created');
+      }
+
 
     }
   }

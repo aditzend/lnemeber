@@ -25,9 +25,21 @@
             <div class='col-xs-12 col-sm-6 col-md-4 col-lg-3'>
               {{> afQuickField name='isMale'}}
             </div>
+            <hr>
+            <p>Cumplea&ntilde;os</p>
             <div class='col-xs-12 col-sm-6 col-md-4 col-lg-3'>
-              {{> afQuickField name='bdate'}}
+              <div class='col-xs-4 col-sm-4 col-md-4 col-lg-4'>
+                {{> afFieldInput name='bDayOfMonth' options= dayOfMonthOptions}}
+              </div>
+              <div class='col-xs-4 col-sm-4 col-md-4 col-lg-4'>
+                {{> afFieldInput name='bMonth' options= monthOptions}}
+              </div>
+              <div class='col-xs-4 col-sm-4 col-md-4 col-lg-4'>
+                {{> afFieldInput name='bYear' options= bYearOptions}}
+              </div>
             </div>
+
+            <hr>
             <div class='col-xs-12 col-sm-6 col-md-4 col-lg-3'>
               {{> afQuickField name='formalTreatment'}}
             </div>

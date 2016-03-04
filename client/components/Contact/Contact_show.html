@@ -23,10 +23,13 @@
                     {{/if}}
                     <h4 class='text-info'>
                   {{treatedAs}}</h4>
-                  {{#if bdate}}
-                  <p>  <span class='label label-info'>{{bdate}}</span> </p>
+                  <p class='text-muted'>{{name}} {{lastName}}</p>
+                  {{#if bDayOfMonth}}
+                  <p>  <span class='label label-info'>
+                    {{bDayOfMonth}}/{{bMonth}}{{#if bYear}}/{{bYear}} {{/if}}
+                  </span> </p>
                   {{/if}}
-
+                  
                   </div>
                 </div>
                 <div class='row'>

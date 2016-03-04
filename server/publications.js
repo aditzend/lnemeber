@@ -67,6 +67,7 @@ Meteor.publish('Rels.byOrigin',
 
 
 
+
 //To get the company/companies to with a contact belongs
 Meteor.publish('CompanyContacts',
  function (origin) {
@@ -106,3 +107,24 @@ Meteor.publish('Contacts.byDestiny',
       }
   }
 );
+
+//---------------------GENERICS-------------------------
+//To get all GENERICS
+
+Meteor.publish('Generics.all', function () {
+  if (this.userId) {
+    return Generics.find();
+  }else{
+    this.ready();
+  }
+});
+
+//To get a GENERIC by _id
+
+Meteor.publish('Generics.byId', function (id) {
+  if (this.userId) {
+    return Generics.find(id);
+  }else{
+    this.ready();
+  }
+});

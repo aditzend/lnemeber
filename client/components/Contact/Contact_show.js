@@ -1,3 +1,4 @@
+
 Template.Contact_show.onCreated( function() {
   //const origin = Meteor.userId();
   const destiny = FlowRouter.getParam('_id');

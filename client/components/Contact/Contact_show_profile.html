@@ -5,6 +5,7 @@
         <div class='col-xs-12 col-md-6 col-lg-8'>
           {{#with actode}}
             <h1 class='shadow'>{{treatedAs}}</h1>
+            <h3 class='shadow text-complement'>{{name}} {{lastName}}</h3>
 
           {{/with}}
           <hr>
@@ -18,22 +19,13 @@
 
         </div>
       </div>
-      {{#if deleting}}<br>
-        <div class='alert alert-danger shake' role='alert'>
-          <p>CUIDADO! MODO DE BORRADO.</p>
-          <p>Tocar la X para borrar elemento.</p>
-          <br>
-          <button id="exit-delete-btn" class='btn btn-danger' data-action='exit-delete'>SALIR</button>
-        </div>
+      {{#if deleting}}
+        {{Alert_delete}}
       {{/if}}
-      {{#if editing}}<br>
-        <div class='alert alert-warning appear-first' role='alert'>
-          <p>MODO DE EDICION
-            <button id="exit-edit-btn" class='btn btn-warning' data-action='exit-edit'>SALIR</button>
-          </p>
-        </div>
+      {{#if editing}}
+        {{Alert_edit}}
       {{/if}}
-      {{#if creating}}<br>
+      {{#if creating}}<!--<br>
         <div class='alert alert-success appear-first' role='alert'>
           <p>MODO DE CREACION
             <button id="exit-create-btn" class='btn btn-success' data-action='exit-create'>SALIR</button>
@@ -43,7 +35,8 @@
           <div class='col-xs-12 col-md-6 col-lg-3'>
             {{> Template.dynamic template=create}}
           </div>
-        </div>
+        </div>-->
+        {{Alert_Form_Create}}
       {{/if}}
       <div class='row'>
         <div class='col-xs-12 col-md-6 col-lg-3'>
