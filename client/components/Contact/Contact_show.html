@@ -23,13 +23,9 @@
                     {{/if}}
                     <h4 class='text-info'>
                   {{treatedAs}}</h4>
-                  <p class='text-muted'>{{name}} {{lastName}}</p>
-                  {{#if bDayOfMonth}}
-                  <p>  <span class='label label-info'>
-                    {{bDayOfMonth}}/{{bMonth}}{{#if bYear}}/{{bYear}} {{/if}}
-                  </span> </p>
-                  {{/if}}
-                  
+                  <p class='text-muted'>{{name}} {{lastName}} {{bdate}}</p>
+                  {{> Birthday_show}}
+
                   </div>
                 </div>
                 <div class='row'>

@@ -11,6 +11,7 @@ var hooksObject = {
   before: {
     insert: function(doc) {
       doc.actodeType = 1;
+      //doc.bdateObj = moment();
       return doc;
     }
   },

@@ -1,34 +1,100 @@
 <template name="Birthday_show">
-<div>
-  {{#if isToday bdate}}<!-- >>>>>> isToday -->
-    <h6 class="label label-100">Hoy cumple {{age bdate}}!</h6>
-    {{else}} <!-- bDay is not today -->
-      {{calcNearest bdate}}
-      {{#if hasPassed}}<!-- >>>>>>   hasPassed -->
-        {{#if moreThanAWeekAgo}}<!-- >>>>>>   moreThanAWeekAgo -->
-            <h5 class="label label-800"> Tiene {{age bdate}}. Cumple: {{bDayPlain}}</h5>
-          {{else}}  <!-- bDay was less than a week ago -->
-            {{#if wasYesterday}}<!-- >>>>>>   wasYesterday -->
-                <h5 class="label label-200"> Tiene {{age bdate}}. Cumple: {{bDayPlain}}</h5>
-              {{else}}
-                <h6 class="label label-500">Cumplio {{age bdate}} {{bDayClose}}</h6>
-            {{/if}}<!--     wasYesterday <<<<<< -->
-        {{/if}}<!--     moreThanAWeekAgo <<<<<< -->
-        {{else}} <!-- bDay has not passed yet -->
-          {{#if isTomorrow}}<!-- >>>>>>   isTomorrow  -->
-            <h5 class="label label-200">Cumple {{newAge bdate}} ma&ntilde;ana !</h5>
-            {{else}} <!-- bDay is not tomorrow -->
-              {{#if inLessThanAWeek}}<!-- >>>>>>   inLessThanAWeek -->
-                  <h5 class="label label-300"> Cumple {{newAge bdate}} a&ntilde;os  {{bDayClose}}</h5>
-                {{else}}<!-- bDay is in more than a week -->
-                  {{#if inLessThanAMonth}}<!-- >>>>>>   inLessThanAMonth -->
-                    <h5 class="label label-400"> Cumple {{newAge bdate}}  {{bDayLong}}</h5>
-                   {{else}}<!-- bDay is in more than a month -->
-                   <h5 class="label label-800"> Tiene {{age bdate}}. Cumple: {{bDayPlain}}</h5>
-                  {{/if}}<!--     inLessThanAMonth <<<<<< -->
-              {{/if}}<!--     inLessThanAWeek <<<<<< -->
-            {{/if}}<!--     isTomorrow <<<<<< -->
-        {{/if}}<!--    hasPassed <<<<<< -->
-    {{/if}}<!--    isToday <<<<<< -->
-</div>
+  <div>
+    {{#if age}}
+      {{#if isToday }}<!-- >>>>>> isToday -->
+        <h6 class="label label-100">Hoy cumple {{age}}!</h6>
+        {{else}} <!-- bDay is not today -->
+          {{#if hasPassed}}<!-- >>>>>>   hasPassed -->
+            {{#if moreThanAWeekAgo}}<!-- >>>>>>   moreThanAWeekAgo -->
+                <h5 class="label label-800"> Tiene {{age}}.Cumple: {{bDayPlain}}</h5>
+              {{else}}  <!-- bDay was less than a week ago -->
+                {{#if wasYesterday}}<!-- >>>>>>   wasYesterday -->
+                    <h5 class="label label-200"> Tiene {{age}}.Cumpli&oacute; ayer!</h5>
+                  {{else}}
+                    <h6 class="label label-500">Cumpli&oacute; {{age}} {{bDayClose}}</h6>
+                {{/if}}<!--     wasYesterday <<<<<< -->
+            {{/if}}<!--     moreThanAWeekAgo <<<<<< -->
+            {{else}} <!-- bDay has not passed yet -->
+              {{#if isTomorrow}}<!-- >>>>>>   isTomorrow  -->
+                <h5 class="label label-200">Cumple {{newAge}} ma&ntilde;ana !</h5>
+                {{else}} <!-- bDay is not tomorrow -->
+                  {{#if inLessThanAWeek}}<!-- >>>>>>   inLessThanAWeek -->
+                      <h5 class="label label-300"> Cumple {{newAge}} a&ntilde;os  {{bDayClose}}</h5>
+                    {{else}}<!-- bDay is in more than a week -->
+                      {{#if inLessThanAMonth}}<!-- >>>>>>   inLessThanAMonth -->
+                        <h5 class="label label-400"> Cumple {{newAge}}  {{bDayLong}}</h5>
+                       {{else}}<!-- bDay is in more than a month -->
+                       <h5 class="label label-800"> Tiene {{age}}. Cumple: {{bDayPlain}}</h5>
+                      {{/if}}<!--     inLessThanAMonth <<<<<< -->
+                  {{/if}}<!--     inLessThanAWeek <<<<<< -->
+                {{/if}}<!--     isTomorrow <<<<<< -->
+            {{/if}}<!--    hasPassed <<<<<< -->
+        {{/if}}<!--    isToday <<<<<< -->
+    {{else}}
+      {{#if bornToday}}
+        <h6 class="label label-100">Naci&oacute; hoy!</h6>
+      {{else}}
+        {{#if newBorn}}
+          {{#if hasPassed}}<!-- >>>>>>   hasPassed -->
+            {{#if moreThanAWeekAgo}}<!-- >>>>>>   moreThanAWeekAgo -->
+                <h5 class="label label-800"> Tiene {{newBorn}}.Cumple: {{bDayPlain}}</h5>
+              {{else}}  <!-- bDay was less than a week ago -->
+                {{#if wasYesterday}}<!-- >>>>>>   wasYesterday -->
+                    <h5 class="label label-200"> Nacio ayer!</h5>
+                  {{else}}
+                    <h6 class="label label-500">Nacio {{bDayClose}}</h6>
+                {{/if}}<!--     wasYesterday <<<<<< -->
+            {{/if}}<!--     moreThanAWeekAgo <<<<<< -->
+            {{else}} <!-- bDay has not passed yet -->
+              {{#if isTomorrow}}<!-- >>>>>>   isTomorrow  -->
+                <h5 class="label label-200">Cumple {{newAge}} ma&ntilde;ana !</h5>
+                {{else}} <!-- bDay is not tomorrow -->
+                  {{#if inLessThanAWeek}}<!-- >>>>>>   inLessThanAWeek -->
+                      <h5 class="label label-300"> Cumple {{newAge}} a&ntilde;os  {{bDayClose}}</h5>
+                    {{else}}<!-- bDay is in more than a week -->
+                      {{#if inLessThanAMonth}}<!-- >>>>>>   inLessThanAMonth -->
+                        <h5 class="label label-400"> Cumple {{newAge}}  {{bDayLong}}</h5>
+                       {{else}}<!-- bDay is in more than a month -->
+                       <h5 class="label label-800"> Cumple {{newAge}} el {{bDayPlain}}</h5>
+                      {{/if}}<!--     inLessThanAMonth <<<<<< -->
+                  {{/if}}<!--     inLessThanAWeek <<<<<< -->
+                {{/if}}<!--     isTomorrow <<<<<< -->
+            {{/if}}<!--    hasPassed <<<<<< -->
+        {{else}}
+          {{#if isToday }}<!-- >>>>>> isToday -->
+            <h6 class="label label-100">Hoy cumple!</h6>
+            {{else}} <!-- bDay is not today -->
+              {{#if hasPassed}}<!-- >>>>>>   hasPassed -->
+                {{#if moreThanAWeekAgo}}<!-- >>>>>>   moreThanAWeekAgo -->
+                    <h5 class="label label-800">Cumple: {{bDayPlain}}</h5>
+                  {{else}}  <!-- bDay was less than a week ago -->
+                    {{#if wasYesterday}}<!-- >>>>>>   wasYesterday -->
+                        <h5 class="label label-200">Cumpli&oacute; ayer!</h5>
+                      {{else}}
+                        <h6 class="label label-500">Cumpli&oacute; {{bDayClose}}</h6>
+                    {{/if}}<!--     wasYesterday <<<<<< -->
+                {{/if}}<!--     moreThanAWeekAgo <<<<<< -->
+                {{else}} <!-- bDay has not passed yet -->
+                  {{#if isTomorrow}}<!-- >>>>>>   isTomorrow  -->
+                    <h5 class="label label-200">Cumple  ma&ntilde;ana !</h5>
+                    {{else}} <!-- bDay is not tomorrow -->
+                      {{#if inLessThanAWeek}}<!-- >>>>>>   inLessThanAWeek -->
+                          <h5 class="label label-300"> Cumple   {{bDayClose}}</h5>
+                        {{else}}<!-- bDay is in more than a week -->
+                          {{#if inLessThanAMonth}}<!-- >>>>>>   inLessThanAMonth -->
+                            <h5 class="label label-400"> Cumple  {{bDayLong}}</h5>
+                           {{else}}<!-- bDay is in more than a month -->
+                           <h5 class="label label-800"> Cumple: {{bDayPlain}}</h5>
+                          {{/if}}<!--     inLessThanAMonth <<<<<< -->
+                      {{/if}}<!--     inLessThanAWeek <<<<<< -->
+                    {{/if}}<!--     isTomorrow <<<<<< -->
+                {{/if}}<!--    hasPassed <<<<<< -->
+            {{/if}}<!--    isToday <<<<<< -->
+
+        {{/if}}
+
+
+      {{/if}}
+    {{/if}}
+  </div>
 </template>
