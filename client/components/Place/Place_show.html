@@ -1,6 +1,6 @@
 <template name="Place_show">
 
-    {{#if places}}
+  {{#if places}}
     <div class='col-xs-12 col-md-6 col-lg-3'>
       <h4 class='text-uppercase'>Direcciones
         <small></small>
@@ -25,26 +25,42 @@
               <div class='row'>
                 <div class='col-xs-8 col-md-8 col-lg-8'>
                   <i class='text-muted fa fa-map-marker'></i>
-                  {{address}}
-                  {{#if text}}-
-                    {{text}}
-                  {{/if}}
+                  {{route}}
+                  {{street_number}},
+                  {{locality}}
+
                 </div>
                 <div class='col-xs-4 col-md-4 col-lg-4'>
                   {{#if phone}}
-                    <a class='btn btn-lg btn-primary' href='tel:{{phone}}' data-action='phone'>
+                    <a class='btn btn-lg btn-primary' data-action='phone' href='tel:{{phone}}'>
                       <i class="fa fa-phone"></i>
                     </a>
                   {{/if}}
                 </div>
 
               </div>
+              <!--<div class='col-xs-8 col-md-8 col-lg-8'>
+                {{administrative_area_level_2}}
+              </div>
+              <div class='col-xs-8 col-md-8 col-lg-8'>
+                {{administrative_area_level_1}}
+              </div>
+              <div class='col-xs-8 col-md-8 col-lg-8'>
+                {{country_short}}
+              </div>-->
+
+            <div class='row'>
+              <div class='col-xs-8 col-md-8 col-lg-8'>
+                  {{notes}}
+              </div>
             </div>
+          </div> <!--well-->
+            
 
-          {{/if}}
-        {{/each}}
-        {{/momentum}}
-      </div>
+        {{/if}}
+      {{/each}}
+    {{/momentum}}
+ </div><!--col-->
 
-    {{/if}}
+{{/if}}
 </template>

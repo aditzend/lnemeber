@@ -1,18 +1,14 @@
-Template.Rel_show.onCreated( function() {
-  this.autorun( () => {
-    this.subscribe(
-      'Rels.byDestiny',
-      Meteor.userId(),
-      FlowRouter.getParam('_id')
-    );
-  }
- );
+Template.Rel_show.onCreated(function() {
+  this.autorun(() => {
+    this.subscribe('Rels.all');
+  });
 });
 Template.Rel_show.helpers({
-  rel : function() {
+  rel: function() {
     return Rels.findOne({
-      origin:Meteor.userId(),
-      destiny:FlowRouter.getParam('_id')});
+      origin: Meteor.userId(),
+      destiny: FlowRouter.getParam('_id')
+    });
   }
 });
 Template.Rel_show.events({
@@ -41,8 +37,19 @@ Template.Rel_show.events({
     Session.set('showSaveBtn',false);
 
   },*/
-  'click [data-action=edit]' : function() {
+  'click [data-action=edit]': function() {
     console.log('editing rel');
-    Session.set('editing',this._id);
+    Session.set('editing', this._id);
   }
 });
+
+
+
+/*this.subscribe(
+      'Rels.byDestiny',
+        Meteor.userId(),
+        FlowRouter.getParam('_id')
+      'Rels.byOwner',
+        Meteor.userId()
+FlowRouter.getParam('_id')
+); */

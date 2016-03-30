@@ -12,7 +12,6 @@ session                 # Client-side reactive dictionary for your app
 jquery                  # Helpful client-side library
 tracker                 # Meteor's client-side reactive programming library
 
-standard-minifiers      # JS/CSS minifiers run for production mode
 es5-shim                # ECMAScript 5 compatibility for older browsers.
 ecmascript              # Enable ECMAScript2015+ syntax in app code
 
@@ -45,8 +44,8 @@ less
 
 #collection
 dburles:collection-helpers
-aldeed:collection2
-aldeed:autoform
+#aldeed:collection2
+#aldeed:autoform
 matb33:collection-hooks
 
 #roles
@@ -57,3 +56,12 @@ arillo:flow-router-helpers
 easy:search
 easysearch:elasticsearch
 easysearch:autosuggest
+
+#others
+themeteorchef:jquery-validation
+dispatch:phoneformat.js
+mquandalle:jade
+chipcastle:countries
+3stack:country-codes
+standard-minifier-css
+standard-minifier-js

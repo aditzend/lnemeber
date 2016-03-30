@@ -1,5 +1,6 @@
 <template name="Birthday_show">
   <div>
+    {{#if validBDay}}
     {{#if age}}
       {{#if isToday }}<!-- >>>>>> isToday -->
         <h6 class="label label-100">Hoy cumple {{age}}!</h6>
@@ -96,5 +97,8 @@
 
       {{/if}}
     {{/if}}
+
+    {{else}}<!--es invalida-->{{/if}}
+
   </div>
 </template>

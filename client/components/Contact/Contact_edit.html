@@ -1,4 +1,4 @@
-<template name="Contact_edit">
+<template name="LEGACY-Contact_edit">
   <div class='panel panel-warning'>
     <div class='panel-heading'>
       EDITAR CONTACTO
@@ -32,6 +32,11 @@
               <input type="checkbox"  name='formalTreatment' id='formalTreatment' {{checkIfFormal}}  > Se trata de Ud.
             </label>
       </div>
+      <div class="input-group">
+        <label for='birthMoment'>Fecha de Nacimiento:</label>
+        <p class='text-muted'> A&ntilde;o-Mes-D&iacute;aT</p>
+        <input id='birthMoment' type="text" class="form-control" placeholder=" 5000 significa, no se el año " aria-describedby="basic-addon1" value='{{birthMoment}}'>
+      </div>
 
       <div class="input-group">
         <label for='email'>Email:</label>
@@ -39,7 +44,15 @@
       </div>
       <div class="input-group">
         <label for='mobile'>Celular:</label>
-        <input id='mobile' type="text" class="form-control" placeholder=" '+54 11 6013 4585' " aria-describedby="basic-addon1" value='{{mobile}}'>
+        <input id='mobile' type="text" class="form-control" placeholder=" '11 6013 4585' " aria-describedby="basic-addon1" value='{{mobile}}'>
+      </div>
+      <div class="input-group">
+        <label for='phone'>L&iacute;nea:</label>
+        <input id='phone' type="text" class="form-control" placeholder=" '02323471691' " aria-describedby="basic-addon1" value='{{phone}}'>
+      </div>
+      <div class="input-group">
+        <label for='internalPhone'>Interno:</label>
+        <input id='internalPhone' type="text" class="form-control" placeholder=" '23' " aria-describedby="basic-addon1" value='{{internalPhone}}'>
       </div>
 
       <br>

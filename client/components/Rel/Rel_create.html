@@ -1,4 +1,60 @@
 <template name="Rel_create">
+  <div class="panel panel-default appear-first">
+    <div class="panel-heading">RELACION CON ESTA EMPRESA</div>
 
-{{> quickForm collection="Rels" id='insertRelationshipForm' type='insert'}}
+    <div class="panel-body">
+        <form data-action='form'>
+          <div class='row'>
+            <div class='col-xs-12'>
+              {{#momentum plugin='growl'}}
+              <div class="form-group">
+                <label class="control-label" for="notes">Notas</label>
+                <input class="form-control" data-action="notesInput" id="notesInput" name="notes" type="text-area">
+                <span class="form-control-feedback"></span>
+                <span class="help-block"></span>
+              </div>
+              {{/momentum}}
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col-xs-12'>
+              <div class="form-group">
+                <label class="control-label" for="paymentDays">D&iacute;as de Pago</label>
+                <input class="form-control" data-action="paymentDaysInput" id="paymentDaysInput" name="paymentDays" type="number">
+                <span class="form-control-feedback"></span>
+                <span class="help-block"></span>
+              </div>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col-xs-12'>
+              <div class="form-group">
+                <label class="control-label" for="paymentTerms">Condici&oacute;n de Pago</label>
+                <input class="form-control" data-action="paymentTermsInput" id="paymentTermsInput" name="paymentTerms" type="text">
+                <span class="form-control-feedback"></span>
+                <span class="help-block"></span>
+              </div>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col-xs-12'>
+              <div class="form-group">
+                <label class="control-label" for="paymentNotes">Notas de Pago</label>
+                <input class="form-control" data-action="paymentNotesInput" id="paymentNotesInput" name="paymentNotes" type="text">
+                <span class="form-control-feedback"></span>
+                <span class="help-block"></span>
+              </div>
+            </div>
+          </div>
+      <div class='row'>
+        <div class='col-xs-12'>
+        <button class="btn btn-success" type="submit">CREAR</button>
+      </div>
+    </div>
+
+        </form>
+
+    </div>
+  </div>
+<!--{{> quickForm collection="Rels" id='insertRelationshipForm' type='insert'}}-->
 </template>

@@ -5,6 +5,7 @@
         <div class='col-xs-12 col-md-6 col-lg-8'>
           {{#with actode}}
             <h1 class='shadow'>{{treatedAs}}</h1>
+            <h3>{{> Birthday_show}}</h3>
             <h3 class='shadow text-complement'>{{name}} {{lastName}}</h3>
 
           {{/with}}
@@ -47,11 +48,11 @@
           {{else}}
             <div class='well well-sm well-clickable' data-action='edit-actode' >
               <p><small class='text-muted'>
-                {{#if isMale}}
-                  <i class='fa fa-mars'> </i>{{else}}
+                {{#if getGender isMale}}
+                  <i class='fa fa-mars'> </i>
+                {{else}}
                   <i class='fa fa-venus'> </i>
                 {{/if}}
-
               </small>
             </p>
                 <p>NOMBRE:
@@ -64,12 +65,19 @@
                     {{email}}</p>
                   <p>CELULAR:
                     {{mobile}}</p>
+                  <p>TELEFONO DE LINEA:
+                    {{phone}}</p>
+                  <p>INTERNO:
+                    {{internalPhone}}</p>
                   <p>TRATAMIENTO:
                     {{treatedAs}}
                     {{#if formalTreatment}}
                       <span class='label label-warning'>FORMAL</span>
                     {{/if}}
                   </p>
+                  <p>CUMPLEA&Ntilde;OS:
+                    {{bDay}}</p>
+
 
               </div>
             {{/if}}
@@ -77,11 +85,13 @@
           </div>
           {{#if rels}}
               <div class='col-xs-12 col-md-6 col-lg-3'>
-                <h4 class='text-uppercase'>Relaciones</h4>
+                <h4 class='text-uppercase shadow'>Relaciones</h4>
                 <button id="delete-btn" class='btn btn-danger' data-action='delete'>
                   <i class='fa fa-2x fa-trash'></i>
                 </button>
+
               {{#each rels}}
+                  <br>
                   {{> Contact_rel_show}}
               {{/each}}
             </div>

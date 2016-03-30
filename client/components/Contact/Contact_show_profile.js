@@ -1,17 +1,17 @@
 var actodeId = '';
 
-Template.Contact_show_profile.onCreated( function() {
+Template.Contact_show_profile.onCreated(function() {
   actodeId = FlowRouter.getParam('_id');
   console.log(actodeId);
-  this.autorun( () => {
+  this.autorun(() => {
     this.subscribe('Actodes.all'),
-    this.subscribe('Rels.byOrigin', actodeId)
+      this.subscribe('Rels.byOrigin', actodeId)
   });
 });
 
 
 Template.Contact_show_profile.helpers({
-  actode : function() {
+  actode: function() {
     return Actodes.findOne(actodeId);
   },
   actodeType: function(id) {
@@ -21,40 +21,50 @@ Template.Contact_show_profile.helpers({
     return Actodes.findOne(id).name;
   },
   rels: function() {
-    return Rels.find({origin: actodeId});
+    return Rels.find({
+      origin: actodeId
+    });
+  },
+  bDay: function() {
+    var d = dateOfBirth(this.bDay, this.bMonth, this.bYear);
+
+    return (d.isValid()) ? d.format('DD MMMM') : 'Preguntar!';
+
   }
 });
 
 Template.Contact_show_profile.events({
   'click [data-action=delete]': function() {
-    Session.set('deleting',true);
+    Session.set('deleting', true);
     console.log('deleting');
   },
-  'click [data-action=delete-item]' : function() {
-    Session.set('btn',true);
+  'click [data-action=delete-item]': function() {
+    Session.set('btn', true);
     console.log('btn CLICK');
-    setTimeout(function(){
-    Session.set('btn',false);
-    console.log('btn UNCLICK');
-  }, 100);
-  console.log('delete item...' + this._id);
-  var relId = Rels.findOne({origin: this._id})._id;
-  console.log('delete rel : ' + relId);
-  //Actodes.remove(this._id);
-  Rels.remove(relId);
-  Session.set('deleting',false);
-},
-'click [data-action=exit-delete]': function() {
-  Session.set('deleting',false);
-  //console.log('deleting');
-},
-'click [data-action=exit-edit]': function() {
-  Session.set('editing',false);
-  //console.log('deleting');
-},
-'click [data-action=edit-actode]' : function(e) {
-  Session.set('editing', 'actode');
-  console.log('editing Actode  ' );
-}
+    setTimeout(function() {
+      Session.set('btn', false);
+      console.log('btn UNCLICK');
+    }, 100);
+    console.log('delete item...' + this._id);
+    var relId = Rels.findOne({
+      origin: this._id
+    })._id;
+    console.log('delete rel : ' + relId);
+    //Actodes.remove(this._id);
+    Rels.remove(relId);
+    Session.set('deleting', false);
+  },
+  'click [data-action=exit-delete]': function() {
+    Session.set('deleting', false);
+    //console.log('deleting');
+  },
+  'click [data-action=exit-edit]': function() {
+    Session.set('editing', false);
+    //console.log('deleting');
+  },
+  'click [data-action=edit-actode]': function(e) {
+    Session.set('editing', 'actode');
+    console.log('editing Actode  ');
+  }
 
 });
