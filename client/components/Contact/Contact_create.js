@@ -81,6 +81,11 @@ Template.Contact_create.onRendered(function() {
 
 
     },
+    showErrors: function(errorMap, errorList) {
+      $("#summary").html("El formulario tiene errores (" + this.numberOfInvalids() +
+        "), ver detalles en rojo.");
+      this.defaultShowErrors();
+    },
     submitHandler: function() {
       var name = $('#nameInput').val();
       var middleName = $('#middleNameInput').val();

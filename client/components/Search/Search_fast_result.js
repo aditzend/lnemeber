@@ -27,9 +27,10 @@ Template.Search_fast_result.helpers({
     });
 
   },
-  id: () => {
+  id2: function() {
     return this._id
   }
+
 
 
 });
