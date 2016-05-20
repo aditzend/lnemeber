@@ -1,4 +1,7 @@
-console.log("Loading commonHelpers.js");
+//console.log("Loading commonHelpers.js");
+Template.registerHelper("appname", function() {
+  return 'TANDERBIL';
+});
 
 Template.registerHelper("deleting", function() {
   return Session.get('deleting');

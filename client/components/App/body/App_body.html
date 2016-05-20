@@ -3,7 +3,7 @@
     <p class="browser-warning"><strong><i class="icon-exclamation-sign"></i> Warning</strong> - You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/" target="_blank">upgrade your browser</a> to properly view this website.</p>
   <![endif]-->
 <head>
-  <title>DM</title>
+  <title>manay</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -25,11 +25,38 @@
     <meta name="msapplication-TileImage" content="/images/favicons/mstile-144x144.png?v=1">
     <meta name="msapplication-config" content="/images/favicons/browserconfig.xml">
 </head>
-  {{> App_nav}}
-  <div class="container">
+
+<!-- Splash screen -->
+<!--    {{>splash }}-->
+
+
+<!--  {{> App_nav}}-->
+{{> header}}
+
+<!-- Navigation -->
+{{> navigation }}
+
+<!--  <div class="container">
     {{#momentum plugin="fade"}}
     {{> Template.dynamic template=main}}
     {{/momentum}}
+  </div>-->
+  <!--{{> App_footer}}-->
+
+  <!-- Main Wrapper -->
+  <main>
+  <div id="wrapper">
+    {{> Template.dynamic template=main}}
+
+      <!-- Right sidebar -->
+      {{> rightSidebar }}
+
+    <!--  {{> footer }}-->
   </div>
-  {{> App_footer}}
+</main>
+
+  <!-- Footer -->
+
+
+
 </template>

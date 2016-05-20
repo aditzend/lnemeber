@@ -18,29 +18,38 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
 #autopublish             # Publish all data to the clients (for prototyping)
 insecure                # Allow all DB writes from clients (for prototyping)
 
-#routing
+#ROUTING
 kadira:flow-router
 kadira:blaze-layout
 
-#accounts
+
+
+
+
+#ACCOUNTS
 accounts-password
 useraccounts:bootstrap
 useraccounts:flow-routing
 softwarerero:accounts-t9n
 
 
-#time
+#TIMING
 momentjs:moment
 rzymek:moment-locale-es
 
-#maps
+#MAPPING
 jeremy:geocomplete
 
-#animation
+#ANIMATION
 percolate:momentum
 
-#style
+
+#STYLING
 less
+twbs:bootstrap
+natestrauser:animate-css
+joshdellay:meteor-ladda-bootstrap
+tsega:bootstrap3-datetimepicker
 
 #collection
 dburles:collection-helpers
@@ -65,3 +74,19 @@ chipcastle:countries
 3stack:country-codes
 standard-minifier-css
 standard-minifier-js
+
+#homer
+kevohagan:sweetalert
+chrismbeckett:toastr
+fortawesome:fontawesome
+
+d3js:d3
+emdagon:c3js
+andrasph:clockpicker
+
+meteorhacks:ssr
+check
+okgrow:router-autoscroll
+#mackbrowne:metismenu
+onokumus:metismenu
+matb33:bootstrap-dropdowns

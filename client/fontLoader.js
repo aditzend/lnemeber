@@ -3,7 +3,7 @@
 
 Meteor.startup(function() {
 
-  WebFontConfig = {
+  /*WebFontConfig = {
     google: { families: [ 'Lato::latin,latin-ext','Oswald:400', 'Mouse Memoirs' ] }
   };
   (function() {
@@ -15,6 +15,6 @@ Meteor.startup(function() {
     var s = document.getElementsByTagName('script')[0];
     s.parentNode.insertBefore(wf, s);
     //console.log("async fonts loaded", WebFontConfig);
-  })();
+  })();*/
 
 })
