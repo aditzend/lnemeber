@@ -118,6 +118,10 @@ Template.Dashboard.helpers({
   }
 
 });
+Template.Dashboard.onCreated(function() {
+
+
+});
 
 /*Template.Dashboard.onCreated(function() {
   BlazeLayout.render('Dashboard', {createSection:'Create'})

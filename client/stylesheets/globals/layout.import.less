@@ -7,9 +7,9 @@ html {
 }
 
 body {
-  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
   background-color: #fff;
-  font-size: 13px;
+  font-size: 15px;
   color: @color-text;
   margin: 0;
   padding: 0;
@@ -44,8 +44,20 @@ body {
   background: @color-background;
   border-left: 1px solid @border-color;
   transition: margin 0.4s ease 0s;
+  // position: absolute;
   position: relative;
   min-height: 100%;
+  z-index: 1;
+}
+#search-result-wrapper {
+  z-index: 1001;
+ // pointer-events: none;
+ // opacity: 0.8;
+ padding-left: 19%;
+ padding-top: -1%;
+ // position:relative;
+ position:absolute;
+ // width:2000px;
 }
 
 .content {

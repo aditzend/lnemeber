@@ -1,6 +1,14 @@
 //console.log("Loading commonHelpers.js");
+Template.registerHelper("nothingFoundAlert", function() {
+  toastr.warning('Proba de nuevo!',
+    'Psssssst... no pudimos encontrar nada con ese nombre.', {
+      timeOut: 9000
+    });
+  hideSearchResults();
+  Session.set('nothingFound', true);
+});
 Template.registerHelper("appname", function() {
-  return 'TANDERBIL';
+  return 'Serabey';
 });
 
 Template.registerHelper("deleting", function() {
@@ -146,4 +154,8 @@ Template.registerHelper("creating", function() {
 
 Template.registerHelper("getGender", function(isMale) {
   return (isMale === "1") ? true : false;
+});
+
+Template.registerHelper("formatPhone", function(phone) {
+  return Phoneformat.formatLocal('AR', phone);
 });

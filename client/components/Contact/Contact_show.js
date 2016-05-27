@@ -57,7 +57,7 @@ Template.Contact_show.events({
     if (Session.get('btn')) {
       console.log('btn tocado, no hago nada');
     } else {
-      console.log('routing...');
+      console.log('routing...', '/show-1/' + this._id);
       FlowRouter.go('/show-1/' + this._id);
     }
   },

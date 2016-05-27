@@ -1,5 +1,7 @@
 // Import Google font
 @import url("http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
+// @import url("https://fonts.googleapis.com/css?family=Roboto:400,300,500,700&subset=latin,latin-ext");
+
 
 // Color list
 @color-navy-blue:#34495e;
@@ -11,10 +13,26 @@
 @color-red:#e74c3c;
 @color-red-deep:#c0392b;
 
+@color-alert-100:#c0392b;
+@color-alert-200:#e67e22;
+@color-alert-300:#ffb606;
+@color-alert-400:#9b59b6;
+@color-alert-500:#6ab0df;
+@color-alert-600:#7b8ea1;
+@color-alert-700: #c9cbcd;
+@color-alert-800: #d8d8d9;
+
+
+
+
+
+
+
+
 // Additional colors
+@color-background: #f1f3f6;
 @color-text: #6a6c6f;
 @color-bright: #f7f9fa;
-@color-background: #f1f3f6;
 @color-background-boxed: lighten(@color-background, 3%);
 @border-color: #e4e5e7;
 
@@ -53,6 +71,8 @@
 @import "globals/forum.import.less";
 @import "globals/mailbox.import.less";
 @import "globals/loader.import.less";
+@import "own/search.import.less";
+@import "own/alert-categories.import.less";
 
 // Styles for landing page
 @import "globals/landing.import.less";

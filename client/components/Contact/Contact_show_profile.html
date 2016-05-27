@@ -1,104 +1,276 @@
 <template name="Contact_show_profile">
-  {{#momentum plugin='left-to-right'}}
-    <div class='container-fluid'>
-      <div class='row'>
-        <div class='col-xs-12 col-md-6 col-lg-8'>
-          {{#with actode}}
-            <h1 class='shadow'>{{treatedAs}}</h1>
-            <h3>{{> Birthday_show}}</h3>
-            <h3 class='shadow text-complement'>{{name}} {{lastName}}</h3>
+    <!-- {{> pageHeader title="Ver Contacto" desc='Aca podes ver, editar y agregar informacion a tu contacto' category="Ver" }} -->
 
-          {{/with}}
-          <hr>
-        </div>
-        <div class='col-xs-12 col-md-6 col-lg-4'>
+    {{#staggering}}
+    <a href="/show-1/shKQs4j2g7DRfLrnP">Michelo</a>
+    <button data-action='goContact'>goContact</button>
 
-      <!--    <button id="rel-create-btn" class='btn btn-primary' data-action='rel-create'>
-            <i class='fa fa-2x fa-link'></i>
-            <i class='fa fa-plus'></i>
-          </button>-->
+        {{#with actode}}
+            <div class="row">
 
-        </div>
-      </div>
-      {{#if deleting}}
-        {{Alert_delete}}
-      {{/if}}
-      {{#if editing}}
-        {{Alert_edit}}
-      {{/if}}
-      {{#if creating}}<!--<br>
-        <div class='alert alert-success appear-first' role='alert'>
-          <p>MODO DE CREACION
-            <button id="exit-create-btn" class='btn btn-success' data-action='exit-create'>SALIR</button>
-          </p>
-        </div>
-        <div class='row'>
-          <div class='col-xs-12 col-md-6 col-lg-3'>
-            {{> Template.dynamic template=create}}
-          </div>
-        </div>-->
-        {{Alert_Form_Create}}
-      {{/if}}
-      <div class='row'>
-        <div class='col-xs-12 col-md-6 col-lg-3'>
-          <h4 class='text-uppercase'>Datos</h4>
-          {{#with actode}}
-          {{#if editingId 'actode'}}
-            {{> Contact_edit}}
-          {{else}}
-            <div class='well well-sm well-clickable' data-action='edit-actode' >
-              <p><small class='text-muted'>
-                {{#if getGender isMale}}
-                  <i class='fa fa-mars'> </i>
-                {{else}}
-                  <i class='fa fa-venus'> </i>
-                {{/if}}
-              </small>
-            </p>
-                <p>NOMBRE:
-                  {{name}}
-                  {{middleName}}
-                </p>
-                  <p>APELLIDO:
-                    {{lastName}}</p>
-                  <p>EMAIL :
-                    {{email}}</p>
-                  <p>CELULAR:
-                    {{mobile}}</p>
-                  <p>TELEFONO DE LINEA:
-                    {{phone}}</p>
-                  <p>INTERNO:
-                    {{internalPhone}}</p>
-                  <p>TRATAMIENTO:
-                    {{treatedAs}}
-                    {{#if formalTreatment}}
-                      <span class='label label-warning'>FORMAL</span>
-                    {{/if}}
-                  </p>
-                  <p>CUMPLEA&Ntilde;OS:
-                    {{bDay}}</p>
+                <div class="col-lg-12 text-center m-t-md">
 
+                    <p class='text-big'>
+                      {{treatedAs}}
+                    </p>
 
-              </div>
-            {{/if}}
-            {{/with}}
-          </div>
-          {{#if rels}}
-              <div class='col-xs-12 col-md-6 col-lg-3'>
-                <h4 class='text-uppercase shadow'>Relaciones</h4>
-                <button id="delete-btn" class='btn btn-danger' data-action='delete'>
-                  <i class='fa fa-2x fa-trash'></i>
-                </button>
+                    <h4>{{> Birthday_show}}</h4>
+                    <p>
+                        <small class='text-muted'>
+                            {{#if getGender isMale}}
+                                <i class='fa fa-male'></i>
+                            {{else}}
+                                <i class='fa fa-female'></i>
+                            {{/if}}
+                            {{name}}
+                            {{actode.lastName}}
+                        </small>
+                    </p>
+                    <p>
+                        <small class='text-muted'></small>
+                        <small class='text-muted'>
+                            {{#if formalTreatment}}
+                                <span class='label label-warning'>FORMAL</span>
+                            {{/if}}
+                        </small>
 
-              {{#each rels}}
-                  <br>
-                  {{> Contact_rel_show}}
-              {{/each}}
+                    </p>
+                </div>
+
             </div>
-        {{/if}}
+            <div class='row'>
+            <div class="col-md-4">
+                <div class="hpanel hbggreen">
+                    <div class="panel-body">
+                        <div class="text-center">
+                            <p class="font-light">
+                                Llamar al m&oacute;vil
+                            </p>
+                            <i class='text-big pe-7s pe-7s-phone'></i>
+                            <p class="font-light">
+                              {{formatPhone mobile}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="hpanel hbgyellow">
+                    <div class="panel-body">
+                        <div class="text-center">
+                            <p class="font-light">
+                                Llamar al fijo
+                            </p>
+                            <i class='text-big pe-7s pe-7s-call'></i>
+                            <p class="font-light">
+                              {{formatPhone phone}} Interno : {{internalPhone}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="hpanel hbgblue">
+                    <div class="panel-body">
+                        <div class="text-center">
+                            <p class="font-light">
+                                Mandar un mail
+                            </p>
+                            <i class='text-big pe-7s pe-7s-mail'></i>
+                            <p class="font-light">
+                              {{email}}
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+
+        {{/with}}
+        <div class='row'>
+
+        <div class="col-lg-6">
+            {{#panel title="DATOS" footer="" built=true}}
+                <div class="row">
+                    <div class="col-lg-12">
+                        {{#if deleting}}
+                            {{Alert_delete}}
+                        {{/if}}
+                        {{#if editing}}
+                            {{Alert_edit}}
+                        {{/if}}
+                        {{#if creating}}
+                            {{Alert_Form_Create}}
+                        {{/if}}
+                        {{#with actode}}
+                            {{#if editingId 'actode'}}
+                                {{> Contact_edit}}
+                            {{else}}
+                                <p>NOMBRE:
+                                    {{name}}
+                                    {{middleName}}
+                                </p>
+                                <p>APELLIDO:
+                                    {{lastName}}</p>
+                                <p>EMAIL :
+                                    {{email}}</p>
+                                <p>CELULAR:
+                                    {{mobile}}</p>
+                                <p>TELEFONO DE LINEA:
+                                    {{phone}}</p>
+                                <p>INTERNO:
+                                    {{internalPhone}}</p>
+                                <p>TRATAMIENTO:
+                                    {{treatedAs}}
+                                    {{#if formalTreatment}}
+                                        (Tratar de Ud.)
+                                    {{/if}}
+                                </p>
+                                <p>CUMPLEA&Ntilde;OS:
+                                    {{bDay}}</p>
+                            {{/if}}
+                        {{/with}}
+                    </div>
+                </div>
+            {{/panel}}
+            {{#panel title="X EDITABLE" footer="" built=true}}
+            <table id="user" class="table table-bordered table-striped" style="clear: both">
+                            <tbody>
+                            <tr>
+                                <td width="35%">Simple text field</td>
+
+                                <td width="65%">
+                                  <p id="textArea" class="editable" data-type="textarea" data-placeholder="Enter text" data-emptytext="Click to enter text" data-rows="4">{{actode.name}}</p>
+
+                                  <!-- <a href="" id="username" data-type="textarea" data-pk="1" -->
+                                                   <!-- data-title="Enter username" class="editable editable-click">xedita</a> -->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Empty text field, required</td>
+                                <td><a href="#" id="firstname" data-type="text" data-pk="1" data-placement="right"
+                                       data-placeholder="Required" data-title="Enter your firstname"
+                                       class="editable editable-click editable-empty">Empty</a></td>
+                            </tr>
+                            <tr>
+                                <td>Select, local array, custom display</td>
+                                <td><a href="#" id="sex" data-type="select" data-pk="1" data-value=""
+                                       data-title="Select sex" class="editable editable-click" style="color: gray;">not
+                                    selected</a></td>
+                            </tr>
+
+                            <tr>
+                                <td>Combodate (date)</td>
+                                <td><a href="#" id="dob" data-type="combodate" data-value="1984-05-15"
+                                       data-format="YYYY-MM-DD" data-viewformat="DD/MM/YYYY"
+                                       data-template="D / MMM / YYYY" data-pk="1" data-title="Select Date of birth"
+                                       class="editable editable-click">15/05/1984</a></td>
+                            </tr>
+                            <tr>
+                                <td>Combodate (datetime)</td>
+                                <td><a href="#" id="event" data-type="combodate" data-template="D MMM YYYY  HH:mm"
+                                       data-format="YYYY-MM-DD HH:mm" data-viewformat="MMM D, YYYY, HH:mm"
+                                       data-pk="1" data-title="Setup event date and time"
+                                       class="editable editable-click editable-empty">Empty</a></td>
+                            </tr>
+
+
+                            <tr>
+                                <td>Textarea, buttons below. Submit by <i>ctrl+enter</i></td>
+                                <td><a href="#" id="comments" data-type="textarea" data-pk="1"
+                                       data-placeholder="Your comments here..." data-title="Enter comments"
+                                       class="editable editable-pre-wrapped editable-click">awesome user!</a></td>
+                            </tr>
+
+
+                            <tr>
+                                <td>Checklist</td>
+                                <td><a href="#" id="fruits" data-type="checklist" data-value="2,3"
+                                       data-title="Select fruits" class="editable editable-click">peach<br>apple</a>
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+            {{/panel}}
+        </div>
+        <div class="col-lg-6">
+            {{#panel title="RELACIONES" footer="" built=true}}
+                <div class="row">
+                    <div class="col-lg-12">
+                        {{#if rels}}
+                                <button id="delete-btn" class='btn btn-danger' data-action='delete'>
+                                  <i class='fa fa-2x fa-trash'></i>
+                                </button>
+
+                              {{#each rels}}
+                                  <br>
+                                  {{> Contact_rel_show}}
+                              {{/each}}
+                        {{/if}}
+
+                    </div>
+                </div>
+            {{/panel}}
         </div>
       </div>
 
+    {{/staggering}}
 
-    {{/momentum}}
-  </template>
+</template>
+
+<!-- {{#if rels}}
+      <div class='col-xs-12 col-md-6 col-lg-3'>
+        <h4 class='text-uppercase shadow'>Relaciones</h4>
+        <button id="delete-btn" class='btn btn-danger' data-action='delete'>
+          <i class='fa fa-2x fa-trash'></i>
+        </button>
+
+      {{#each rels}}
+          <br>
+          {{> Contact_rel_show}}
+      {{/each}}
+    </div>
+{{/if}} -->
+
+<!-- <div class='container-fluid'> -->
+<!-- <div class='row'> -->
+<!-- <div class='col-xs-12 col-md-6 col-lg-8'> -->
+<!-- {{#with actode}}
+    <h1 >{{treatedAs}}</h1>
+    <h3>{{> Birthday_show}}</h3>
+    <h3 class='shadow text-complement'>{{name}} {{lastName}}</h3>
+  {{/with}}
+  <hr> -->
+<!-- </div> -->
+<!-- <div class='col-xs-12 col-md-6 col-lg-4'> -->
+<!--    <button id="rel-create-btn" class='btn btn-primary' data-action='rel-create'>
+    <i class='fa fa-2x fa-link'></i>
+    <i class='fa fa-plus'></i>
+  </button>-->
+<!-- </div> -->
+<!-- </div> -->
+
+<!--<br>
+<div class='alert alert-success appear-first' role='alert'>
+  <p>MODO DE CREACION
+    <button id="exit-create-btn" class='btn btn-success' data-action='exit-create'>SALIR</button>
+  </p>
+</div>
+<div class='row'>
+  <div class='col-xs-12 col-md-6 col-lg-3'>
+    {{> Template.dynamic template=create}}
+  </div>
+</div>-->
+
+<!-- <div class='row'> -->
+<!-- <div class='col-xs-12 col-md-6 col-lg-3'> -->
+<!-- <h4 class='text-uppercase'>Datos</h4> -->
+
+<!-- <div class='well well-sm well-clickable' data-action='edit-actode' > -->
+
+<!-- </div> -->
+
+<!-- </div> -->
+<!-- </div> -->

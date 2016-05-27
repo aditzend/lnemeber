@@ -64,4 +64,4 @@ function setBodySmall() {
     $('body').removeClass('page-small');
     $('body').removeClass('show-sidebar');
   }
-}
+};

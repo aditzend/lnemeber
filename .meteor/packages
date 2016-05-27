@@ -18,12 +18,11 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
 #autopublish             # Publish all data to the clients (for prototyping)
 insecure                # Allow all DB writes from clients (for prototyping)
 
-#ROUTING
-kadira:flow-router
-kadira:blaze-layout
 
 
 
+#ANIMATION
+percolate:momentum
 
 
 #ACCOUNTS
@@ -33,40 +32,29 @@ useraccounts:flow-routing
 softwarerero:accounts-t9n
 
 
-#TIMING
-momentjs:moment
-rzymek:moment-locale-es
-
-#MAPPING
-jeremy:geocomplete
-
-#ANIMATION
-percolate:momentum
-
-
-#STYLING
-less
-twbs:bootstrap
-natestrauser:animate-css
-joshdellay:meteor-ladda-bootstrap
-tsega:bootstrap3-datetimepicker
-
-#collection
+#COLLECTION
 dburles:collection-helpers
 #aldeed:collection2
 #aldeed:autoform
 matb33:collection-hooks
 
-#roles
-nicolaslopezj:roles
-arillo:flow-router-helpers
 
-#search
-easy:search
-easysearch:elasticsearch
-easysearch:autosuggest
 
-#others
+
+#MAPPING
+jeremy:geocomplete
+
+#HOMER
+kevohagan:sweetalert
+chrismbeckett:toastr
+fortawesome:fontawesome
+
+
+
+
+
+
+#OTHERS
 themeteorchef:jquery-validation
 dispatch:phoneformat.js
 mquandalle:jade
@@ -74,11 +62,6 @@ chipcastle:countries
 3stack:country-codes
 standard-minifier-css
 standard-minifier-js
-
-#homer
-kevohagan:sweetalert
-chrismbeckett:toastr
-fortawesome:fontawesome
 
 d3js:d3
 emdagon:c3js
@@ -90,3 +73,30 @@ okgrow:router-autoscroll
 #mackbrowne:metismenu
 onokumus:metismenu
 matb33:bootstrap-dropdowns
+lookback:dropdowns
+lookback:tooltips
+
+#ROLES
+nicolaslopezj:roles
+arillo:flow-router-helpers
+
+#ROUTING
+kadira:flow-router
+kadira:blaze-layout
+
+
+#SEARCH
+easy:search
+easysearch:elasticsearch
+
+#STYLING
+less
+twbs:bootstrap
+natestrauser:animate-css
+joshdellay:meteor-ladda-bootstrap
+tsega:bootstrap3-datetimepicker
+
+#TIMING
+momentjs:moment
+rzymek:moment-locale-es
+natestrauser:x-editable-bootstrap

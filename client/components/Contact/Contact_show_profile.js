@@ -1,9 +1,9 @@
 var actodeId = '';
 
 Template.Contact_show_profile.onCreated(function() {
-  actodeId = FlowRouter.getParam('_id');
-  console.log(actodeId);
   this.autorun(() => {
+    actodeId = FlowRouter.getParam('_id');
+    console.log('accesing ', actodeId);
     this.subscribe('Actodes.all'),
       this.subscribe('Rels.byOrigin', actodeId)
   });
@@ -34,6 +34,9 @@ Template.Contact_show_profile.helpers({
 });
 
 Template.Contact_show_profile.events({
+  'click #textArea.editable': function(response, newValue) {
+    console.log("editing");
+  },
   'click [data-action=delete]': function() {
     Session.set('deleting', true);
     console.log('deleting');

@@ -1,4 +1,4 @@
-<template name="Search_actode">
+<!-- <template name="Search_actode">
 
     <div class="input-group input-group-lg">
       {{#EasySearch.IfInputEmpty index=index }}
@@ -29,21 +29,40 @@
           <i class="fa fa-remove"></i>
         </span>
       {{/EasySearch.IfNoResults}}
-      {{> EasySearch.Input index=index attributes=inputAttributes }}
+
+
+
+
+      {{> EasySearch.Input index=index attributes=inputAttributes noDocumentsOnEmpty='true' }}
+
+
+
+
     </div>
-    <ul class="list-group appear-third">
-      {{#EasySearch.Each index=index }}
-        {{#if oneFound}}
-          {{> Search_fast_result}}
-          {{else}}
-          {{> actodeListItem}}
-        {{/if}}
-      {{/EasySearch.Each}}
-    </ul>
     {{#EasySearch.IfNoResults index=index }}
     <br>
       <div class="padded no-results">Sin resultados</div>
       <br>
     {{/EasySearch.IfNoResults }}
-  
-</template>
+
+    {{#EasySearch.Each index=index }}
+      {{#if oneFound}}
+        {{> Search_fast_result}}
+        {{else}}
+        {{> actodeListItem}}
+      {{/if}}
+    {{/EasySearch.Each}}
+
+
+
+</template> -->
+
+<!--<ul class="list-group appear-third">
+  {{#EasySearch.Each index=index }}
+    {{#if oneFound}}
+      {{> Search_fast_result}}
+      {{else}}
+      {{> actodeListItem}}
+    {{/if}}
+  {{/EasySearch.Each}}
+</ul>-->
