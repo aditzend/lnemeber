@@ -1,36 +1,31 @@
-var actodeId = '';
-
-Template.Contact_show_profile.onCreated(function() {
-  this.autorun(() => {
-    actodeId = FlowRouter.getParam('_id');
-    console.log('accesing ', actodeId);
-    this.subscribe('Actodes.all'),
-      this.subscribe('Rels.byOrigin', actodeId)
-  });
-});
-
-
 Template.Contact_show_profile.helpers({
-  actode: function() {
-    return Actodes.findOne(actodeId);
-  },
-  actodeType: function(id) {
-    return Actodes.findOne(id).actodeType;
-  },
-  destinyActode: function(id) {
-    return Actodes.findOne(id).name;
-  },
-  rels: function() {
-    return Rels.find({
-      origin: actodeId
-    });
-  },
-  bDay: function() {
-    var d = dateOfBirth(this.bDay, this.bMonth, this.bYear);
+  birthData(contact) {
+      return {
+        dateOfBirth: dateOfBirth(contact.bDay, contact.bMonth, contact.bYear),
+        actualBirthDay: actualBirthDay(dateOfBirth(contact.bDay, contact.bMonth,
+          contact.bYear))
+      };
+    }
+    /*actode: function() {
+      return Actodes.findOne(actodeId);
+    },
+    actodeType: function(id) {
+      return Actodes.findOne(id).actodeType;
+    },
+    destinyActode: function(id) {
+      return Actodes.findOne(id).name;
+    },
+    rels: function() {
+      return Rels.find({
+        origin: actodeId
+      });
+    },
+    bDay: function() {
+      var d = dateOfBirth(this.bDay, this.bMonth, this.bYear);
 
-    return (d.isValid()) ? d.format('DD MMMM') : 'Preguntar!';
+      return (d.isValid()) ? d.format('DD MMMM') : 'Preguntar!';
 
-  }
+    }*/
 });
 
 Template.Contact_show_profile.events({

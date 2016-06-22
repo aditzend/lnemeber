@@ -4,16 +4,7 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
-meteor-base             # Packages every Meteor app needs to have
-mobile-experience       # Packages for a great mobile UX
-mongo                   # The database Meteor supports right now
-blaze-html-templates    # Compile .html files into Meteor Blaze views
-session                 # Client-side reactive dictionary for your app
-jquery                  # Helpful client-side library
-tracker                 # Meteor's client-side reactive programming library
 
-es5-shim                # ECMAScript 5 compatibility for older browsers.
-ecmascript              # Enable ECMAScript2015+ syntax in app code
 
 #autopublish             # Publish all data to the clients (for prototyping)
 insecure                # Allow all DB writes from clients (for prototyping)
@@ -21,8 +12,52 @@ insecure                # Allow all DB writes from clients (for prototyping)
 
 
 
-#ANIMATION
+
+# meteor libraries
+meteor-base             # Packages every Meteor app needs to have
+ecmascript              # Enable ECMAScript2015+ syntax in app code
+es5-shim                # ECMAScript 5 compatibility for older browsers.
+check
+tracker                 # Meteor's client-side reactive programming library
+
+# standard libraries
+jquery                  # Helpful client-side library
+underscore
+less
+aldeed:simple-schema
+
+# ui
+blaze-html-templates    # Compile .html files into Meteor Blaze views
+reactive-dict
+reactive-var
+aldeed:template-extension
+
+  #HOMER
+kevohagan:sweetalert
+chrismbeckett:toastr
+fortawesome:fontawesome
+
+  #ANIMATION
 percolate:momentum
+
+
+
+# data
+mongo                   # The database Meteor supports right now
+
+dburles:collection-helpers
+#aldeed:collection2
+#aldeed:autoform
+matb33:collection-hooks
+
+mobile-experience       # Packages for a great mobile UX
+session                 # Client-side reactive dictionary for your app
+
+
+
+
+
+
 
 
 #ACCOUNTS
@@ -32,22 +67,14 @@ useraccounts:flow-routing
 softwarerero:accounts-t9n
 
 
-#COLLECTION
-dburles:collection-helpers
-#aldeed:collection2
-#aldeed:autoform
-matb33:collection-hooks
 
 
 
 
-#MAPPING
-jeremy:geocomplete
 
-#HOMER
-kevohagan:sweetalert
-chrismbeckett:toastr
-fortawesome:fontawesome
+
+
+
 
 
 
@@ -68,7 +95,6 @@ emdagon:c3js
 andrasph:clockpicker
 
 meteorhacks:ssr
-check
 okgrow:router-autoscroll
 #mackbrowne:metismenu
 onokumus:metismenu
@@ -90,7 +116,6 @@ easy:search
 easysearch:elasticsearch
 
 #STYLING
-less
 twbs:bootstrap
 natestrauser:animate-css
 joshdellay:meteor-ladda-bootstrap
@@ -100,3 +125,7 @@ tsega:bootstrap3-datetimepicker
 momentjs:moment
 rzymek:moment-locale-es
 natestrauser:x-editable-bootstrap
+random
+mdg:validated-method
+jeremy:geocomplete
+dburles:google-maps

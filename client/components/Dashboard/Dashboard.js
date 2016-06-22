@@ -1,3 +1,22 @@
+import {
+  Companies
+}
+from '/imports/api/companies/companies.js';
+
+import '/imports/ui/components/rel/rel-customer-edit.js';
+import '/imports/ui/panels/customers-panel.js';
+import '/imports/ui/components/person/person-create.js';
+
+
+Template.Dashboard.onCreated(function dashboardOnCreated() {
+  this.autorun(() => {
+    // this.subscribe('companies.public');
+  });
+});
+
+// console.log("Companies", Companies);
+
+
 /*Template.Dashboard.onRendered(function() {
 
   // Flot charts data and options
@@ -113,15 +132,22 @@ Template.Dashboard.events({
 });
 
 Template.Dashboard.helpers({
-  showCreateOptions() {
-    return Session.get('showCreateOptions');
-  }
+  exampleMapOptions: function() {
+      // Make sure the maps API has loaded
+      if (GoogleMaps.loaded()) {
+        // Map initialization options
+        return {
+          center: new google.maps.LatLng(-37.8136, 144.9631),
+          zoom: 8
+        };
+      }
+    }
+    // companies() {
+    //   return Companies.find();
+    // }
 
 });
-Template.Dashboard.onCreated(function() {
 
-
-});
 
 /*Template.Dashboard.onCreated(function() {
   BlazeLayout.render('Dashboard', {createSection:'Create'})

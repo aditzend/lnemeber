@@ -1,9 +1,12 @@
+Template.navigation.onCreated(function() {
+  this.autorun(() => {
+    this.subscribe('userData'),
+      this.subscribe('persons.own')
+  });
+});
 Template.navigation.onRendered(function() {
-
-
   // Initialize metsiMenu plugin to sidebar menu
   $('#side-menu').metisMenu();
-
   // Sparkline bar chart data and options used under Profile image on navigation
   /*  $("#sparkline1").sparkline([5, 6, 7, 2, 0, 4, 2, 4, 5, 7, 2, 4, 12, 11, 4], {
       type: 'bar',
@@ -12,7 +15,6 @@ Template.navigation.onRendered(function() {
       barColor: '#62cb31',
       negBarColor: '#53ac2a'
     });*/
-
 });
 
 Template.navigation.events({
@@ -39,7 +41,35 @@ Template.navigation.events({
 });
 
 Template.navigation.helpers({
-  userEmail: () => Meteor.user().emails[0].address
+
+  userEmail() {
+      const instance = Template.instance();
+      if (instance.subscriptionsReady()) {
+        return Meteor.user().emails[0].address;
+      }
+    },
+    relatedPerson() {
+      const instance = Template.instance();
+      if (instance.subscriptionsReady()) {
+
+
+        let r = Meteor.users.findOne(Meteor.userId()).relatedPerson;
+        // let relatedPersonId = Rels.findOne({
+        //   destiny: Meteor.userId(),
+        //   type: "HAS_USER"
+        // }).origin;
+        let relatedPerson = Persons.findOne(r);
+        let name = relatedPerson.name;
+
+
+
+        return (name) ?
+          name :
+          'Completa tus datos!';
+        // return 'subscriptionsReady';
+
+      }
+    }
 
 
 });

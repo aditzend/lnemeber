@@ -1,0 +1,39 @@
+<template name="Customers_panel">
+  
+  
+  {{#if selectedCompany}}
+    <div class="list-item">
+      {{> Company_show (showCompanyArgs selectedCompany)}}
+      
+    </div>
+
+    <div class="pull-right">
+        <button class="js-deselect-company btn btn-xs btn-default">
+            <i class='fa fa-arrow-left'></i>
+            Volver a la busqueda</button>
+    </div>
+    
+    <div class="list-item">
+      
+    {{#if rel selectedCompany}}
+    {{#if editingCustomerRel}}
+      {{> Rel_customer_edit (editCustomerRelArgs selectedCompany)}}
+    {{else}}
+    {{> Rel_customer_show (showCustomerRelArgs selectedCompany)}}
+
+    {{/if}}
+    {{else}}
+    {{> Rel_customer_edit (editCustomerRelArgs selectedCompany)}}
+    {{/if}}
+    </div>
+  {{else}} <!-- //selectedCompany -->
+  {{#if creatingCompany}}
+  {{> Company_create createCompanyArgs }}
+  
+  {{else}}
+      <h3>Seleccionar empresa</h3>
+      {{> Company_search searchCompanyArgs }}
+      {{/if}}
+  {{/if}} <!-- //selectedCompany -->
+<!-- {{> Contact_edit}}  -->
+</template>

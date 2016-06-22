@@ -2,7 +2,7 @@ var i = 0;
 
 Template.header.onCreated(function() {
   this.autorun(() => {
-    this.subscribe('Actodes.all');
+    this.subscribe('companies.public');
     this.subscribe('Rels.all');
   });
 });
@@ -137,7 +137,10 @@ Template.header.events({
           hideSearchResults();
         } else {
           if (evt.keyCode == '8') {
+            //backspace
             toastr.clear();
+            selected.removeClass('h-bg-yellow');
+
             showSearchResults();
 
           } else {

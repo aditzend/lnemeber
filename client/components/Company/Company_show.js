@@ -1,9 +1,9 @@
-Template.Company_show.onCreated(function() {
+Template.xCompany_show.onCreated(function() {
 
 
 })
 
-Template.Company_show.helpers({
+Template.xCompany_show.helpers({
   company: function() {
     return Actodes.findOne({
       _id: FlowRouter.getParam('_id')
@@ -12,7 +12,7 @@ Template.Company_show.helpers({
 
 });
 
-Template.Company_show.events({
+Template.xCompany_show.events({
   'click [data-action=showPlace_create]': function() {
     //console.log(e.target.id);
     BlazeLayout.render('App_body', {

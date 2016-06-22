@@ -1,12 +1,17 @@
-<template name="Company_create">
-  <div class="panel panel-default appear-first">
-    <div class="panel-heading">DATOS DE LA EMPRESA</div>
+ <template name="Company_create">
+   
+   {{#if companyCreated}}
+   {{> Company_show (showCompanyArgs companyCreated)}}
 
-    <div class="panel-body">
-        <form data-action='form'>
+   {{> Rel_customer_edit (editCustomerRelArgs companyCreated)}}
+   {{else}}
+   
+   {{#panel title="Nueva empresa"}}
+   
+        <form data-action='form' class="form-horizontal">
           <div class='row'>
-
-          <div class='col-xs-12 col-sm-6 col-md-4 col-lg-3'>
+   
+          <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
             {{#momentum plugin='growl'}}
             <div class="form-group">
               <label class="control-label" for="name">Raz&oacute;n social</label>
@@ -16,7 +21,7 @@
             </div>
             {{/momentum}}
           </div>
-          <div class='col-xs-12 col-sm-6 col-md-4 col-lg-3'>
+          <div class='col-xs-12 col-lg-12'>
               <div class="form-group">
                 <label class="control-label" for="country">De qu&eacute; pa&iacute;s es la empresa?</label>
                 <select data-action='country' id='countryInput' class='form-control'>
@@ -33,7 +38,7 @@
                 <span class="help-block"></span>
               </div>
           </div>
-          <div class='col-xs-12 col-sm-6 col-md-4 col-lg-3'>
+          <div class='col-xs-12 col-lg-12'>
             <div class="form-group">
               <label class="control-label" for="cuit">CUIT</label>
               <input class="form-control" data-action="cuitInput" id="cuitInput" name="cuit" type="number">
@@ -41,17 +46,19 @@
               <span class="help-block"></span>
             </div>
           </div>
-
+   
       </div>
       <div class='row'>
         <div class='col-xs-12 col-sm-6 col-md-4 col-lg-3'>
-
-        <button class="btn btn-success" type="submit">CREAR</button>
+          <span class="js-cancel btn btn-default" type="submit">Cancelar</span>
+   
+        <button class="js-create btn btn-success" type="submit">Crear</button>
       </div>
     </div>
-
+   
         </form>
-
-    </div>
-  </div>
+        {{/panel}}
+        
+{{/if}}
+  
 </template>

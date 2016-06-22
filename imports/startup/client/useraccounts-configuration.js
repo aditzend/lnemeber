@@ -1,14 +1,31 @@
+import {
+  AccountsTemplates
+}
+from 'meteor/useraccounts:core';
+
+
+
+T9n.setLanguage('es');
+
+AccountsTemplates.removeField('password');
+
+AccountsTemplates.addField({
+  _id: 'password',
+  type: 'password',
+  required: true,
+  minLength: 8,
+
+  re: /(?=.*[a-z])(?=.*[A-Z]).{6,}/,
+  errStr: 'At least 1 digit, 1 lower-case and 1 upper-case'
+});
+
+// let userId = Meteor.userId();
 AccountsTemplates.configure({
   //defaultTemplate: 'myCustomFullPageAtForm',
   defaultLayout: 'AT_layout',
   defaultLayoutType: 'blaze',
   defaultLayoutRegions: {},
-  defaultContentRegion: 'main'
-});
-
-T9n.setLanguage('es');
-
-AccountsTemplates.configure({
+  defaultContentRegion: 'main',
   // Behavior
   confirmPassword: false,
   enablePasswordChange: true,
@@ -42,10 +59,9 @@ AccountsTemplates.configure({
   redirectTimeout: 4000,
 
   // Hooks
-  /*onLogoutHook: myLogoutFunc,
-  onSubmitHook: mySubmitFunc,
-  preSignUpHook: myPreSubmitFunc,
-  postSignUpHook: myPostSubmitFunc,*/
+  // onLogoutHook: postSignUp
+  // onSubmitHook: mySubmitFunc,
+  // preSignUpHook: myPreSubmitFunc,
 
   // Texts
   /*texts: {

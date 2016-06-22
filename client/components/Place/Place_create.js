@@ -37,15 +37,10 @@ AutoForm.hooks({
 });
 */
 
-//Meter esto en algun bloque del FlowRouter para que no afecte al tiempo de carga inicial
-Meteor.startup(function() {
-  GoogleMaps.load({
-    key: 'AIzaSyAgu2RfWsX44a9EjszIdicx2CTqQk2IODs',
-    libraries: 'places'
-  });
-});
+
 
 Template.Place_create.onRendered(function() {
+
   //-----------------------------geocomplete
   this.autorun(() => {
     if (GoogleMaps.loaded()) {
@@ -58,11 +53,10 @@ Template.Place_create.onRendered(function() {
       });
 
     }
-    $("#addressInput")
-      .geocomplete()
-      .bind("geocode:result", function(event, result) {
-        console.log(result);
-      });
+    $("#addressInput").geocomplete().bind("geocode:result", function(
+      event, result) {
+      console.log(result);
+    });
     $("#addressInput").bind("geocode:dragged", function(event, latLng) {
       $("input[name=lat]").val(latLng.lat());
       console.log(latLng.lat());

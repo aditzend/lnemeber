@@ -1,0 +1,12 @@
+<template name="Rel_customer_show">
+
+                    <p>{{rel.notes}}</p>
+                    {{#if rel.paymentNotes}}
+                        <p>
+                          <i class='fa fa-credit-card'></i>
+                          {{rel.paymentDays}}
+                          {{rel.paymentTerms}}
+                          {{rel.paymentNotes}}
+                        </p>
+                      {{/if}}
+</template>

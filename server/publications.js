@@ -18,62 +18,6 @@ Meteor.publish('Actodes.all', function() {
   }
 });
 
-//------------------------PLACES---------------------
-
-
-Meteor.publish('Places.byRelatedActode',
-  function(actodeId) {
-    if (this.userId) {
-      return Places.find({
-        relatedActode: actodeId
-      });
-    } else {
-      this.ready();
-    }
-  });
-Meteor.publish('Places.all',
-  function() {
-    if (this.userId) {
-      return Places.find();
-    } else {
-      this.ready();
-    }
-  });
-//------------------------RELS---------------------
-
-// Pub de prueba
-Meteor.publish('Rels.all',
-  function() {
-    return Rels.find();
-  });
-
-//To get suppliers and customers
-Meteor.publish('Rels.byDestiny',
-  function(origin, destiny) {
-    if (this.userId) {
-      return Rels.find({
-        origin: origin,
-        destiny: destiny,
-        owner: this.userId
-      });
-    } else {
-      this.ready();
-    }
-  });
-
-//To get rels of a contact
-Meteor.publish('Rels.byOrigin',
-  function(origin) {
-    if (this.userId) {
-      return Rels.find({
-        origin: origin,
-        owner: this.userId //belongsTo
-      });
-    } else {
-      this.ready();
-    }
-  });
-
 
 
 //To get the company/companies to with a contact belongs
@@ -146,3 +90,27 @@ Meteor.publish('Countries.all', function() {
     this.ready();
   }
 });*/
+
+
+
+//------------------------PLACES---------------------
+
+
+Meteor.publish('Places.byRelatedActode',
+  function(actodeId) {
+    if (this.userId) {
+      return Places.find({
+        relatedActode: actodeId
+      });
+    } else {
+      this.ready();
+    }
+  });
+Meteor.publish('Places.all',
+  function() {
+    if (this.userId) {
+      return Places.find();
+    } else {
+      this.ready();
+    }
+  });

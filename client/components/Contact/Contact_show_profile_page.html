@@ -1,0 +1,9 @@
+<template name="Contact_show_profile_page">
+{{#each contact in contactArray}}
+    {{> Contact_show_profile (contactArgs contact)}}
+    <!-- item {{actodeId}} -->
+  {{else}}
+    {{> App_notFound}}
+{{/each}}
+<!-- Contact_show_profile_page -->
+</template>

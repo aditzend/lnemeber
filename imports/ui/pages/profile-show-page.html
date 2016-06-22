@@ -1,0 +1,21 @@
+<template name="Profile_show_page">
+  {{#staggering}}
+      {{#if Template.subscriptionsReady}}
+      <div class="row">
+          <div class="col-lg-12">
+              <div class="hpanel">
+                  <div class="panel-body">
+                      <h3>Perfil</h3>
+                  </div>
+              </div>
+          </div>
+      </div>
+      {{> Person_show person = person}}
+      {{> Person_show_work person = person}}
+  
+      {{else}}
+      CARGANDO...
+{{/if}}      
+    {{/staggering}}
+</template>
+

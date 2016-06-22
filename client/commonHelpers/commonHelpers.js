@@ -156,6 +156,15 @@ Template.registerHelper("getGender", function(isMale) {
   return (isMale === "1") ? true : false;
 });
 
-Template.registerHelper("formatPhone", function(phone) {
-  return Phoneformat.formatLocal('AR', phone);
+Template.registerHelper("formatInternational", function(phone) {
+  const country = Phoneformat.countryForE164Number(phone) || 'AR';
+  return Phoneformat.formatInternational(country, phone);
+});
+Template.registerHelper("phoneCountry", function(phone) {
+  return Phoneformat.countryForE164Number(phone) || 'AR';
+
+});
+
+Template.registerHelper("not", function(argument) {
+  return !argument;
 });

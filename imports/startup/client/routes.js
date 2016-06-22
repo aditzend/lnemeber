@@ -1,3 +1,21 @@
+import {
+  FlowRouter
+}
+from 'meteor/kadira:flow-router';
+import {
+  BlazeLayout
+}
+from 'meteor/kadira:blaze-layout';
+import {
+  AccountsTemplates
+}
+from 'meteor/useraccounts:core';
+
+import '../../api/users/createUser.js';
+import '../../ui/pages/profile-show-page.js';
+
+
+
 //no one enters without logging!
 FlowRouter.triggers.enter([AccountsTemplates.ensureSignedIn]);
 
@@ -5,18 +23,32 @@ FlowRouter.triggers.enter([AccountsTemplates.ensureSignedIn]);
 FlowRouter.route('/', {
   name: 'home',
   action: function() {
-    BlazeLayout.render('App_body', {
-      main: "Dashboard"
-    });
+    if (Meteor.userId()) {
+      BlazeLayout.render('App_body', {
+        main: "Dashboard"
+      });
+
+    }
+
   }
 });
 
 FlowRouter.route('/exit', {
   name: 'exit',
   action: function() {
-    Meteor.logout();
+    AccountsTemplates.logout();
     BlazeLayout.render('AT_layout', {
       main: "Exit"
+    });
+  }
+});
+
+FlowRouter.route('/create-user-lkjpoi098', {
+  name: 'createUser',
+  action: function() {
+    Meteor.logout();
+    BlazeLayout.render('App_body', {
+      main: "createUser"
     });
   }
 });
@@ -76,7 +108,22 @@ FlowRouter.route('/create-generic/', {
     Session.set('showCreateOptions', false);
   }
 });
+
+
 //---------------------------------------------------------------
+//--------------------PROFILE---------------------------------------
+FlowRouter.route('/profile/', {
+  name: 'Profile.show',
+  action() {
+    BlazeLayout.render('App_body', {
+      main: 'Profile_show_page'
+    });
+  }
+});
+
+//---------------------------------------------------------------
+
+
 
 //--------------------SHOW---------------------------------------
 FlowRouter.route('/show-generic/:_id', {
@@ -103,16 +150,6 @@ FlowRouter.route('/show-2/:_id', {
     });
   }
 });
-FlowRouter.route('/contact/:_id', {
-  name: 'Contact.show',
-  action(params, queryParams) {
-    console.log("render contact ");
-    BlazeLayout.render('App_body', {
-      main: 'Contact_show'
-    });
-
-  }
-});
 
 
 
@@ -120,7 +157,7 @@ FlowRouter.route('/show-1/:_id', {
   name: 'showContact',
   action() {
     BlazeLayout.render('App_body', {
-      main: 'Contact_show_profile'
+      main: 'Contact_show_profile_page'
     });
   }
 });
