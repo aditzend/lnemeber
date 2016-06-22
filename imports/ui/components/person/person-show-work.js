@@ -36,8 +36,8 @@ import '../../../api/rels/methods.js';
 
 
 Template.Person_show_work.onCreated(function() {
-  let admin = Meteor.call('rels.checkAdmin');
-  console.log(admin);
+  // let admin = Meteor.call('rels.checkAdmin');
+  // console.log(admin);
 
 
   const instance = Template.instance();

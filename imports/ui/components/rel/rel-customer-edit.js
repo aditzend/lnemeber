@@ -10,20 +10,65 @@ Template.Rel_customer_edit.onCreated(function() {
   });
 });
 
+Template.Rel_customer_edit.onRendered(function() {
+  const instance = Template.instance();
+  const d = Template.instance().data;
+  const rel = Rels.findOne({
+    origin: d.origin,
+    destiny: d.destiny,
+    type: d.type
+  });
+  if (rel) {
+    instance.$('#notesInput').val(rel.notes);
+    instance.$('#paymentDaysInput').val(rel.paymentDays);
+    instance.$('#paymentTermsInput').val(rel.paymentTerms);
+    instance.$('#paymentNotesInput').val(rel.paymentNotes);
+  }
+
+});
+
 
 
 Template.Rel_customer_edit.events({
-  'submit [data-action=save-edit]': function(e) {
+  'submit form': function(e, instance) {
     e.preventDefault();
-    console.log('editing Rel: ' + this._id);
-    Rels.update(this._id, {
+    console.log(instance.data.type);
+    const d = instance.data;
+
+    const rel = Rels.findOne({
+      origin: d.origin,
+      destiny: d.destiny,
+      type: d.type
+    });
+
+    const relId = Rels.upsert({
+      _id: rel._id
+    }, {
       $set: {
+        type: d.type,
+        origin: d.origin,
+        destiny: d.destiny,
         notes: e.target.notes.value,
         paymentDays: e.target.paymentDays.value,
         paymentTerms: e.target.paymentTerms.value,
         paymentNotes: e.target.paymentNotes.value,
       }
     });
+    // 
+    console.log('new rel >>>>>>', relId);
+    instance.data.onSavedData(relId);
+
+    // 
+    // 
+    // console.log('editing Rel: ' + this._id);
+    // Rels.update(this._id, {
+    //   $set: {
+    //     notes: e.target.notes.value,
+    //     paymentDays: e.target.paymentDays.value,
+    //     paymentTerms: e.target.paymentTerms.value,
+    //     paymentNotes: e.target.paymentNotes.value,
+    //   }
+    // });
   },
   'click .js-rel-customer-edit-cancel': function(e, instance) {
     instance.data.onCancel();

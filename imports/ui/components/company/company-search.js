@@ -15,6 +15,8 @@ Template.Company_search.helpers({
     };
   },
   company_searchIndex: function() {
+    // const instance = Template.instance();
+    // return instance.data.index;
     return CompaniesIndex;
   },
   insertedText: function() {

@@ -1,4 +1,4 @@
-import './customers-panel.html';
+import './vendors-panel.html';
 import '../components/company/company-search.js';
 import '../components/contact/contact-edit.js';
 
@@ -13,18 +13,19 @@ Template.Customers_panel.onCreated(function() {
   });
 });
 
-Template.Customers_panel.helpers({
+Template.Vendors_panel.helpers({
   searchCompanyArgs() {
       const instance = Template.instance();
 
       return {
+        index: CompaniesIndex,
         selectedCompany(id) {
-            instance.state.set('selectedCompany', id);
-            console.log("STATE>>>>>>>>>>>>>> SELECTED COMPANY ", id);
-          },
-          companyNotFound(insertedText) {
-            instance.state.set('creatingCompany', insertedText);
-          }
+          instance.state.set('selectedCompany', id);
+          console.log("STATE>>>>>>>>>>>>>> SELECTED COMPANY ", id);
+        },
+        companyNotFound(insertedText) {
+          instance.state.set('creatingCompany', insertedText);
+        }
       }
     },
     showCompanyArgs(id) {
@@ -53,18 +54,15 @@ Template.Customers_panel.helpers({
         destiny: HARDCODE_OWNER,
         onSavedData(relId) {
           instance.state.set('createdRel', relId);
-          instance.state.set('editingCustomerRel', false);
-
         },
         onCancel() {
           instance.state.set('editingCustomerRel', false);
-          console.log('Cancelado');
         }
       }
     },
     editingCustomerRel() {
       const instance = Template.instance();
-      return instance.state.get('editingCustomerRel');
+      return instance.get('editingCustomerRel');
     },
 
     createCompanyArgs() {
@@ -96,7 +94,7 @@ Template.Customers_panel.helpers({
     },
     rel(company) {
       const rel = Rels.findOne({
-        type: 'customer',
+        type: 'vendor',
         origin: company,
         destiny: HARDCODE_OWNER
       });
@@ -109,11 +107,8 @@ Template.Customers_panel.helpers({
     }
 });
 
-Template.Customers_panel.events({
+Template.Vendors_panel.events({
   'click .js-deselect-company': function(e, instance) {
     instance.state.set('selectedCompany', false);
-  },
-  'click .js-rel-customer-edit': function(e, instance) {
-    instance.state.set('editingCustomerRel', true);
   }
 });

@@ -3,13 +3,12 @@ import {
 }
 from 'meteor/meteor';
 
+console.log('rels methods loaded');
 
 
 Meteor.methods({
-  'rels.checkAdmin' ({
-
-  }) {
-    return '123';
+  'rels.checkAdmin' () {
+    console.log('heyyyy');
   },
   'rels.upsertWorker' ({
     origin, destiny, position
