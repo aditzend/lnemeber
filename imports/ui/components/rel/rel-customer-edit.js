@@ -3,6 +3,7 @@ import '/imports/api/rels/methods.js';
 
 
 Template.Rel_customer_edit.onCreated(function() {
+  console.log(this.data);
   this.state = new ReactiveDict();
   this.state.setDefault({
     editing: false
@@ -41,10 +42,24 @@ Template.Rel_customer_edit.events({
       type: d.type
     });
 
-    const relId = Rels.upsert({
-      _id: rel._id
-    }, {
-      $set: {
+    let relId;
+
+    if (rel) {
+      relId = Rels.update({
+        _id: rel._id
+      }, {
+        $set: {
+          type: d.type,
+          origin: d.origin,
+          destiny: d.destiny,
+          notes: e.target.notes.value,
+          paymentDays: e.target.paymentDays.value,
+          paymentTerms: e.target.paymentTerms.value,
+          paymentNotes: e.target.paymentNotes.value,
+        }
+      });
+    } else {
+      relId = Rels.insert({
         type: d.type,
         origin: d.origin,
         destiny: d.destiny,
@@ -52,8 +67,10 @@ Template.Rel_customer_edit.events({
         paymentDays: e.target.paymentDays.value,
         paymentTerms: e.target.paymentTerms.value,
         paymentNotes: e.target.paymentNotes.value,
-      }
-    });
+      });
+    }
+
+
     // 
     console.log('new rel >>>>>>', relId);
     instance.data.onSavedData(relId);

@@ -31,14 +31,6 @@ import './company-create.html';
 import '../rel/rel-customer-edit';
 import '/imports/api/companies/methods.js';
 
-Template.Company_create.onCreated(function() {
-  // this.subscribe('Rels.all');
-  this.state = new ReactiveDict();
-  this.state.setDefault({
-    editingCustomerRel: false,
-    companyCreated: false
-  });
-});
 
 
 Template.Company_create.onRendered(function() {
@@ -83,7 +75,7 @@ Template.Company_create.onRendered(function() {
         finType: 'CUIT',
         ssok: ssok
       });
-      instance.state.set('companyCreated', newCompany);
+      instance.data.onSavedData(newCompany);
       // Rels.insert({
       //   origin: Meteor.user().relatedPerson,
       //   type: 'worker',
@@ -110,48 +102,23 @@ Template.Company_create.onRendered(function() {
 
 });
 
-Template.Company_create.helpers({
-  companyCreated() {
-      const instance = Template.instance();
-      return instance.state.get('companyCreated');
-    },
-    showCompanyArgs(id) {
-      const instance = Template.instance();
-      return {
-        selectedCompanyId: id
-      }
-    },
-    editCustomerRelArgs(id) {
-      const instance = Template.instance();
-      return {
-        selectedCompanyId: id,
-        onCancel() {
-          instance.state.set('editingCustomerRel', false);
-        },
-        onSavedData(id) {
-          instance.state.set('customerRelCreated', id);
-        }
-      }
-    },
-});
+
 
 Template.Company_create.events({
   'submit form': (e, instance) => {
     e.preventDefault();
 
   },
-  'change [data-action=country]': (e) => {
-    console.log(CountryCodes.countryCode(e.target.value));
 
-  },
   'click .js-cancel': function(e, instance) {
+    instance.data.onCancel();
     swal({
       title: 'Cancelado',
       text: 'No se guardaron los datos',
       type: 'warning'
     });
-    this.onCancel();
-    console.log(instance.data);
+
+
   }
 
 });

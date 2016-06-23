@@ -1,10 +1,6 @@
  <template name="Company_create">
    
-   {{#if companyCreated}}
-   {{> Company_show (showCompanyArgs companyCreated)}}
 
-   {{> Rel_customer_edit (editCustomerRelArgs companyCreated)}}
-   {{else}}
    
    {{#panel title="Nueva empresa"}}
    
@@ -59,6 +55,6 @@
         </form>
         {{/panel}}
         
-{{/if}}
+
   
 </template>
