@@ -11,7 +11,7 @@
     </div>
   </div>
     <hr>
-      <div class="list-item">
+      <div class ="list-item">
         <div class="pull-right">
           <button class="js-company-edit btn btn-xs btn-default">
           <i class='fa fa-pencil'></i>
@@ -49,20 +49,36 @@
         {{/if}}
       </div>
       <hr>
+      {{#panel title='Contactos'}}
       <div class="list-item">
-        {{#if editingContact}}
-          {{> Contact_edit (editContactArgs selectedCompany)}}
+        {{#if creatingContact}}
+        {{> Contact_edit (editContactArgs selectedCompany '' '' '' )}}
+        
         {{else}}
-          <div class="pull-right">
-            <button class="js-contact-create btn btn-xs btn-default">
+          <div class="text-center">
+            <button class="js-contact-create btn btn-default">
             <i class='fa fa-user'></i>
             Crear contacto
             </button>
           </div>
-        
-          
         {{/if}}
+        <hr>
+        </div>
+        <div class="list-item">
+          {{#each contactRels selectedCompany}}
+          <hr>
+            {{#if editingContact _id}}
+              editando rel {{_id}}
+              {{> Contact_edit (editContactArgs destiny origin _id)}}
+            {{else}}
+              {{> Contact_show (showContactArgs origin _id )}}
+              person id {{origin}}
+            {{/if}}
+          {{/each}}
       </div>
+      {{/panel}}
+      
+  
       
     {{else}} <!-- //selectedCompany -->
       {{#if creatingCompany}}

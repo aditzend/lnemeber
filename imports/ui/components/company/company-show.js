@@ -1,29 +1,29 @@
 import {
-  Meteor
+    Meteor
 }
 from 'meteor/meteor';
 
 
 import {
-  Template
+    Template
 }
 from 'meteor/templating';
 import {
-  Mongo
+    Mongo
 }
 from 'meteor/mongo';
 import {
-  Tracker
+    Tracker
 }
 from 'meteor/tracker';
 
 import {
-  ReactiveDict
+    ReactiveDict
 }
 from 'meteor/reactive-dict';
 
 import {
-  FlowRouter
+    FlowRouter
 }
 from 'meteor/kadira:flow-router';
 
@@ -32,16 +32,16 @@ import './company-edit.js';
 
 
 Template.Company_show.onCreated(function() {
-  console.log("show company", this.data.selectedCompanyId);
+    // console.log("show company", this.data.selectedCompanyId);
 
-  this.subscribe("companies.public.byId", this.data.selectedCompanyId);
+    this.subscribe("companies.public.byId", this.data.selectedCompanyId);
 });
 
 Template.Company_show.helpers({
 
-  company() {
-    const instance = Template.instance();
+    company() {
+        const instance = Template.instance();
 
-    return Companies.findOne(instance.data.selectedCompanyId);
-  }
+        return Companies.findOne(instance.data.selectedCompanyId);
+    }
 });

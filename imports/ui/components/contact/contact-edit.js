@@ -31,6 +31,10 @@ import './contact-edit.html';
 
 Template.Contact_edit.onRendered(function() {
     const instance = Template.instance();
+    const person = instance.data.person;
+    const rel = instance.data.rel;
+    const mode = instance.data.mode;
+
     var arrYears = bYearOptions();
     var selectYear = document.getElementById("bYearInput");
     for (i = 0; i < arrYears.length; i++) {
@@ -141,8 +145,6 @@ Template.Contact_edit.onRendered(function() {
                 this.defaultShowErrors();
             },
             submitHandler: function() {
-                console.log("submit request");
-
 
                 let treatedAs = instance.$('#treatedAsInput')
                     .val();
@@ -188,39 +190,90 @@ Template.Contact_edit.onRendered(function() {
                     (phone === '' || Phoneformat.isValidNumber(phone,
                         phoneCountry))
                 ) {
-                    console.log("insert attempt");
 
-                    const newPerson = Persons.insert({
-                        name: name,
-                        lastName: lastName,
-                        treatedAs: treatedAs,
-                        fin: fin,
-                        finType: 'DNI',
-                        country: 'AR',
-                        isMale: isMale,
-                        email: email,
-                        bDay: bDay,
-                        bMonth: bMonth,
-                        bYear: bYear,
-                        mobile: mobile,
-                        phone: phone,
-                        internalPhone: internalPhone
-                    });
-                    const newRel = Rels.insert({
-                        origin: newPerson,
-                        destiny: instance.data.destiny,
-                        type: instance.data.type,
-                        position: position,
-                        treatedAs: treatedAs,
-                        formalTreatment: formalTreatment,
-                        owner: instance.data.owner
-                    });
+                    if (instance.data.person == undefined) {
 
-                    swal({
-                        title: 'Ok!',
-                        text: treatedAs + ' es ' + position + ' en ' + instance.data.company.name,
-                        type: "success"
-                    });
+                        console.log("INSERTING...");
+
+                        const newPerson = Persons.insert({
+                            name: name,
+                            lastName: lastName,
+                            treatedAs: treatedAs,
+                            fin: fin,
+                            finType: 'DNI',
+                            country: 'AR',
+                            isMale: isMale,
+                            email: email,
+                            bDay: bDay,
+                            bMonth: bMonth,
+                            bYear: bYear,
+                            mobile: mobile,
+                            phone: phone,
+                            internalPhone: internalPhone
+                        });
+                        const newRel = Rels.insert({
+                            origin: newPerson,
+                            destiny: instance.data.destiny,
+                            type: instance.data.type,
+                            position: position,
+                            treatedAs: treatedAs,
+                            formalTreatment: formalTreatment,
+                            owner: instance.data.owner
+                        });
+                        instance.data.onSavedData();
+
+                        swal({
+                            title: 'Ok!',
+                            text: 'Ahora ' + treatedAs + ' es ' + position + ' en ' + instance.data.company.name,
+                            type: "success"
+                        });
+
+
+
+                    } else {
+                        console.log("UPDATING...");
+
+                        Persons.update({
+                            _id: person._id
+                        }, {
+                            name: name,
+                            lastName: lastName,
+                            treatedAs: treatedAs,
+                            fin: fin,
+                            finType: 'DNI',
+                            country: 'AR',
+                            isMale: isMale,
+                            email: email,
+                            bDay: bDay,
+                            bMonth: bMonth,
+                            bYear: bYear,
+                            mobile: mobile,
+                            phone: phone,
+                            internalPhone: internalPhone
+                        });
+                        Rels.update({
+                            _id: rel._id
+                        }, {
+                            origin: person._id,
+                            destiny: instance.data.destiny,
+                            type: instance.data.type,
+                            position: position,
+                            treatedAs: treatedAs,
+                            formalTreatment: formalTreatment,
+                            owner: instance.data.owner
+                        });
+                        instance.data.onSavedData();
+                        swal({
+                            title: 'Ok!',
+                            text: 'Los datos de  ' + treatedAs + ' se actualizaron. ',
+                            type: "success"
+                        });
+                    }
+
+
+
+
+
                     // let r = Meteor.user().relatedPerson;
                     // 
                     // Persons.update(r, {
@@ -281,10 +334,7 @@ Template.Contact_edit.helpers({
 
 Template.Contact_edit.events({
 
-    'click .js-save': function(e, instance) {
-        this.onSavedData(true);
 
-    },
     'click .js-cancel': function(e, instance) {
         this.onCancel(true);
         swal({
