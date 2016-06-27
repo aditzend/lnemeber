@@ -1,31 +1,31 @@
-import {
-    Meteor
-}
-from 'meteor/meteor';
-
-
-import {
-    Template
-}
-from 'meteor/templating';
-import {
-    Mongo
-}
-from 'meteor/mongo';
-import {
-    Tracker
-}
-from 'meteor/tracker';
-
-import {
-    ReactiveDict
-}
-from 'meteor/reactive-dict';
-
-import {
-    FlowRouter
-}
-from 'meteor/kadira:flow-router';
+// import {
+//     Meteor
+// }
+// from 'meteor/meteor';
+// 
+// 
+// import {
+//     Template
+// }
+// from 'meteor/templating';
+// import {
+//     Mongo
+// }
+// from 'meteor/mongo';
+// import {
+//     Tracker
+// }
+// from 'meteor/tracker';
+// 
+// import {
+//     ReactiveDict
+// }
+// from 'meteor/reactive-dict';
+// 
+// import {
+//     FlowRouter
+// }
+// from 'meteor/kadira:flow-router';
 
 import './contact-show.html';
 import './contact-edit.js';
@@ -41,28 +41,19 @@ Template.Contact_show.onCreated(function() {
 
 
 Template.Contact_show.helpers({
-    // editing() {
-    //     const instance = Template.instance();
-    //     return instance.state.get('editing');
-    // },
-    // displaying() {
-    //     const instance = Template.instance();
-    //     return !instance.state.get('editing');
-    // },
+    showBirthdayArgs(day, month, year) {
+        return {
+            bDay: day,
+            bMonth: month,
+            bYear: year
+        }
+    },
+    showBirthdayArgs2(day) {
+        return {
+            bDay: day
 
-    // personArgs(person) {
-    //     const instance = Template.instance();
-    //     return {
-    //         person,
-    //         onSavedData(finished) {
-    //             instance.state.set('editing', false);
-    //         },
-    //         onCancel(finished) {
-    //             instance.state.set('editing', false);
-    //         }
-    // 
-    //     }
-    // }
+        }
+    },
 
     showingOptionButtons() {
         const instance = Template.instance();
@@ -92,7 +83,7 @@ Template.Contact_show.events({
 
     },
     'click .js-delete': function(e, instance) {
-        instance.data.onDelete(instance.data.relId);
+        instance.data.onDelete(instance.data.rel._id);
     },
     'click .js-edit': function(e, instance) {
         instance.data.onEdit(instance.data.rel._id);

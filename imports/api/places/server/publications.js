@@ -1,5 +1,15 @@
 import {
-  Places
+    Meteor
 }
-from
-  '../places.js';
+from 'meteor/meteor';
+
+
+
+Meteor.publish('places.test',
+    function() {
+        if (this.userId) {
+            return Places.find();
+        } else {
+            this.ready();
+        }
+    });

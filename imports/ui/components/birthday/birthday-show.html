@@ -1,7 +1,17 @@
 <template name="Birthday_show">
   <div>
+    <!-- dia {{bDay}}
+    mes {{bMonth}}
+    anio {{bYear}}
+    nacimiento {{dateOfBirth}}
+    nuevo cumple {{actualBirthDay dateOfBirth}}
+    edad {{age dateOfBirth}}
+    <hr>
+    ahora es {{now}}
+    <hr> -->
     
     {{#if validBDay dateOfBirth}}
+
     {{#if age dateOfBirth}}
       {{#if isToday dateOfBirth}}<!-- >>>>>> isToday -->
         <h6 class="label label-100"> <i class='fa fa-gift'></i> Hoy cumple {{age dateOfBirth}}!</h6>
@@ -17,13 +27,13 @@
                 {{/if}}<!--     wasYesterday <<<<<< -->
             {{/if}}<!--     moreThanAWeekAgo <<<<<< -->
             {{else}} <!-- bDay has not passed yet -->
-              {{#if isTomorrow  actualBirthDay }}<!-- >>>>>>   isTomorrow  -->
+                {{#if isTomorrow  actualBirthDay }}<!-- >>>>>>   isTomorrow  -->
                 <h5 class="label label-200">Cumple {{newAge dateOfBirth}} ma&ntilde;ana !</h5>
                 {{else}} <!-- bDay is not tomorrow -->
-                  {{#if inLessThanAWeek}}<!-- >>>>>>   inLessThanAWeek -->
+                  {{#if inLessThanAWeek actualBirthDay}}<!-- >>>>>>   inLessThanAWeek -->
                       <h5 class="label label-300"> Cumple {{newAge dateOfBirth}} a&ntilde;os  {{bDayClose actualBirthDay}}</h5>
                     {{else}}<!-- bDay is in more than a week -->
-                      {{#if inLessThanAMonth}}<!-- >>>>>>   inLessThanAMonth -->
+                      {{#if inLessThanAMonth actualBirthDay}}<!-- >>>>>>   inLessThanAMonth -->
                         <h5 class="label label-400"> Cumple {{newAge dateOfBirth}}  {{bDayLong actualBirthDay}}</h5>
                        {{else}}<!-- bDay is in more than a month -->
                        <h5 class="label label-800"> Tiene {{age dateOfBirth}}. Cumple: {{bDayPlain actualBirthDay}}</h5>

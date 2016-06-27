@@ -3,10 +3,14 @@ import '../components/company/company-search.js';
 import '../components/company/company-edit.js';
 import '../components/contact/contact-edit.js';
 import '../components/contact/contact-show.js';
+import '../components/place/place-show.js';
+import '../components/place/place-edit.js';
+import '../components/birthday/birthday-show.js';
 
 Template.Customers_panel.onCreated(function() {
     this.subscribe('Rels.all');
     this.subscribe('persons.test');
+    this.subscribe('places.test');
     this.state = new ReactiveDict();
     this.state.setDefault({
         selectedCompany: false,
@@ -17,12 +21,15 @@ Template.Customers_panel.onCreated(function() {
         companyCreated: false,
         creatingContact: false,
         editingContact: false,
-        deletingContact: false
+        deletingContact: false,
+        creatingPlace: false,
+        editingPlace: false
     });
 });
 
 //vvvvvvvvvvvvvv ARGS vvvvvvvvvvvvvv
 Template.Customers_panel.helpers({
+
     searchCompanyArgs() {
         const instance = Template.instance();
 
@@ -36,10 +43,40 @@ Template.Customers_panel.helpers({
             }
         }
     },
-    showCompanyArgs(id) {
+    showCompanyArgs(selectedCompanyId) {
         const instance = Template.instance();
+        const company = Companies.findOne(selectedCompanyId);
         return {
-            selectedCompanyId: id
+            company: company,
+            onEdit(companyId) {
+                instance.state.set('editingCompany', companyId);
+                // console.log('EDIT CONTACT REL ', relId);
+            },
+            onDelete(companyId) {
+                instance.state.set('deletingCompany', companyId);
+                // console.log('DELETE CONTACT REL ', relId);
+                swal({
+                        title: "Borramos a " + company.name + ' ?',
+                        text: "No se puede recuperar esta informacion!",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "Sí, borrar!",
+                        cancelButtonText: "No, cancelar por favor!",
+                        closeOnConfirm: false,
+                        closeOnCancel: false
+                    },
+                    function(isConfirm) {
+                        if (isConfirm) {
+                            const deleted = Companies.remove(companyId);
+                            instance.state.set('selectedCompany', false);
+                            swal(company.name + " fue eliminada.", "Se borraron los datos", "success");
+                        } else {
+                            swal("Eliminación cancelada!", company.name + " esta segura :)", "error");
+                        }
+                    });
+
+            }
         }
     },
     editCompanyArgs(id) {
@@ -133,6 +170,32 @@ Template.Customers_panel.helpers({
             }
         }
     },
+    editPlaceArgs(companyId, placeId, relId) {
+        const instance = Template.instance();
+        const company = Companies.findOne(companyId);
+        const place = Places.findOne(placeId);
+        const rel = Rels.findOne(relId);
+        return {
+            destiny: companyId,
+            owner: HARDCODE_OWNER,
+            type: 'place',
+            company: company,
+            place: place,
+            rel: rel,
+            onSavedData() {
+                // console.log('rel created contact', relId);
+                instance.state.set('editingPlace', false);
+                instance.state.set('creatingPlace', false);
+
+            },
+            onCancel() {
+                // console.log('cancel');
+                instance.state.set('editingPlace', false);
+                instance.state.set('creatingPlace', false);
+
+            }
+        }
+    },
 
     showContactArgs(personId, relId) {
         const instance = Template.instance();
@@ -163,7 +226,11 @@ Template.Customers_panel.helpers({
                     },
                     function(isConfirm) {
                         if (isConfirm) {
-                            Rels.remove(relId);
+
+                            const deleted = Rels.remove(relId);
+                            console.log('deleted', deleted);
+
+
                             swal("Eliminado!", "Este contacto fue eliminado.", "success");
                         } else {
                             swal("Cancelado", "Este contacto esta seguro :)", "error");
@@ -172,8 +239,48 @@ Template.Customers_panel.helpers({
 
             }
         }
-    }
+    },
+    showPlaceArgs(placeId, relId) {
+        const instance = Template.instance();
+        const place = Places.findOne(placeId);
+        const rel = Rels.findOne(relId);
+        return {
+            place: place,
+            rel: rel,
+            onEdit(relId) {
+                instance.state.set('editingPlace', relId);
+                // console.log('EDIT CONTACT REL ', relId);
+            },
+            onDelete(relId) {
+                instance.state.set('deletingPlace', relId);
+                // console.log('DELETE CONTACT REL ', relId);
+                swal({
+                        title: "Estas seguro?",
+                        text: "No se puede recuperar esta informacion!",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "Si, borrarlo!",
+                        cancelButtonText: "No, cancelar por favor!",
+                        closeOnConfirm: false,
+                        closeOnCancel: false
+                    },
+                    function(isConfirm) {
+                        if (isConfirm) {
 
+                            const deleted = Rels.remove(relId);
+                            console.log('deleted', deleted);
+
+
+                            swal("Eliminado!", "Este lugar fue eliminado.", "success");
+                        } else {
+                            swal("Cancelado", "Este lugar esta seguro :)", "error");
+                        }
+                    });
+
+            }
+        }
+    },
 
 
 });
@@ -187,6 +294,7 @@ Template.Customers_panel.helpers({
         const instance = Template.instance();
         return instance.state.get('editingCompany');
     },
+
     selectedCompany() {
         const instance = Template.instance();
         return instance.state.get('selectedCompany');
@@ -202,6 +310,14 @@ Template.Customers_panel.helpers({
     creatingContact() {
         const instance = Template.instance();
         return instance.state.get('creatingContact');
+    },
+    creatingPlace() {
+        const instance = Template.instance();
+        return instance.state.get('creatingPlace');
+    },
+    editingPlace() {
+        const instance = Template.instance();
+        return instance.state.get('editingPlace');
     },
     editingContact(relId) {
         const instance = Template.instance();
@@ -225,6 +341,14 @@ Template.Customers_panel.helpers({
             destiny: company
         });
         return rels;
+    },
+    placeRels(company) {
+        const rels = Rels.find({
+            type: 'place',
+            // origin: company,
+            destiny: company
+        });
+        return rels;
     }
 });
 
@@ -240,6 +364,9 @@ Template.Customers_panel.events({
     },
     'click .js-contact-create': function(e, instance) {
         instance.state.set('creatingContact', true);
+    },
+    'click .js-place-create': function(e, instance) {
+        instance.state.set('creatingPlace', true);
     },
     'click .js-confirm-deletion': function(e, instance) {
         const relId = instance.state.get('deletingContactRel');

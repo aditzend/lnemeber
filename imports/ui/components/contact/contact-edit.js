@@ -269,60 +269,9 @@ Template.Contact_edit.onRendered(function() {
                             type: "success"
                         });
                     }
-
-
-
-
-
-                    // let r = Meteor.user().relatedPerson;
-                    // 
-                    // Persons.update(r, {
-                    //   $set: {
-                    //     name: name,
-                    //     middleName: middleName,
-                    //     lastName: lastName,
-                    //     fin: fin,
-                    //     finType: 'DNI',
-                    //     country: 'AR',
-                    //     isMale: isMale,
-                    //     email: email,
-                    //     bDay: bDay,
-                    //     bMonth: bMonth,
-                    //     bYear: bYear,
-                    //     mobile: mobile,
-                    //     phone: phone,
-                    //     internalPhone: internalPhone
-                    //   }
-                    // });
-                    // instance.state.set('editing', false);
-
-
-
-
-
-                    /*console.log('INSERT : ' + insert);
-                    console.log("name : " + name);
-                    console.log("middleName : " + middleName);
-                    console.log("lastName : " + lastName);
-                    console.log("treatedAs : " + treatedAs);
-                    console.log("formalTreatment : " + formalTreatment);
-                    console.log("isMale : " + isMale);
-                    console.log("birthMoment : " + birthMoment);
-                    console.log("mobile : " + mobile);
-                    console.log("bDay : " + bDay);
-                    console.log("bMonth : " + bMonth);
-                    console.log("bYear : " + bYear);*/
                 }
-                /*  var createdActode = Actodes.findOne(insert);
-      console.log(createdActode.treatedAs);
-
-*/
-
             }
         });
-
-
-
 });
 
 Template.Contact_edit.helpers({
@@ -415,34 +364,6 @@ Template.Contact_edit.events({
                 .next("span")
                 .hide();
         }
-    },
-    // 'focus [data-action=bDayInput]': function() {
-    //   //var option = document.createElement("option");
-    //   var select = document.getElementById("bDayInput");
-    //   var arr = dayOfMonthOptions();
-    //   for (i = 0; i < arr.length; i++) {
-    //     select.add(new Option(arr[i].text, arr[i].value));
-    //   }
-    // },
-    // 'focus [data-action=bMonthInput]': function() {
-    //   //var option = document.createElement("option");
-    //   var select = document.getElementById("bMonthInput");
-    //   var arr = monthOptions();
-    //   for (i = 0; i < arr.length; i++) {
-    //     select.add(new Option(arr[i].text, arr[i].value));
-    //   }
-    // },
-    // 'focus [data-action=bYearInput]': function() {
-    //     let arrYears = bYearOptions();
-    //     let selectYear = document.getElementById("bYearInput");
-    //     for (i = 0; i < arrYears.length; i++) {
-    //       selectYear.add(new Option(arrYears[i].text, arrYears[i].value));
-    //     };
-    //   }
-    /*,
-    'keyup [data-action=nameInput]' : function(e) {
-      console.log(Template.instance().find( "[data-action=nameInput]" ).class);
+    }
 
-
-    }*/
 });

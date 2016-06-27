@@ -32,16 +32,49 @@ import './company-edit.js';
 
 
 Template.Company_show.onCreated(function() {
-    // console.log("show company", this.data.selectedCompanyId);
-
-    this.subscribe("companies.public.byId", this.data.selectedCompanyId);
+    this.state = new ReactiveDict();
+    this.state.setDefault({
+        showingOptionButtons: false,
+        expanded: false
+    });
 });
 
 Template.Company_show.helpers({
-
-    company() {
+    showingOptionButtons() {
         const instance = Template.instance();
-
-        return Companies.findOne(instance.data.selectedCompanyId);
+        return instance.state.get('showingOptionButtons');
+    },
+    expanded() {
+        const instance = Template.instance();
+        return instance.state.get('expanded');
     }
+
+});
+
+
+Template.Company_show.events({
+    'click .js-show-option-buttons': function(e, instance) {
+        instance.state.set('showingOptionButtons', true);
+    },
+    'click .js-hide-option-buttons': function(e, instance) {
+        instance.state.set('showingOptionButtons', false);
+    },
+    'click .js-expand': function(e, instance) {
+        instance.state.set('expanded', true);
+
+
+    },
+    'click .js-compress': function(e, instance) {
+        instance.state.set('expanded', false);
+
+
+    },
+    'click .js-delete': function(e, instance) {
+        instance.data.onDelete(instance.data.company._id);
+    },
+    'click .js-edit': function(e, instance) {
+        instance.data.onEdit(instance.data.company._id);
+
+    }
+
 });
