@@ -28,7 +28,6 @@ import {
 from 'meteor/kadira:flow-router';
 
 import './company-show.html';
-import './company-edit.js';
 
 
 Template.Company_show.onCreated(function() {

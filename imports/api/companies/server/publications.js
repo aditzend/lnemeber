@@ -1,5 +1,5 @@
 import {
-  Meteor
+    Meteor
 }
 from 'meteor/meteor';
 
@@ -9,23 +9,35 @@ from 'meteor/meteor';
 // }
 // from '../companies.js';
 Meteor.publish("companies.public", function companiesPublic() {
-  return Companies.find({}, {
-    fields: {
-      ssok: false
-    }
-  });
+    return Companies.find({}, {
+        fields: {
+            ssok: false
+        }
+    });
 });
 
 Meteor.publish('companies.public.byId', function companiesPublicById(id) {
-  if (!this.userId) {
-    this.ready();
-  } else {
-    return Companies.find({
-      _id: id
-    }, {
-      fields: {
-        ssok: false
-      }
-    });
-  }
+    if (!this.userId) {
+        this.ready();
+    } else {
+        return Companies.find({
+            _id: id
+        }, {
+            fields: {
+                ssok: false
+            }
+        });
+    }
+});
+Meteor.publish('companies.name', function companiesName() {
+    if (!this.userId) {
+        this.ready();
+    } else {
+        return Companies.find({
+            fields: {
+                name: true,
+                ssok: false
+            }
+        });
+    }
 });

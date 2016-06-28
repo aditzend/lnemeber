@@ -1,26 +1,20 @@
-import './customers-panel.html';
-import '../components/company/company-search.js';
-import '../components/company/company-edit.js';
-import '../components/contact/contact-edit.js';
-import '../components/contact/contact-show.js';
-import '../components/place/place-show.js';
-import '../components/place/place-edit.js';
-import '../components/birthday/birthday-show.js';
-import '../components/rel/rel-customer-show.js';
+import './items-panel.html';
+import '../components/item/item-search.js';
 
-Template.Customers_panel.onCreated(function() {
+
+Template.Items_panel.onCreated(function() {
     this.subscribe('Rels.all');
     this.subscribe('persons.test');
     this.subscribe('places.test');
-    this.subscribe('companies.public');
+    this.subscribe('items.public');
     this.state = new ReactiveDict();
     this.state.setDefault({
-        selectedCompany: false,
+        selectedItem: false,
         createdRel: false,
-        editingCustomerRel: false,
-        creatingCompany: false,
-        editingCompany: false,
-        companyCreated: false,
+        editingVendorRel: false,
+        creatingItem: false,
+        editingItem: false,
+        itemCreated: false,
         creatingContact: false,
         editingContact: false,
         deletingContact: false,
@@ -30,37 +24,37 @@ Template.Customers_panel.onCreated(function() {
 });
 
 //vvvvvvvvvvvvvv ARGS vvvvvvvvvvvvvv
-Template.Customers_panel.helpers({
+Template.Items_panel.helpers({
 
-    searchCompanyArgs() {
+    searchItemArgs() {
         const instance = Template.instance();
 
         return {
-            mode: 'customer',
-            index: CustomersIndex,
-            selectedCompany(id) {
-                instance.state.set('selectedCompany', id);
+            mode: 'product',
+            index: ProductsIndex,
+            selectedItem(id) {
+                instance.state.set('selectedItem', id);
                 // console.log("STATE>>>>>>>>>>>>>> SELECTED COMPANY ", id);
             },
-            companyNotFound(insertedText) {
-                instance.state.set('creatingCompany', insertedText);
+            itemNotFound(insertedText) {
+                instance.state.set('creatingItem', insertedText);
             }
         }
     },
-    showCompanyArgs(selectedCompanyId) {
+    showItemArgs(selectedItemId) {
         const instance = Template.instance();
-        const company = Companies.findOne(selectedCompanyId);
+        const item = Items.findOne(selectedItemId);
         return {
-            company: company,
-            onEdit(companyId) {
-                instance.state.set('editingCompany', companyId);
+            item: item,
+            onEdit(itemId) {
+                instance.state.set('editingItem', itemId);
                 // console.log('EDIT CONTACT REL ', relId);
             },
-            onDelete(companyId) {
-                instance.state.set('deletingCompany', companyId);
+            onDelete(itemId) {
+                instance.state.set('deletingItem', itemId);
                 // console.log('DELETE CONTACT REL ', relId);
                 swal({
-                        title: "Borramos a " + company.name + ' ?',
+                        title: "Borramos a " + item.name + ' ?',
                         text: "No se puede recuperar esta informacion!",
                         type: "warning",
                         showCancelButton: true,
@@ -72,97 +66,97 @@ Template.Customers_panel.helpers({
                     },
                     function(isConfirm) {
                         if (isConfirm) {
-                            const deleted = Companies.remove(companyId);
-                            instance.state.set('selectedCompany', false);
-                            swal(company.name + " fue eliminada.", "Se borraron los datos", "success");
+                            const deleted = Items.remove(itemId);
+                            instance.state.set('selectedItem', false);
+                            swal(item.name + " fue eliminada.", "Se borraron los datos", "success");
                         } else {
-                            swal("Eliminación cancelada!", company.name + " esta segura :)", "error");
+                            swal("Eliminación cancelada!", item.name + " esta segura :)", "error");
                         }
                     });
 
             }
         }
     },
-    editCompanyArgs(id) {
+    editItemArgs(id) {
         const instance = Template.instance();
-        const company = Companies.findOne(id);
+        const item = Items.findOne(id);
         return {
-            company: company,
+            item: item,
             onSavedData() {
-                instance.state.set('editingCompany', false);
+                instance.state.set('editingItem', false);
 
             },
             onCancel() {
-                instance.state.set('editingCompany', false);
+                instance.state.set('editingItem', false);
 
             }
 
         }
     },
-    showCustomerRelArgs(companyId) {
+    showVendorRelArgs(itemId) {
         const instance = Template.instance();
         const rel = Rels.findOne({
-            type: 'customer',
-            origin: companyId,
+            type: 'vendor',
+            origin: itemId,
             destiny: HARDCODE_OWNER
         });
         return {
             rel,
             onEdit(relId) {
-                instance.state.set('editingCustomerRel', relId);
+                instance.state.set('editingVendorRel', relId);
                 // console.log('EDIT CONTACT REL ', relId);
             }
         }
 
     },
-    editCustomerRelArgs(companyId) {
+    editVendorRelArgs(itemId) {
         const instance = Template.instance();
 
         return {
-            type: 'customer',
-            origin: companyId,
+            type: 'vendor',
+            origin: itemId,
             destiny: HARDCODE_OWNER,
             onSavedData(relId) {
                 instance.state.set('createdRel', relId);
-                instance.state.set('editingCustomerRel', false);
+                instance.state.set('editingVendorRel', false);
 
             },
             onCancel() {
-                instance.state.set('editingCustomerRel', false);
+                instance.state.set('editingVendorRel', false);
                 console.log('Cancelado');
             }
         }
     },
-    createCompanyArgs() {
+    createItemArgs() {
         const instance = Template.instance();
 
         return {
-            company: {
-                name: instance.state.get('creatingCompany')
+            item: {
+                name: instance.state.get('creatingItem')
             },
             // person,
-            onSavedData(newCompany) {
-                instance.state.set('creatingCompany', false);
-                instance.state.set('selectedCompany', newCompany);
+            onSavedData(newItem) {
+                instance.state.set('creatingItem', false);
+                instance.state.set('selectedItem', newItem);
 
             },
             onCancel() {
-                instance.state.set('creatingCompany', false);
+                instance.state.set('creatingItem', false);
 
             }
         }
     },
 
-    editContactArgs(companyId, personId, relId) {
+    editContactArgs(itemId, personId, relId) {
         const instance = Template.instance();
-        const company = Companies.findOne(companyId);
+        const item = Items.findOne(itemId);
         const person = Persons.findOne(personId);
         const rel = Rels.findOne(relId);
         return {
-            destiny: companyId,
+            destiny: itemId,
             owner: HARDCODE_OWNER,
             type: 'contact',
-            company: company,
+            item: item,
             person: person,
             rel: rel,
             onSavedData() {
@@ -179,16 +173,16 @@ Template.Customers_panel.helpers({
             }
         }
     },
-    editPlaceArgs(companyId, placeId, relId) {
+    editPlaceArgs(itemId, placeId, relId) {
         const instance = Template.instance();
-        const company = Companies.findOne(companyId);
+        const item = Items.findOne(itemId);
         const place = Places.findOne(placeId);
         const rel = Rels.findOne(relId);
         return {
-            destiny: companyId,
+            destiny: itemId,
             owner: HARDCODE_OWNER,
             type: 'place',
-            company: company,
+            item: item,
             place: place,
             rel: rel,
             onSavedData() {
@@ -294,27 +288,27 @@ Template.Customers_panel.helpers({
 
 });
 //vvvvvvvvvvvvvv STATE vvvvvvvvvvvvvv
-Template.Customers_panel.helpers({
-    editingCustomerRel() {
+Template.Items_panel.helpers({
+    editingVendorRel() {
         const instance = Template.instance();
-        return instance.state.get('editingCustomerRel');
+        return instance.state.get('editingVendorRel');
     },
-    editingCompany() {
+    editingItem() {
         const instance = Template.instance();
-        return instance.state.get('editingCompany');
+        return instance.state.get('editingItem');
     },
 
-    selectedCompany() {
+    selectedItem() {
         const instance = Template.instance();
-        return instance.state.get('selectedCompany');
+        return instance.state.get('selectedItem');
     },
-    creatingCompany() {
+    creatingItem() {
         const instance = Template.instance();
-        return instance.state.get('creatingCompany');
+        return instance.state.get('creatingItem');
     },
-    companyCreated() {
+    itemCreated() {
         const instance = Template.instance();
-        return instance.state.get('companyCreated');
+        return instance.state.get('itemCreated');
     },
     creatingContact() {
         const instance = Template.instance();
@@ -334,42 +328,42 @@ Template.Customers_panel.helpers({
     }
 });
 //vvvvvvvvvvvvvv HELPERS vvvvvvvvvvvvvv
-Template.Customers_panel.helpers({
-    rel(company) {
+Template.Items_panel.helpers({
+    rel(item) {
         const rel = Rels.findOne({
-            type: 'customer',
-            origin: company,
+            type: 'vendor',
+            origin: item,
             destiny: HARDCODE_OWNER
         });
         return rel;
     },
-    contactRels(company) {
+    contactRels(item) {
         const rels = Rels.find({
             type: 'contact',
-            // origin: company,
-            destiny: company
+            // origin: item,
+            destiny: item
         });
         return rels;
     },
-    placeRels(company) {
+    placeRels(item) {
         const rels = Rels.find({
             type: 'place',
-            // origin: company,
-            destiny: company
+            // origin: item,
+            destiny: item
         });
         return rels;
     }
 });
 
-Template.Customers_panel.events({
-    'click .js-deselect-company': function(e, instance) {
-        instance.state.set('selectedCompany', false);
+Template.Items_panel.events({
+    'click .js-deselect-item': function(e, instance) {
+        instance.state.set('selectedItem', false);
     },
-    'click .js-rel-customer-edit': function(e, instance) {
-        instance.state.set('editingCustomerRel', true);
+    'click .js-rel-vendor-edit': function(e, instance) {
+        instance.state.set('editingVendorRel', true);
     },
-    'click .js-company-edit': function(e, instance) {
-        instance.state.set('editingCompany', true);
+    'click .js-item-edit': function(e, instance) {
+        instance.state.set('editingItem', true);
     },
     'click .js-contact-create': function(e, instance) {
         instance.state.set('creatingContact', true);

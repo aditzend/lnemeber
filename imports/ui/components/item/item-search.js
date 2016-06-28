@@ -1,13 +1,11 @@
-import './company-search.html';
+import './item-search.html';
 
-Template.Company_search.onCreated(function() {
-    // this.state = new ReactiveDict();
-    // this.state.setDefault({
-    //     searchingIn: CustomersIndex
-    // });
+Template.Item_search.onCreated(function() {
+
+
 });
-Template.Company_search.helpers({
-    company_searchIndexAttributes: function() {
+Template.Item_search.helpers({
+    item_searchIndexAttributes: function() {
         return {
             'id': 'search-input',
             'class': 'form-control',
@@ -16,18 +14,18 @@ Template.Company_search.helpers({
             'style': "text-transform:uppercase"
         };
     },
-    company_searchIndex: function() {
+    item_searchIndex: function() {
         const instance = Template.instance();
         const mode = instance.data.mode;
         switch (mode) {
-            case 'customer':
-                return CustomersIndex;
+            case 'product':
+                return ProductsIndex;
                 break;
-            case 'vendor':
-                return VendorsIndex;
+            case 'input':
+                return InputsIndex;
                 break;
             default:
-                return CompaniesIndex;
+                return ItemsIndex;
         }
     },
     insertedText: function() {
@@ -39,17 +37,17 @@ Template.Company_search.helpers({
     }
 });
 
-Template.Company_search.events({
+Template.Item_search.events({
     'click .js-search-result-item': function(e, instance) {
         //console.log("id elegido ", );
-        instance.data.selectedCompany(e.target.id);
+        instance.data.selectedItem(e.target.id);
 
     },
-    'click .js-create-company': function(e, instance) {
+    'click .js-create-item': function(e, instance) {
         const index = instance.data.index;
         let dict = index.getComponentDict();
         let insertedText = dict.get('searchDefinition')
             .toUpperCase();
-        instance.data.companyNotFound(insertedText);
+        instance.data.itemNotFound(insertedText);
     }
 });
