@@ -12,7 +12,7 @@ Template.Company_search.helpers({
             'id': 'search-input',
             'class': 'form-control',
             'autocomplete': 'off',
-            'placeholder': "Buscar empresa... ",
+            'placeholder': "Insertar parte del nombre o del CUIT  ",
             'style': "text-transform:uppercase"
         };
     },

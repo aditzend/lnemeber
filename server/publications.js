@@ -35,16 +35,7 @@ Meteor.publish('CompanyContacts',
         }
     });
 
-Meteor.publish('Rels.byOwner',
-    function(owner) {
-        if (this.userId) {
-            return Rels.find({
-                owner: owner
-            });
-        } else {
-            this.ready();
-        }
-    });
+
 
 Meteor.publish('Contacts.byDestiny',
     function(destiny, owner) {

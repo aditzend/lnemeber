@@ -9,10 +9,15 @@ import '../components/birthday/birthday-show.js';
 import '../components/rel/rel-customer-show.js';
 
 Template.Customers_panel.onCreated(function() {
-    this.subscribe('Rels.all');
-    this.subscribe('persons.test');
-    this.subscribe('places.test');
-    this.subscribe('companies.public');
+    this.autorun(() => {
+        this.subscribe('rels.customers', Session.get('workfor'), Session.get('workerRelId'));
+        this.subscribe('rels.places', Session.get('workfor'), Session.get('workerRelId'));
+        this.subscribe('rels.contacts', Session.get('workfor'), Session.get('workerRelId'));
+        this.subscribe('persons.test');
+        this.subscribe('places.test');
+        this.subscribe('companies.public');
+    })
+
     this.state = new ReactiveDict();
     this.state.setDefault({
         selectedCompany: false,
@@ -104,7 +109,7 @@ Template.Customers_panel.helpers({
         const rel = Rels.findOne({
             type: 'customer',
             origin: companyId,
-            destiny: HARDCODE_OWNER
+            destiny: Session.get('workfor')
         });
         return {
             rel,
@@ -121,7 +126,7 @@ Template.Customers_panel.helpers({
         return {
             type: 'customer',
             origin: companyId,
-            destiny: HARDCODE_OWNER,
+            destiny: Session.get('workfor'),
             onSavedData(relId) {
                 instance.state.set('createdRel', relId);
                 instance.state.set('editingCustomerRel', false);
@@ -160,7 +165,7 @@ Template.Customers_panel.helpers({
         const rel = Rels.findOne(relId);
         return {
             destiny: companyId,
-            owner: HARDCODE_OWNER,
+            owner: Session.get('workfor'),
             type: 'contact',
             company: company,
             person: person,
@@ -186,7 +191,7 @@ Template.Customers_panel.helpers({
         const rel = Rels.findOne(relId);
         return {
             destiny: companyId,
-            owner: HARDCODE_OWNER,
+            owner: Session.get('workfor'),
             type: 'place',
             company: company,
             place: place,
@@ -339,7 +344,7 @@ Template.Customers_panel.helpers({
         const rel = Rels.findOne({
             type: 'customer',
             origin: company,
-            destiny: HARDCODE_OWNER
+            destiny: Session.get('workfor')
         });
         return rel;
     },

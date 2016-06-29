@@ -101,9 +101,11 @@ Template.navigation.events({
         FlowRouter.go('login');
     },
     'click .js-workfor': function(e, instance) {
-            const companyId = e.target.id;
+            Session.set('workfor', e.target.id);
 
-            Session.set('workfor', companyId);
+            Session.set('workerRelId', $(e.target)
+                .attr('relid'));
+
         }
         /*  'click [data-action=loginWithFacebook]': function() {
       Meteor.loginWithFacebook({

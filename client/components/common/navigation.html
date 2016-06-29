@@ -21,7 +21,7 @@
                         <li class="divider"></li>
                         {{#each workerRel in workerRels}}
                         <!-- <li class='btn btn-default js-workfor' id='{{workerRel.destiny}}'>work </li> -->
-                        <li class='js-workfor' id='{{workerRel.destiny}}'>{{companyName workerRel.destiny}}</li>
+                        <li class='js-workfor' id='{{workerRel.destiny}}' relid='{{workerRel._id}}' >{{companyName workerRel.destiny}}</li>
                         {{/each}}
                         <li><a data-action='logout' href="{{pathFor 'login'}}">Entrar</a></li>
                         <li><a data-action='logout' href="{{pathFor 'exit'}}">Salir</a></li>
@@ -39,7 +39,7 @@
             </div>
             <br>
 
-            <ul class="nav" id="side-menu">
+            <!-- <ul class="nav" id="side-menu">
                 <li class="{{isActiveRoute regex='loadingButtons|codeEditor|panels|typography|buttons|components|alerts|modals|draggable|nestableList|tour|icons'}}">
                     <a href="#">Crear<span class="fa arrow"></span> </a>
                     <ul class="nav nav-second-level {{isActiveRoute regex='loadingButtons|codeEditor|panels|typography|buttons|components|alerts|modals|draggable|nestableList|tour|icons' className='in'}}">
@@ -54,7 +54,7 @@
                         <li class="{{isActiveRoute regex='contacts'}}"><a href="../show-generics">Gen&eacute;ricos</a></li>
                     </ul>
                 </li>
-            </ul>
+            </ul> -->
         </div>
     </aside>
 </template>

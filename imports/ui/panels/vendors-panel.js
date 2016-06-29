@@ -10,9 +10,16 @@ import '../components/rel/rel-vendor-show.js';
 import '../components/rel/rel-vendor-edit.js';
 
 Template.Vendors_panel.onCreated(function() {
-    this.subscribe('Rels.all');
-    this.subscribe('persons.test');
-    this.subscribe('places.test');
+
+    this.autorun(() => {
+        this.subscribe('rels.vendors', Session.get('workfor'), Session.get('workerRelId'));
+        this.subscribe('rels.places', Session.get('workfor'), Session.get('workerRelId'));
+        this.subscribe('rels.contacts', Session.get('workfor'), Session.get('workerRelId'));
+        this.subscribe('persons.test');
+        this.subscribe('places.test');
+        this.subscribe('companies.public');
+    })
+
     this.state = new ReactiveDict();
     this.state.setDefault({
         selectedCompany: false,
@@ -88,6 +95,7 @@ Template.Vendors_panel.helpers({
         const company = Companies.findOne(id);
         return {
             company: company,
+
             onSavedData() {
                 instance.state.set('editingCompany', false);
 
@@ -104,7 +112,7 @@ Template.Vendors_panel.helpers({
         const rel = Rels.findOne({
             type: 'vendor',
             origin: companyId,
-            destiny: HARDCODE_OWNER
+            destiny: Session.get('workfor')
         });
         return {
             rel,
@@ -121,7 +129,8 @@ Template.Vendors_panel.helpers({
         return {
             type: 'vendor',
             origin: companyId,
-            destiny: HARDCODE_OWNER,
+            destiny: Session.get('workfor'),
+            owner: Session.get('workfor'),
             onSavedData(relId) {
                 instance.state.set('createdRel', relId);
                 instance.state.set('editingVendorRel', false);
@@ -160,7 +169,7 @@ Template.Vendors_panel.helpers({
         const rel = Rels.findOne(relId);
         return {
             destiny: companyId,
-            owner: HARDCODE_OWNER,
+            owner: Session.get('workfor'),
             type: 'contact',
             company: company,
             person: person,
@@ -186,7 +195,7 @@ Template.Vendors_panel.helpers({
         const rel = Rels.findOne(relId);
         return {
             destiny: companyId,
-            owner: HARDCODE_OWNER,
+            owner: Session.get('workfor'),
             type: 'place',
             company: company,
             place: place,
@@ -339,7 +348,7 @@ Template.Vendors_panel.helpers({
         const rel = Rels.findOne({
             type: 'vendor',
             origin: company,
-            destiny: HARDCODE_OWNER
+            destiny: Session.get('workfor')
         });
         return rel;
     },

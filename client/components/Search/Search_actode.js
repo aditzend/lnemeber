@@ -3,7 +3,6 @@
   //console.log($('#search-input'));
   this.autorun(() => {
     this.subscribe('Actodes.all');
-    this.subscribe('Rels.all');
   });
 });
 

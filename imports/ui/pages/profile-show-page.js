@@ -1,25 +1,25 @@
 import {
-  Meteor
+    Meteor
 }
 from 'meteor/meteor';
 
 
 import {
-  Template
+    Template
 }
 from 'meteor/templating';
 import {
-  Mongo
+    Mongo
 }
 from 'meteor/mongo';
 import {
-  Tracker
+    Tracker
 }
 from 'meteor/tracker';
 
 
 import {
-  FlowRouter
+    FlowRouter
 }
 from 'meteor/kadira:flow-router';
 
@@ -35,46 +35,48 @@ import './profile-show-page.html';
 
 
 Template.Profile_show_page.onCreated(function profileShowPageOnCreated() {
-  this.autorun(() => {
-    this.subscribe('persons.own');
-    this.subscribe('Rels.byOrigin', this.userId);
-  });
+    this.autorun(() => {
+        this.subscribe('persons.own');
+    });
 });
 
 
 
 Template.Profile_show_page.helpers({
-  adminOf() {
-      let c = Meteor.call('ad');
-      return c;
+    adminOf() {
+        let c = Meteor.call('ad');
+        return c;
     },
     relatedPersonId() {
-      const instance = Template.instance();
+        const instance = Template.instance();
 
-      // let r = Meteor.users.findOne(Meteor.userId()).relatedPerson;
-      return Meteor.user().relatedPerson;
-      // let relatedPerson = Persons.findOne(r);
+        // let r = Meteor.users.findOne(Meteor.userId()).relatedPerson;
+        return Meteor.user()
+            .relatedPerson;
+        // let relatedPerson = Persons.findOne(r);
 
 
     },
     person() {
-      const r = Meteor.user().relatedPerson;
-      return Persons.findOne(r);
+        const r = Meteor.user()
+            .relatedPerson;
+        return Persons.findOne(r);
     },
     company() {
-      const r = Meteor.user().relatedPerson;
-      return Persons.findOne(r);
+        const r = Meteor.user()
+            .relatedPerson;
+        return Persons.findOne(r);
     },
 
     personArgs(relatedPersonId) {
-      const instance = Template.instance();
-      const person = Persons.findOne(relatedPersonId);
-      console.log('person ', person._id);
-      console.log('person ', person.name);
-      return {
-        personReady: instance.subscriptionsReady(),
-        person
-      }
+        const instance = Template.instance();
+        const person = Persons.findOne(relatedPersonId);
+        console.log('person ', person._id);
+        console.log('person ', person.name);
+        return {
+            personReady: instance.subscriptionsReady(),
+            person
+        }
     }
 });
 

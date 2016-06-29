@@ -3,7 +3,6 @@ import '../components/item/item-search.js';
 
 
 Template.Items_panel.onCreated(function() {
-    this.subscribe('Rels.all');
     this.subscribe('persons.test');
     this.subscribe('places.test');
     this.subscribe('items.public');
