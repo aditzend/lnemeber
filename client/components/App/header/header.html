@@ -1,4 +1,46 @@
 <template name="header">
+  <!-- Search Results -->
+  <div id='search-result-wrapper'>
+    
+    <!-- {{#if searchingInHeader}} -->
+    <div id='search-results' class="dropdown dropdown-example">
+
+                                    <ul id='search-result-ul' class="dropdown-menu" role="menu">
+  <!-- <li> <i class='fa fa-search'></i> BUSCANDO</li> -->
+                                      {{#EasySearch.Each index=headerIndex }}
+                                        {{#if oneFound}}
+                                          {{> Search_fast_result}}
+                                          {{else}}
+                                          {{> Search_result_item}}
+                                        {{/if}}
+                                      {{/EasySearch.Each}}
+
+
+
+                                    </ul>
+                                </div>
+                                <!-- {{#EasySearch.IfNoResults index=index }} -->
+                                <!-- {{nothingFoundAlert}} -->
+                                <!-- <li class='h-bg-orange'><a href="../show-{{actodeType}}/{{_id}}"> -->
+                                <!-- <div class="panel-body note-link"> -->
+                                                            <!-- No existe nada con ese nombre! -->
+                                                        <!-- </div> -->
+                                                      <!-- </a></li> -->
+                                                      <!-- <div class="hpanel"> -->
+              <!-- <div class="panel-body float-e-margins"> -->
+                  <!-- <div class="wrapper"> -->
+                      <!-- <div class="row color-demo"> -->
+                          <!-- <div class="header-line h-bg-orange">
+                              <div>No existe nada con ese nombre!<span>Proba con otra palabra.</span></div>
+                          </div> -->
+                      <!-- </div> -->
+                  <!-- </div> -->
+              <!-- </div> -->
+      
+                                <!-- {{/EasySearch.IfNoResults}} -->
+
+                                <!-- {{/if}} -->
+  </div>
 
     <div id="header">
         <div class="color-line">
@@ -16,7 +58,7 @@
             </div>
 
 
-            <form data-action='header-search-form' role="search" class="navbar-form-custom" method="post" action="#">
+            <form data-action='header--form' role="search" class="navbar-form-custom" method="post" action="#">
                 <div data-action='header-search' class="form-group">
                   {{> EasySearch.Input index=headerIndex attributes=headerInputAttributes noDocumentsOnEmpty='true' }}
                     <!-- <input type="text" placeholder="Busca lo que quieras" class="form-control" name="search"> -->
@@ -33,15 +75,15 @@
                 <div class="collapse mobile-navbar" id="mobile-collapse">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a class="" href="{{pathFor 'At.signin'}}">Login</a>
+                            <a class="" href="{{pathFor 'At.signin'}}"><span class='text-primary'> Loguearse </span></a>
                         </li>
                         <li>
-                            <a class="" href="">Logout</a>
+                            <a class="" href="{{pathFor '/'}}"><span class='text-primary'> Panel </span></a>
                         </li>
                         <li>
-                      Buscar
-
+                            <a class="js-logout" href="{{pathFor 'exit'}}">  <span class='text-primary'>Salir </span></a>
                         </li>
+                  
                     </ul>
                 </div>
             </div>
@@ -51,50 +93,18 @@
 
                     <li >
                         <a class="dropdown-toggle" href="{{pathFor 'home'}}" >
-                            <i class="pe-7s-keypad"></i>
+                        
+                            <i class="pe-7s-keypad">  </i>
+                            <span class='text-primary'><small>Panel de control</small>  </span>
                         </a>
 
                     </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle label-menu-corner" href="#" data-toggle="dropdown">
-                            <i class="pe-7s-mail"></i>
-                            <span class="label label-success">4</span>
-                        </a>
-                        <ul class="dropdown-menu hdropdown animated flipInX">
-                            <div class="title">
-                                You have 4 new messages
-                            </div>
-                            <li>
-                                <a>
-                                    It is a long established.
-                                </a>
-                            </li>
-                            <li>
-                                <a>
-                                    There are many variations.
-                                </a>
-                            </li>
-                            <li>
-                                <a>
-                                    Lorem Ipsum is simply dummy.
-                                </a>
-                            </li>
-                            <li>
-                                <a>
-                                    Contrary to popular belief.
-                                </a>
-                            </li>
-                            <li class="summary"><a href="#">See All Messages</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#" id="sidebar" class="right-sidebar-toggle">
-                            <i class="pe-7s-upload pe-7s-news-paper"></i>
-                        </a>
-                    </li>
+          
                     <li class='dropdown'>
                         <a href={{pathFor 'exit'}}>
                             <i class="pe-7s-upload pe-rotate-90"></i>
+                            <span class='text-primary'><small> Salir </small></span>
+                            
                         </a>
                     </li>
                 </ul>

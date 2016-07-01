@@ -1,4 +1,9 @@
 <template name="navigation">
+  {{#if Template.subscriptionsReady}}
+
+
+  
+  
     <aside id="menu">
         <div id="navigation">
             <div class="profile-picture">
@@ -57,4 +62,8 @@
             </ul> -->
         </div>
     </aside>
+  {{else}}
+  Cargando datos...
+  
+    {{/if}}
 </template>

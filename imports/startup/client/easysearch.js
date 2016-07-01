@@ -1,4 +1,4 @@
-ActodesIndex = new EasySearch.Index({
+HeaderIndex = new EasySearch.Index({
     engine: new EasySearch.Minimongo({
         sort: function() {
             return {
@@ -19,7 +19,7 @@ ActodesIndex = new EasySearch.Index({
         }
     }),
     collection: Persons,
-    fields: ['_id', 'name', 'lastName'],
+    fields: ['_id', 'name', 'lastName', 'fin'],
     defaultSearchOptions: {
         limit: 9
     },

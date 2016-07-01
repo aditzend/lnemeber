@@ -11,8 +11,6 @@ Template.Dashboard.onCreated(function() {
     this.autorun(() => {
         // this.subscribe('userData'),
         //     this.subscribe('persons.own'),
-        //     this.subscribe('rels.worker'),
-        this.subscribe('companies.name')
     });
 });
 
@@ -42,7 +40,7 @@ Template.Dashboard.helpers({
     companyName(companyId) {
         const company = Companies.findOne(companyId);
         if (company) {
-            return company.name;
+            return company.logo;
         } else {
             return '-'
         }

@@ -61,7 +61,7 @@
 //         }
 //     });
 //To get worker rels of a person
-Meteor.publish('rels.worker',
+Meteor.publish(null,
     function() {
         const user = Meteor.users.findOne(this.userId);
         if (this.userId) {
@@ -70,6 +70,10 @@ Meteor.publish('rels.worker',
             return Rels.find({
                 type: 'worker',
                 origin: person
+            }, {
+                fields: {
+                    owner: 0
+                }
             })
         } else {
             this.ready();
@@ -153,7 +157,7 @@ Meteor.publish('rels.contacts',
         const company = Companies.findOne(workfor); //this is an async call, if you remove the loop the data wont be ready and company.ssok will throw undefined
         let n = 1;
         //cheap way of making the process wait until company is ready =) 
-        while (n < 3) {
+        while (n < 1000) {
             n++;
         }
 

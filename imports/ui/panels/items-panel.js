@@ -1,24 +1,26 @@
 import './items-panel.html';
 import '../components/item/item-search.js';
+import '../components/item/item-show.js';
 
 
 Template.Items_panel.onCreated(function() {
-    this.subscribe('persons.test');
-    this.subscribe('places.test');
-    this.subscribe('items.public');
+
+    this.autorun(() => {
+
+        this.subscribe('items.own', Session.get('workfor'), Session.get('workerRelId'));
+
+    });
+
     this.state = new ReactiveDict();
     this.state.setDefault({
         selectedItem: false,
-        createdRel: false,
-        editingVendorRel: false,
         creatingItem: false,
         editingItem: false,
         itemCreated: false,
-        creatingContact: false,
-        editingContact: false,
-        deletingContact: false,
-        creatingPlace: false,
-        editingPlace: false
+        creatingItem: false,
+        editingItem: false,
+        deletingItem: false,
+
     });
 });
 
@@ -33,18 +35,24 @@ Template.Items_panel.helpers({
             index: ProductsIndex,
             selectedItem(id) {
                 instance.state.set('selectedItem', id);
-                // console.log("STATE>>>>>>>>>>>>>> SELECTED COMPANY ", id);
+                console.log("STATE>>>>>>>>>>>>>> SELECTED Item ", id);
             },
             itemNotFound(insertedText) {
                 instance.state.set('creatingItem', insertedText);
             }
         }
     },
+    // showthis() {
+    //     return {
+    //         foo: 'bar'
+    //     }
+    // },
     showItemArgs(selectedItemId) {
         const instance = Template.instance();
         const item = Items.findOne(selectedItemId);
         return {
             item: item,
+
             onEdit(itemId) {
                 instance.state.set('editingItem', itemId);
                 // console.log('EDIT CONTACT REL ', relId);
@@ -146,7 +154,7 @@ Template.Items_panel.helpers({
         }
     },
 
-    editContactArgs(itemId, personId, relId) {
+    editItemArgs(itemId, personId, relId) {
         const instance = Template.instance();
         const item = Items.findOne(itemId);
         const person = Persons.findOne(personId);
@@ -160,14 +168,14 @@ Template.Items_panel.helpers({
             rel: rel,
             onSavedData() {
                 // console.log('rel created contact', relId);
-                instance.state.set('editingContact', false);
-                instance.state.set('creatingContact', false);
+                instance.state.set('editingItem', false);
+                instance.state.set('creatingItem', false);
 
             },
             onCancel() {
                 // console.log('cancel');
-                instance.state.set('editingContact', false);
-                instance.state.set('creatingContact', false);
+                instance.state.set('editingItem', false);
+                instance.state.set('creatingItem', false);
 
             }
         }
@@ -199,49 +207,7 @@ Template.Items_panel.helpers({
         }
     },
 
-    showContactArgs(personId, relId) {
-        const instance = Template.instance();
 
-        const person = Persons.findOne(personId);
-        const rel = Rels.findOne(relId);
-        return {
-            person: person,
-            rel: rel,
-
-            onEdit(relId) {
-                instance.state.set('editingContact', relId);
-                // console.log('EDIT CONTACT REL ', relId);
-            },
-            onDelete(relId) {
-                instance.state.set('deletingContact', relId);
-                // console.log('DELETE CONTACT REL ', relId);
-                swal({
-                        title: "Estas seguro?",
-                        text: "No se puede recuperar esta informacion!",
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "Si, borrarlo!",
-                        cancelButtonText: "No, cancelar por favor!",
-                        closeOnConfirm: false,
-                        closeOnCancel: false
-                    },
-                    function(isConfirm) {
-                        if (isConfirm) {
-
-                            const deleted = Rels.remove(relId);
-                            console.log('deleted', deleted);
-
-
-                            swal("Eliminado!", "Este contacto fue eliminado.", "success");
-                        } else {
-                            swal("Cancelado", "Este contacto esta seguro :)", "error");
-                        }
-                    });
-
-            }
-        }
-    },
     showPlaceArgs(placeId, relId) {
         const instance = Template.instance();
         const place = Places.findOne(placeId);
@@ -309,9 +275,9 @@ Template.Items_panel.helpers({
         const instance = Template.instance();
         return instance.state.get('itemCreated');
     },
-    creatingContact() {
+    creatingItem() {
         const instance = Template.instance();
-        return instance.state.get('creatingContact');
+        return instance.state.get('creatingItem');
     },
     creatingPlace() {
         const instance = Template.instance();
@@ -321,9 +287,9 @@ Template.Items_panel.helpers({
         const instance = Template.instance();
         return instance.state.get('editingPlace');
     },
-    editingContact(relId) {
+    editingItem(relId) {
         const instance = Template.instance();
-        return (relId == instance.state.get('editingContact')) ? true : false;
+        return (relId == instance.state.get('editingItem')) ? true : false;
     }
 });
 //vvvvvvvvvvvvvv HELPERS vvvvvvvvvvvvvv
@@ -365,13 +331,13 @@ Template.Items_panel.events({
         instance.state.set('editingItem', true);
     },
     'click .js-contact-create': function(e, instance) {
-        instance.state.set('creatingContact', true);
+        instance.state.set('creatingItem', true);
     },
     'click .js-place-create': function(e, instance) {
         instance.state.set('creatingPlace', true);
     },
     'click .js-confirm-deletion': function(e, instance) {
-        const relId = instance.state.get('deletingContactRel');
+        const relId = instance.state.get('deletingItemRel');
         console.log('delete confirmed ', relId);
 
     },

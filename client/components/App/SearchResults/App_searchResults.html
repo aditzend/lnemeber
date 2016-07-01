@@ -1,40 +1,4 @@
 <template name="App_searchResults">
-  <!-- {{#if searchingInHeader}} -->
-  <div id='search-results' class="dropdown dropdown-example">
-
-                                  <ul id='search-result-ul' class="dropdown-menu" role="menu">
-<!-- <li> <i class='fa fa-search'></i> BUSCANDO</li> -->
-                                    {{#EasySearch.Each index=index }}
-                                      {{#if oneFound}}
-                                        {{> Search_fast_result}}
-                                        {{else}}
-                                        {{> Search_result_item}}
-                                      {{/if}}
-                                    {{/EasySearch.Each}}
 
 
-
-                                  </ul>
-                              </div>
-                              {{#EasySearch.IfNoResults index=index }}
-                              {{nothingFoundAlert}}
-                              <!-- <li class='h-bg-orange'><a href="../show-{{actodeType}}/{{_id}}"> -->
-                              <!-- <div class="panel-body note-link"> -->
-                                                          <!-- No existe nada con ese nombre! -->
-                                                      <!-- </div> -->
-                                                    <!-- </a></li> -->
-                                                    <!-- <div class="hpanel"> -->
-            <!-- <div class="panel-body float-e-margins"> -->
-                <!-- <div class="wrapper"> -->
-                    <!-- <div class="row color-demo"> -->
-                        <!-- <div class="header-line h-bg-orange">
-                            <div>No existe nada con ese nombre!<span>Proba con otra palabra.</span></div>
-                        </div> -->
-                    <!-- </div> -->
-                <!-- </div> -->
-            <!-- </div> -->
-        <!-- </div> -->
-                              {{/EasySearch.IfNoResults}}
-
-                              <!-- {{/if}} -->
 </template>

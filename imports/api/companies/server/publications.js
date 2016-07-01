@@ -8,36 +8,33 @@ from 'meteor/meteor';
 //   Companies
 // }
 // from '../companies.js';
-Meteor.publish("companies.public", function companiesPublic() {
+// Meteor.publish("companies.public", function companiesPublic() {
+//     return Companies.find({}, {
+//         fields: {
+//             ssok: false
+//         }
+//     });
+// });
+Meteor.publish(null, function companiesNames() {
     return Companies.find({}, {
         fields: {
-            ssok: false
+            // name: 1,
+            // _id: 1,
+            // ssok: 0
         }
     });
 });
 
-Meteor.publish('companies.public.byId', function companiesPublicById(id) {
-    if (!this.userId) {
-        this.ready();
-    } else {
-        return Companies.find({
-            _id: id
-        }, {
-            fields: {
-                ssok: false
-            }
-        });
-    }
-});
-Meteor.publish('companies.name', function companiesName() {
-    if (!this.userId) {
-        this.ready();
-    } else {
-        return Companies.find({
-            fields: {
-                name: true,
-                ssok: false
-            }
-        });
-    }
-});
+// Meteor.publish('companies.public.byId', function companiesPublicById(id) {
+//     if (!this.userId) {
+//         this.ready();
+//     } else {
+//         return Companies.find({
+//             _id: id
+//         }, {
+//             fields: {
+//                 ssok: false
+//             }
+//         });
+//     }
+// });

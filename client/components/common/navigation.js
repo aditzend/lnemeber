@@ -4,17 +4,11 @@ Template.navigation.onCreated(function() {
 
     this.autorun(() => {
         this.subscribe('userData'),
-            this.subscribe('persons.own'),
-            this.subscribe('rels.worker'),
-            this.subscribe('companies.name')
-            // if (this.subscriptionsReady()) {
-            //     this.state.setDefault({
-            //         user: Meteor.userId(),
-            //         relatedPerson: Meteor.user()
-            //             .relatedPerson,
-            //         workingFor: false,
-            //         foo: 'bar'
+            this.subscribe('persons.own')
+
     });
+
+
 
 });
 
@@ -25,22 +19,49 @@ Template.navigation.onRendered(function() {
     // Initialize metsiMenu plugin to sidebar menu
     $('#side-menu')
         .metisMenu();
-    // console.log('person related', Template.instance().state.);
+
+
+
+    // const workerRel = Rels.findOne({
+    //     type: 'worker',
+    //     primary: true
+    // });
+
+    // Session.set('workfor', Rels.findOne({
+    //         type: 'worker',
+    //         primary: true
+    //     })
+    //     .destiny);
+    // Session.set('workerRelId', workerRel._id);
+
+
 
 });
 
 
 Template.navigation.helpers({
     workerRels() {
+        if (Session.get('workfor') === undefined) {
+            console.log("setting default company");
+            const workerRel = Rels.findOne({
+                type: 'worker',
+                primary: 'true'
+            });
+            Session.set('workfor', workerRel.destiny);
+            Session.set('workerRelId', workerRel._id);
+            // console.log("rel ", workerRel);
+        }
 
         const instance = Template.instance();
         // origin: instance.state.get('relatedPerson')
         const workerRel = Rels.find({
-            type: 'worker',
-            origin: 'xQ3eNjbYnK5QZt6Bd'
-                // origin: instance.state.get('relatedPerson')
+            type: 'worker'
         });
         return workerRel;
+
+    },
+    workfor() {
+
 
     },
     companyName(companyId) {

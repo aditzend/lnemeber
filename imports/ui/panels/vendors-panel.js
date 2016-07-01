@@ -17,7 +17,6 @@ Template.Vendors_panel.onCreated(function() {
         this.subscribe('rels.contacts', Session.get('workfor'), Session.get('workerRelId'));
         this.subscribe('persons.test');
         this.subscribe('places.test');
-        this.subscribe('companies.public');
     })
 
     this.state = new ReactiveDict();

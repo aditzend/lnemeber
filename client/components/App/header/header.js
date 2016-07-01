@@ -1,9 +1,7 @@
 var i = 0;
 
 Template.header.onCreated(function() {
-    this.autorun(() => {
-        this.subscribe('companies.public');
-    });
+
 });
 
 Template.header.helpers({
@@ -13,42 +11,36 @@ Template.header.helpers({
             'id': 'search-input',
             'class': 'form-control',
             'autocomplete': 'off',
-            'placeholder': "'Maria','29984695','Lopez' "
+            'placeholder': "Buscador de contactos"
         };
     },
-    actodes: function() {
-        return Actodes.find({}, {
+    persons: function() {
+        return Persons.find({}, {
             sort: {
                 name: 1
             }
         });
     },
     headerIndex: function() {
-        return ActodesIndex;
+        return HeaderIndex;
     },
     pathTest: function() {
-            var params = {
-                _id: '5shKQs4j2g7DRfLrnP'
-            };
-            var path = FlowRouter.path('showContact', params);
-            return path;
-        }
-        /*,
-        currentUser: function() {
-          return Accounts.userId();
-        },
-        resultsCount: function() {
-          return ActodesIndex.getComponentDict().get('count');
-        },
-        oneFound: function() {
-          if (ActodesIndex.getComponentDict().get('count') == 1) {
-            return true;
-          }
-        }*/
+        var params = {
+            _id: '5shKQs4j2g7DRfLrnP'
+        };
+        var path = FlowRouter.path('showContact', params);
+        return path;
+    }
+
 
 });
 
 Template.header.events({
+    'click .js-logout': function(e, instance) {
+        console.log("logout");
+        Meteor.logout();
+
+    },
 
     'click .hide-menu': function(event) {
 
@@ -87,8 +79,13 @@ Template.header.events({
         /*Session.set('searchingInHeader', true);*/
     },
     'blur [data-action=header-search]': function() {
+        const instance = Template.instance();
         console.log("blur");
-        hideSearchResults();
+        Meteor.setTimeout(function() {
+                instance.$('#search-results')
+                    .hide();
+            },
+            100);
 
         /*Meteor.setTimeout(function() {
             Session.set('searchingInHeader', false);
@@ -101,7 +98,7 @@ Template.header.events({
     'submit [data-action=header-search-form]': function(evt) {
         evt.preventDefault();
     },
-    'keyup #search-input': function(evt) {
+    'keyup #search-input': function(evt, instance) {
         var kids = $('#search-result-ul')
             .children();
         var selected = $('#search-result-ul')
@@ -133,7 +130,11 @@ Template.header.events({
                 /*console.log("go to result...", selected.children().first().attr(
                   'href'));*/
                 FlowRouter.go(url);
-                hideSearchResults();
+                Meteor.setTimeout(function() {
+                        instance.$('#search-results')
+                            .hide();
+                    },
+                    100);
                 console.log(url);
 
 
@@ -144,22 +145,32 @@ Template.header.events({
                 var input = $('#search-input');
                 if (input.val()
                     .length < 1 && evt.keyCode == '8') {
-                    hideSearchResults();
+                    Meteor.setTimeout(function() {
+                            instance.$('#search-results')
+                                .hide();
+                        },
+                        100);
                 } else {
                     if (evt.keyCode == '8') {
                         //backspace
                         toastr.clear();
                         selected.removeClass('h-bg-yellow');
 
-                        showSearchResults();
+                        console.log("show results");
+                        instance.$('#search-results')
+                            .show();
 
                     } else {
                         if (Session.get('nothingFound')) {
                             Session.set('nothingFound', false)
-                            showSearchResults();
+                            console.log("show results");
+                            instance.$('#search-results')
+                                .show();
 
                         } else {
-                            showSearchResults();
+                            console.log("show results");
+                            instance.$('#search-results')
+                                .show();
 
                         }
 

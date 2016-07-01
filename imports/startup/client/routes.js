@@ -14,11 +14,14 @@ from 'meteor/useraccounts:core';
 import '../../api/users/createUser.js';
 import '../../ui/pages/profile-show-page.js';
 import '../../ui/pages/dashboard.js';
+import '../../ui/pages/login.html';
+import '../../ui/pages/landing-page.js';
+import '../../ui/layouts/landing-layout.html';
 
 
 
 //no one enters without logging!
-FlowRouter.triggers.enter([AccountsTemplates.ensureSignedIn]);
+//FlowRouter.triggers.enter([AccountsTemplates.ensureSignedIn]);
 
 //home always renders the dashboard
 FlowRouter.route('/', {
@@ -28,8 +31,25 @@ FlowRouter.route('/', {
             BlazeLayout.render('App_body', {
                 main: "Dashboard"
             });
+        } else {
+            BlazeLayout.render('Landing_layout', {
+                main: "Landing_page"
 
+            });
         }
+
+    }
+});
+FlowRouter.route('/landing', {
+    name: 'landing',
+    action: function() {
+
+        BlazeLayout.render('Landing_layout', {
+            main: "Landing_page"
+
+        });
+
+
 
     }
 });
@@ -60,7 +80,8 @@ AccountsTemplates.configureRoute('signIn', {
     name: 'signin',
     path: '/login',
     //template: 'myLogin',
-    layoutTemplate: 'AT_layout',
+    layoutTemplate: 'login',
+    // layoutTemplate: 'AT_layout',
     layoutRegions: {},
     contentRegion: 'main'
 });

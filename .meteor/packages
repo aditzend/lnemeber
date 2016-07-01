@@ -81,6 +81,7 @@ softwarerero:accounts-t9n
 
 
 
+
 #OTHERS
 themeteorchef:jquery-validation
 dispatch:phoneformat.js
@@ -129,3 +130,4 @@ random
 mdg:validated-method
 jeremy:geocomplete
 dburles:google-maps
+email

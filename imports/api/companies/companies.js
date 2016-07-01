@@ -1,9 +1,6 @@
-import {
-  Mongo
-}
-from 'meteor/mongo';
-
-
-// FIX ME!
-// There is a problem with the new imports architecture, this statement has been moved to lib/collections/declarations/collections.js
-//export const Companies = new Mongo.Collection('Companies');
+Companies = new Mongo.Collection('companies');
+Companies.before.insert(function(userId, doc) {
+    doc.createdAt = moment()
+        .toISOString();
+    doc.author = Meteor.userId();
+});
