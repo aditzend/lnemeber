@@ -332,9 +332,9 @@ Template.Vendors_panel.helpers({
         const instance = Template.instance();
         return instance.state.get('creatingPlace');
     },
-    editingPlace() {
+    editingPlace(relId) {
         const instance = Template.instance();
-        return instance.state.get('editingPlace');
+        return (instance.state.get('editingPlace') === relId) ? true : false;
     },
     editingContact(relId) {
         const instance = Template.instance();

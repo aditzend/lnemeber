@@ -7,6 +7,7 @@ import '../../api/items/items.js';
 import '../../api/persons/persons.js';
 import '../../api/places/places.js';
 import '../../api/generics/generics.js';
+import '../../api/logs/logs.js';
 
 
 import './useraccounts-configuration.js';
@@ -26,6 +27,20 @@ Meteor.startup(function() {
         .addClass('fixed-sidebar');
     $('body')
         .addClass('fixed-small-header');
+
+    TAPi18n.setLanguage('es')
+        .done(function() {
+            console.log('i18n loaded');
+        })
+        .fail(function(error_message) {
+            // Handle the situation
+            console.log(error_message);
+        });
+
+
+
+
+
     // const workerRel = Rels.findOne({
     //     type: 'worker'
     // });

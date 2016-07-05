@@ -13,8 +13,8 @@ Template.Customers_panel.onCreated(function() {
         this.subscribe('rels.customers', Session.get('workfor'), Session.get('workerRelId'));
         this.subscribe('rels.places', Session.get('workfor'), Session.get('workerRelId'));
         this.subscribe('rels.contacts', Session.get('workfor'), Session.get('workerRelId'));
-        this.subscribe('persons.test');
-        this.subscribe('places.test');
+        // this.subscribe('persons.test');
+        // this.subscribe('places.test');
     })
 
     this.state = new ReactiveDict();
@@ -30,6 +30,7 @@ Template.Customers_panel.onCreated(function() {
         deletingContact: false,
         creatingPlace: false,
         editingPlace: false
+
     });
 });
 
@@ -156,60 +157,6 @@ Template.Customers_panel.helpers({
             }
         }
     },
-
-    editContactArgs(companyId, personId, relId) {
-        const instance = Template.instance();
-        const company = Companies.findOne(companyId);
-        const person = Persons.findOne(personId);
-        const rel = Rels.findOne(relId);
-        return {
-            destiny: companyId,
-            owner: Session.get('workfor'),
-            type: 'contact',
-            company: company,
-            person: person,
-            rel: rel,
-            onSavedData() {
-                // console.log('rel created contact', relId);
-                instance.state.set('editingContact', false);
-                instance.state.set('creatingContact', false);
-
-            },
-            onCancel() {
-                // console.log('cancel');
-                instance.state.set('editingContact', false);
-                instance.state.set('creatingContact', false);
-
-            }
-        }
-    },
-    editPlaceArgs(companyId, placeId, relId) {
-        const instance = Template.instance();
-        const company = Companies.findOne(companyId);
-        const place = Places.findOne(placeId);
-        const rel = Rels.findOne(relId);
-        return {
-            destiny: companyId,
-            owner: Session.get('workfor'),
-            type: 'place',
-            company: company,
-            place: place,
-            rel: rel,
-            onSavedData() {
-                // console.log('rel created contact', relId);
-                instance.state.set('editingPlace', false);
-                instance.state.set('creatingPlace', false);
-
-            },
-            onCancel() {
-                // console.log('cancel');
-                instance.state.set('editingPlace', false);
-                instance.state.set('creatingPlace', false);
-
-            }
-        }
-    },
-
     showContactArgs(personId, relId) {
         const instance = Template.instance();
 
@@ -253,6 +200,62 @@ Template.Customers_panel.helpers({
             }
         }
     },
+
+    editContactArgs(companyId, personId, relId) {
+        const instance = Template.instance();
+        const company = Companies.findOne(companyId);
+        const person = Persons.findOne(personId);
+        const rel = Rels.findOne(relId);
+        return {
+            destiny: companyId,
+            owner: Session.get('workfor'),
+            type: 'contact',
+            company: company,
+            person: person,
+            rel: rel,
+            onSavedData() {
+                // console.log('rel created contact', relId);
+                instance.state.set('editingContact', false);
+                instance.state.set('creatingContact', false);
+
+            },
+            onCancel() {
+                // console.log('cancel');
+                instance.state.set('editingContact', false);
+                instance.state.set('creatingContact', false);
+
+            }
+        }
+    },
+    editPlaceArgs(companyId, placeId, relId) {
+        const instance = Template.instance();
+        let rel = Rels.findOne(relId);
+        const place = Places.findOne(placeId);
+        console.log('STATE VAR editingPlace :', instance.state.get('editingPlace'));
+        console.log('relId parameter received', relId);
+
+        return {
+            destiny: companyId,
+            owner: Session.get('workfor'),
+            type: 'place',
+            place: place,
+            rel: rel,
+            onSavedData() {
+                // console.log('rel created contact', relId);
+                instance.state.set('editingPlace', false);
+                instance.state.set('creatingPlace', false);
+
+            },
+            onCancel() {
+                // console.log('cancel');
+                instance.state.set('editingPlace', false);
+                instance.state.set('creatingPlace', false);
+
+            }
+        }
+    },
+
+
     showPlaceArgs(placeId, relId) {
         const instance = Template.instance();
         const place = Places.findOne(placeId);
@@ -262,7 +265,7 @@ Template.Customers_panel.helpers({
             rel: rel,
             onEdit(relId) {
                 instance.state.set('editingPlace', relId);
-                // console.log('EDIT CONTACT REL ', relId);
+                console.log('EDIT place rel', relId);
             },
             onDelete(relId) {
                 instance.state.set('deletingPlace', relId);
@@ -328,9 +331,9 @@ Template.Customers_panel.helpers({
         const instance = Template.instance();
         return instance.state.get('creatingPlace');
     },
-    editingPlace() {
+    editingPlace(relId) {
         const instance = Template.instance();
-        return instance.state.get('editingPlace');
+        return (instance.state.get('editingPlace') === relId) ? true : false;
     },
     editingContact(relId) {
         const instance = Template.instance();

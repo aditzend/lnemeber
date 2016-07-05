@@ -18,6 +18,7 @@ boilerplate-generator@1.0.8
 caching-compiler@1.0.4
 caching-html-compiler@1.0.6
 callback-hook@1.0.8
+cfs:http-methods@0.0.32
 check@1.2.1
 chipcastle:countries@1.0.2
 chrismbeckett:toastr@2.1.2_1
@@ -75,6 +76,7 @@ meteor@1.1.14
 meteor-base@1.0.4
 meteor-platform@1.2.6
 meteorhacks:ssr@2.2.0
+meteorspark:util@0.2.0
 minifier-css@1.1.11
 minifier-js@1.1.11
 minifiers@1.1.7
@@ -102,7 +104,11 @@ peerlibrary:base-component@0.16.0
 peerlibrary:blaze-components@0.18.0
 peerlibrary:computed-field@0.3.1
 peerlibrary:data-lookup@0.1.0
+peerlibrary:fiber-utils@0.6.0
 peerlibrary:reactive-field@0.1.0
+peerlibrary:reactive-mongo@0.1.1
+peerlibrary:reactive-publish@0.2.0
+peerlibrary:server-autorun@0.5.2
 percolate:momentum@0.7.2
 percolate:velocityjs@1.2.1_1
 promise@0.6.7
@@ -124,6 +130,7 @@ spacebars-compiler@1.0.11
 srp@1.0.8
 standard-minifier-css@1.0.6
 standard-minifier-js@1.0.6
+tap:i18n@1.8.2
 templating@1.1.9
 templating-tools@1.0.4
 themeteorchef:jquery-validation@1.14.0

@@ -10,8 +10,12 @@
 
             {{#pageTitle title="Panel de Control Principal"}}
             <h2> 
-              <img src="{{companyName workfor}}" alt="" />
-               </h2>
+              {{#if companyLogo workfor}}
+              <img src="{{companyLogo workfor}}" alt="" />
+              {{else}}
+              {{companyName workfor}}
+              {{/if}}
+             </h2>
 
             {{/pageTitle}}
       

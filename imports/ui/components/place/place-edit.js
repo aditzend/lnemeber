@@ -2,9 +2,15 @@ import './place-edit.html';
 
 Template.Place_edit.onRendered(function() {
     const instance = Template.instance();
-    const company = instance.data.company;
+    //const company = instance.data.company;
     const place = instance.data.place;
     const rel = instance.data.rel;
+
+    $('#placeType')
+        .val(place.placeType);
+
+    //console.log(instance.data);
+
     //-----------------------------geocomplete
     this.autorun(() => {
         if (GoogleMaps.loaded()) {
@@ -94,7 +100,8 @@ Template.Place_edit.onRendered(function() {
                             placeType: placeType,
                             notes: notes,
                             phone: phone,
-                            internalPhone: internalPhone
+                            internalPhone: internalPhone,
+                            owner: instance.data.destiny
 
                         });
 
@@ -102,14 +109,13 @@ Template.Place_edit.onRendered(function() {
                             origin: newPlace,
                             destiny: instance.data.destiny,
                             type: instance.data.type,
-
                             owner: instance.data.owner
                         });
                         instance.data.onSavedData();
 
                         swal({
-                            title: 'Ahora ' + instance.data.company.name + ' tiene un nuevo lugar!',
-                            text: 'Datos guardados',
+                            title: 'Nuevo lugar registrado!',
+
                             type: "success"
                         });
                     } else {
@@ -129,7 +135,8 @@ Template.Place_edit.onRendered(function() {
                             country_short: country_short,
                             placeType: placeType,
                             phone: phone,
-                            internalPhone: internalPhone
+                            internalPhone: internalPhone,
+                            notes: notes
                         });
                         Rels.update({
                             _id: rel._id
@@ -137,7 +144,6 @@ Template.Place_edit.onRendered(function() {
                             origin: place._id,
                             destiny: instance.data.destiny,
                             type: instance.data.type,
-                            notes: notes,
                             owner: instance.data.owner
                         });
                         instance.data.onSavedData();

@@ -6,7 +6,7 @@
     <div class="">
       <button class="js-deselect-company btn btn-primary">
       <i class='fa fa-arrow-left'></i>
-        Volver a la busqueda
+        {{_ "Back to search"}}
       </button>
     </div>
   </div>
@@ -34,7 +34,7 @@
         {{/if}}
       </div>
       <hr>
-      {{#panel title='Lugares' collapsed=true}}
+      {{#panel title= (_'Places') collapsed=true}}
         <div class="list-item">
           {{#if creatingPlace}}
           {{> Place_edit (editPlaceArgs selectedCompany '' '' '' )}}
@@ -43,7 +43,7 @@
             <div class="text-center">
               <button class="js-place-create btn btn-default">
               <i class='fa fa-map-marker'></i>
-              Crear lugar
+              {{_ "New place"}}
               </button>
             </div>
           {{/if}}
@@ -61,7 +61,7 @@
         </div>
       {{/panel}}
       <hr>
-      {{#panel title='Contactos' }}
+      {{#panel title=(_'Contacts') }}
       <div class="list-item">
         {{#if creatingContact}}
         {{> Contact_edit (editContactArgs selectedCompany '' '' '' )}}
@@ -70,7 +70,7 @@
           <div class="text-center">
             <button class="js-contact-create btn btn-default">
             <i class='fa fa-user'></i>
-            Crear contacto
+              {{_ "New contact"}}
             </button>
           </div>
         {{/if}}

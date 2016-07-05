@@ -15,13 +15,13 @@ import '../../api/users/createUser.js';
 import '../../ui/pages/profile-show-page.js';
 import '../../ui/pages/dashboard.js';
 import '../../ui/pages/login.html';
+import '../../ui/pages/reset-password.js';
 import '../../ui/pages/landing-page.js';
 import '../../ui/layouts/landing-layout.html';
 
 
 
-//no one enters without logging!
-//FlowRouter.triggers.enter([AccountsTemplates.ensureSignedIn]);
+
 
 //home always renders the dashboard
 FlowRouter.route('/', {
@@ -54,6 +54,11 @@ FlowRouter.route('/landing', {
     }
 });
 
+// AccountsTemplates.configureRoute('resetPwd', {
+//     name: 'resetPwd',
+//     path: '/reset-password',
+// });
+
 FlowRouter.route('/exit', {
     name: 'exit',
     action: function() {
@@ -64,15 +69,7 @@ FlowRouter.route('/exit', {
     }
 });
 
-FlowRouter.route('/create-user-lkjpoi098', {
-    name: 'createUser',
-    action: function() {
-        Meteor.logout();
-        BlazeLayout.render('App_body', {
-            main: "createUser"
-        });
-    }
-});
+
 
 //-------------------AccountsTemplates------------------------
 AccountsTemplates.configureRoute('signIn', {
@@ -86,15 +83,35 @@ AccountsTemplates.configureRoute('signIn', {
     contentRegion: 'main'
 });
 
+
+
+
 AccountsTemplates.configureRoute('changePwd', {
     layoutType: 'blaze',
-    name: 'At.changePwd',
-    path: '/changepassword',
+    name: 'changePwd',
+    path: '/change-password',
     //template: 'myLogin',
-    layoutTemplate: 'AT_layout',
+    //layoutTemplate: 'AT_layout',
+    layoutTemplate: 'login',
     layoutRegions: {},
     contentRegion: 'main'
 });
+//AccountsTemplates.configureRoute('resetPwd');
+
+FlowRouter.route('/reset-password', {
+    name: 'resetPwd',
+    action: function() {
+
+        BlazeLayout.render('Landing_layout', {
+            main: "resetPassword"
+
+        });
+
+
+
+    }
+});
+
 
 //------------------------------------------------------------
 
@@ -136,6 +153,7 @@ FlowRouter.route('/create-generic/', {
 //--------------------PROFILE---------------------------------------
 FlowRouter.route('/profile/', {
     name: 'Profile.show',
+    triggersEnter: [AccountsTemplates.ensureSignedIn],
     action() {
         BlazeLayout.render('App_body', {
             main: 'Profile_show_page'
@@ -149,6 +167,7 @@ FlowRouter.route('/profile/', {
 
 //--------------------SHOW---------------------------------------
 FlowRouter.route('/show-generic/:_id', {
+    triggersEnter: [AccountsTemplates.ensureSignedIn],
     name: 'showGeneric',
     action() {
         BlazeLayout.render('App_body', {
@@ -157,6 +176,7 @@ FlowRouter.route('/show-generic/:_id', {
     }
 });
 FlowRouter.route('/show-generics/', {
+    triggersEnter: [AccountsTemplates.ensureSignedIn],
     name: 'showGenerics',
     action() {
         BlazeLayout.render('App_body', {
@@ -165,6 +185,7 @@ FlowRouter.route('/show-generics/', {
     }
 });
 FlowRouter.route('/show-2/:_id', {
+    triggersEnter: [AccountsTemplates.ensureSignedIn],
     name: 'showCompany',
     action() {
         BlazeLayout.render('App_body', {
@@ -175,7 +196,8 @@ FlowRouter.route('/show-2/:_id', {
 
 
 
-FlowRouter.route('/show-1/:_id', {
+FlowRouter.route('/show-/:_id', {
+    triggersEnter: [AccountsTemplates.ensureSignedIn],
     name: 'showContact',
     action() {
         BlazeLayout.render('App_body', {

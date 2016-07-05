@@ -6,7 +6,7 @@ from 'meteor/useraccounts:core';
 
 
 T9n.setLanguage('es');
-
+console.log(TAPi18n.__('Log In'));
 
 let myPostSubmitFunc = function(userId, info) {
     if (userId) {
@@ -39,6 +39,25 @@ AccountsTemplates.addField({
     errStr: 'At least 1 digit, 1 lower-case and 1 upper-case'
 });
 
+AccountsTemplates.configure({
+    texts: {
+        button: {
+            changePwd: "Password Text",
+            enrollAccount: "Enroll Text",
+            forgotPwd: "Enviar mail",
+            resetPwd: "Reset Pwd Text",
+            signIn: "Entrar",
+            signUp: "Sign Up Text",
+        }
+    }
+});
+
+
+// 
+// Accounts.urls.resetPassword = (token) => {
+//     return Meteor.absoluteUrl(`reset-password/${token}`);
+// };
+
 // let userId = Meteor.userId();
 AccountsTemplates.configure({
     //defaultTemplate: 'myCustomFullPageAtForm',
@@ -50,7 +69,7 @@ AccountsTemplates.configure({
     // Behavior
     confirmPassword: false,
     enablePasswordChange: true,
-    forbidClientAccountCreation: false,
+    forbidClientAccountCreation: true,
     overrideLoginErrors: true,
     sendVerificationEmail: false,
     lowercaseUsername: false,
@@ -78,6 +97,7 @@ AccountsTemplates.configure({
     // Redirects
     homeRoutePath: '/',
     redirectTimeout: 4000,
+
 
     // Hooks
     // onLogoutHook: postSignUp

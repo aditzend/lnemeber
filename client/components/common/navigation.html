@@ -16,20 +16,25 @@
                     <!--<button data-action='loginWithFacebook' class='btn btn-default'>Login with Facebook</button>-->
                 </div>
                 <br>
-                
-                <div class="dropdown btn btn-default">
+              
+                <div class="dropdown btn btn-default pull-left">
                     <a class="dropdown-toggle" href="#" data-toggle="dropdown">
-                        <small class="text-muted"> Opciones <b class="caret"></b></small>
+                        <small class="text-muted"> {{_ "Options"}} <b class="caret"></b></small>
                     </a>
                     <ul class="dropdown-menu animated flipInX m-t-xs">
                 
                         <li class="divider"></li>
                         {{#each workerRel in workerRels}}
                         <!-- <li class='btn btn-default js-workfor' id='{{workerRel.destiny}}'>work </li> -->
-                        <li class='js-workfor' id='{{workerRel.destiny}}' relid='{{workerRel._id}}' >{{companyName workerRel.destiny}}</li>
+                        <li class='text-center'  >
+                          <button class="js-workfor btn btn-default btn-xs" id='{{workerRel.destiny}}' relid='{{workerRel._id}}'>{{companyName workerRel.destiny}}</button>
+                        </li>
+                    <br>
                         {{/each}}
-                        <li><a data-action='logout' href="{{pathFor 'login'}}">Entrar</a></li>
-                        <li><a data-action='logout' href="{{pathFor 'exit'}}">Salir</a></li>
+                        <hr>
+                        <li><a  class='btn btn-default pull-left' href="{{pathFor 'changePwd'}}">{{_ "Change password"}}</a></li>
+                        <br>
+                        <!-- <li><a class='btn btn-default' data-action='logout' href="{{pathFor 'exit'}}">Salir</a></li> -->
                     </ul>
                 </div>
                 <br>
@@ -37,29 +42,20 @@
               
                 
                 <div>
-                  <a class='btn btn-default' href="{{pathFor 'Profile.show'}}"><i class='fa fa-pencil'>  </i><small>  Editar perfil</small></a>
+                  <a class='btn btn-default pull-left' href="{{pathFor 'Profile.show'}}"><i class='fa fa-pencil'>  </i><small>  {{_ "Edit profile"}}</small></a>
+                  <!-- <a class='js-reset btn btn-default' href="#"><i class='fa fa-pencil'>  </i><small>  Mandar email olvido</small></a> -->
                   
                 </div>
+              
+               
+               
+               
                 
             </div>
-            <br>
+        
 
-            <!-- <ul class="nav" id="side-menu">
-                <li class="{{isActiveRoute regex='loadingButtons|codeEditor|panels|typography|buttons|components|alerts|modals|draggable|nestableList|tour|icons'}}">
-                    <a href="#">Crear<span class="fa arrow"></span> </a>
-                    <ul class="nav nav-second-level {{isActiveRoute regex='loadingButtons|codeEditor|panels|typography|buttons|components|alerts|modals|draggable|nestableList|tour|icons' className='in'}}">
-                        <li class="{{isActiveRoute regex='panels'}}"><a href="../create-company?relType=SUPL">Cliente</a></li>
-                        <li class="{{isActiveRoute regex='typography'}}"><a href="../create-company?relType=CUST">Proveedor</a></li>
-                        <li class="{{isActiveRoute regex='buttons'}}"><a href="{{pathFor 'createGeneric'}}">Gen&eacute;rico</a></li>
-                    </ul>
-                </li>
-                <li class="nav-second-level {{isActiveRoute regex='emailView|emailCompose|notes|appPlans|faq|contacts|projects|project|socialBoard|timeline|profile|mailbox|blog|blogDetails|forum|forumDetails|gallery|calendar|search|chatView|fileManager|invoice'}}">
-                    <a href="#">Ver<span class="fa arrow"></span> </a>
-                    <ul class="nav nav-second-level {{isActiveRoute regex='emailView|emailCompose|notes|appPlans|faq|contacts|projects|project|socialBoard|timeline|profile|mailbox|blog|blogDetails|forum|forumDetails|gallery|calendar|search|chatView|fileManager|invoice' className="in"}}">
-                        <li class="{{isActiveRoute regex='contacts'}}"><a href="../show-generics">Gen&eacute;ricos</a></li>
-                    </ul>
-                </li>
-            </ul> -->
+        
+    
         </div>
     </aside>
   {{else}}

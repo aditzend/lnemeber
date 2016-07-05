@@ -1,11 +1,4 @@
-import {
-    Meteor
-}
-from 'meteor/meteor';
-
-
-
-Meteor.publish('places.test',
+Meteor.publish(null,
     function() {
         if (this.userId) {
             return Places.find();

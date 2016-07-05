@@ -52,7 +52,7 @@
           <div class="list-item">
             {{#each placeRels selectedCompany}}
             <hr>
-              {{#if editingPlace _id}}
+              {{#if editingPlace  _id}}
                 {{> Place_edit (editPlaceArgs destiny origin _id)}}
               {{else}}
                 {{> Place_show (showPlaceArgs origin _id )}}
@@ -65,7 +65,7 @@
       <div class="list-item">
         {{#if creatingContact}}
         {{> Contact_edit (editContactArgs selectedCompany '' '' '' )}}
-        
+        dfg
         {{else}}
           <div class="text-center">
             <button class="js-contact-create btn btn-default">

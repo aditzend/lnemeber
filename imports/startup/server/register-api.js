@@ -5,6 +5,8 @@ import '../../api/items/items.js';
 import '../../api/persons/persons.js';
 import '../../api/places/places.js';
 import '../../api/generics/generics.js';
+import '../../api/logs/logs.js';
+import './email.js';
 
 
 

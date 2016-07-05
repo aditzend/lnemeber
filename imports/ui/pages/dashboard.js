@@ -37,14 +37,28 @@ Template.Dashboard.helpers({
 
         return companyId;
     },
+    companyLogo(companyId) {
+        const company = Companies.findOne(companyId);
+        if (company) {
+            if (company.logo) {
+                return company.logo;
+            } else {
+                return false
+            }
+        } else {
+            return false
+        }
+
+
+    },
     companyName(companyId) {
         const company = Companies.findOne(companyId);
         if (company) {
-            return company.logo;
+            return company.name;
         } else {
             return '-'
         }
-    },
+    }
 
 
 

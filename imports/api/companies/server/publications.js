@@ -16,25 +16,18 @@ from 'meteor/meteor';
 //     });
 // });
 Meteor.publish(null, function companiesNames() {
-    return Companies.find({}, {
-        fields: {
-            // name: 1,
-            // _id: 1,
-            // ssok: 0
-        }
-    });
-});
+    if (this.userId) {
+        return Companies.find({}, {
+            fields: {
+                name: 1,
+                _id: 1,
+                fin: 1,
+                finType: 1,
+                logo: 1
+            }
+        });
+    } else {
+        this.ready();
+    }
 
-// Meteor.publish('companies.public.byId', function companiesPublicById(id) {
-//     if (!this.userId) {
-//         this.ready();
-//     } else {
-//         return Companies.find({
-//             _id: id
-//         }, {
-//             fields: {
-//                 ssok: false
-//             }
-//         });
-//     }
-// });
+});

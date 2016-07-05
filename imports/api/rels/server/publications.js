@@ -1,65 +1,3 @@
-// import {
-//   Rels
-// }
-// from '../rels.js';
-// Meteor.publish('Rels.all', function relsAll() {
-//     if (!this.userId) {
-//         return this.ready();
-//     }
-// 
-//     return Rels.find({}, {
-//         fields: {
-//             owner: false
-//         }
-//     });
-// });
-
-
-//------------------------RELS---------------------
-// Pub de prueba
-// Meteor.publish('Rels.all',
-//     function() {
-//         if (this.userId) {
-//             return Rels.find({});
-//         } else {
-//             this.ready();
-//         }
-//     });
-
-//To get suppliers and customers
-// Meteor.publish('Rels.byDestiny',
-//     function(origin, destiny) {
-//         if (this.userId) {
-//             return Rels.find({
-//                 origin: origin,
-//                 destiny: destiny,
-//                 owner: this.userId
-//             }, {
-//                 fields: {
-//                     owner: false
-//                 }
-//             });
-//         } else {
-//             this.ready();
-//         }
-//     });
-
-//To get rels of a contact
-// Meteor.publish('Rels.byOrigin',
-//     function(origin) {
-//         if (this.userId) {
-//             return Rels.find({
-//                 origin: origin,
-//                 owner: this.userId //belongsTo
-//             }, {
-//                 fields: {
-//                     owner: false
-//                 }
-//             });
-//         } else {
-//             this.ready();
-//         }
-//     });
 //To get worker rels of a person
 Meteor.publish(null,
     function() {
@@ -81,104 +19,144 @@ Meteor.publish(null,
     });
 Meteor.publish('rels.customers',
     function(workfor, workerRelId) { //f7BXSGPQY3gnKf9zr
-        const workerRel = Rels.findOne(workerRelId);
-        const company = Companies.findOne(workfor); //this is an async call, if you remove the loop the data wont be ready and company.ssok will throw undefined
-        let n = 1;
-        //cheap way of making the process wait until company is ready =) 
-        while (n < 3) {
-            n++;
-        }
-
-        if (company.ssok === workerRel.owner) {
-            return Rels.find({
-                type: 'customer',
-                destiny: workfor
-            }, {
+        this.autorun(function(computation) {
+            let workerRel = Rels.findOne(workerRelId, {
                 fields: {
-                    owner: false
+                    owner: 1
                 }
             });
-        } else {
-            return this.ready();
-        }
+            let company = Companies.findOne(workfor, {
+                fields: {
+                    ssok: 1
+                }
+            });
+            let ip = this.connection.clientAddress;
 
+
+            if (company.ssok === workerRel.owner) {
+                console.log("access granted to customers");
+                return Rels.find({
+                    type: 'customer',
+                    destiny: workfor
+                }, {
+                    fields: {
+                        owner: false
+                    }
+                });
+            } else {
+                console.log("ACCESS DENIED : Attempt logged to ip ", ip);
+                Logs.insert({
+                    type: 'ACCESS_DENIAL',
+                    user: this.userId,
+                    ip: ip,
+                    createdAt: new Date()
+                        .valueOf(),
+                    affects: company._id,
+                    details: 'rels.customers publication denied due to keys inconsistency'
+                });
+                this.ready();
+            }
+        });
     });
 Meteor.publish('rels.vendors',
     function(workfor, workerRelId) { //f7BXSGPQY3gnKf9zr
-        const workerRel = Rels.findOne(workerRelId);
-        const company = Companies.findOne(workfor); //this is an async call, if you remove the loop the data wont be ready and company.ssok will throw undefined
-        let n = 1;
-        //cheap way of making the process wait until company is ready =) 
-        while (n < 3) {
-            n++;
-        }
+        this.autorun(function(computation) {
+            let workerRel = Rels.findOne(workerRelId, {
+                fields: {
+                    owner: 1
+                }
+            });
+            let company = Companies.findOne(workfor, {
+                fields: {
+                    ssok: 1
+                }
+            });
+            let ip = this.connection.clientAddress;
 
-        if (company.ssok === workerRel.owner) {
+
+            if (company.ssok === workerRel.owner) {
+                console.log("access granted to vendors");
+                return Rels.find({
+                    type: 'vendor',
+                    destiny: workfor
+                }, {
+                    fields: {
+                        owner: false
+                    }
+                });
+            } else {
+                console.log("ACCESS DENIED : Attempt logged to ip ", ip);
+                Logs.insert({
+                    type: 'ACCESS_DENIAL',
+                    user: this.userId,
+                    ip: ip,
+                    createdAt: new Date()
+                        .valueOf(),
+                    affects: company._id,
+                    details: 'rels.vendors publication denied due to keys inconsistency'
+                });
+                this.ready();
+            }
+        });
+    });
+Meteor.publish(null,
+    function(workfor, workerRelId) {
+
+
+
+        if (this.userId) {
             return Rels.find({
-                type: 'vendor',
-                destiny: workfor
+                type: 'place'
             }, {
                 fields: {
                     owner: false
                 }
             });
         } else {
-            return this.ready();
-        }
 
+            this.ready();
+        }
     });
-Meteor.publish('rels.places',
-    function(workfor, workerRelId) { //f7BXSGPQY3gnKf9zr
-        const workerRel = Rels.findOne(workerRelId);
-        const company = Companies.findOne(workfor); //this is an async call, if you remove the loop the data wont be ready and company.ssok will throw undefined
-        let n = 1;
-        //cheap way of making the process wait until company is ready =) 
-        while (n < 3) {
-            n++;
-        }
 
-        if (company.ssok === workerRel.owner) {
-            return Rels.find({
-                type: 'place',
-                owner: workfor
-            }, {
-                fields: {
-                    owner: false
-                }
-            });
-        } else {
-            return this.ready();
-        }
-
-    });
 Meteor.publish('rels.contacts',
-    function(workfor, workerRelId) { //f7BXSGPQY3gnKf9zr
-        const workerRel = Rels.findOne(workerRelId);
-        const company = Companies.findOne(workfor); //this is an async call, if you remove the loop the data wont be ready and company.ssok will throw undefined
-        let n = 1;
-        //cheap way of making the process wait until company is ready =) 
-        while (n < 1000) {
-            n++;
-        }
-
-        if (company.ssok === workerRel.owner) {
-            return Rels.find({
-                type: 'contact',
-                owner: workfor
-            }, {
+    function(workfor, workerRelId) {
+        this.autorun(function(computation) {
+            let workerRel = Rels.findOne(workerRelId, {
                 fields: {
-                    owner: false
+                    owner: 1
                 }
             });
-        } else {
-            return this.ready();
-        }
+            let company = Companies.findOne(workfor, {
+                fields: {
+                    ssok: 1
+                }
+            });
+            let ip = this.connection.clientAddress;
 
+
+            if (company.ssok === workerRel.owner) {
+                console.log("access granted to contacts");
+                return Rels.find({
+                    type: 'contact',
+                    owner: company._id
+
+                }, {
+                    fields: {
+                        owner: false
+                    }
+                });
+            } else {
+                console.log("ACCESS DENIED : Attempt logged to ip ", ip);
+                Logs.insert({
+                    type: 'ACCESS_DENIAL',
+                    user: this.userId,
+                    ip: ip,
+                    createdAt: new Date()
+                        .valueOf(),
+                    affects: company._id,
+                    details: 'rels.contacts publication denied due to keys inconsistency'
+                });
+                this.ready();
+            }
+        });
     });
-// Meteor.publish(null,
-//     function() {
-// 
-//         return Rels.find({
-//             type: 'customer'
-//         });
-//     });

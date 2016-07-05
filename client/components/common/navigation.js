@@ -1,3 +1,7 @@
+import {
+    TAPi18n
+} from 'meteor/tap:i18n';
+
 Template.navigation.onCreated(function() {
 
     this.state = new ReactiveDict();
@@ -19,6 +23,7 @@ Template.navigation.onRendered(function() {
     // Initialize metsiMenu plugin to sidebar menu
     $('#side-menu')
         .metisMenu();
+    console.log(TAPi18n.__('Log In'));
 
 
 
@@ -40,6 +45,9 @@ Template.navigation.onRendered(function() {
 
 
 Template.navigation.helpers({
+    logic() {
+        return "the logic";
+    },
     workerRels() {
         if (Session.get('workfor') === undefined) {
             console.log("setting default company");
@@ -122,11 +130,14 @@ Template.navigation.events({
         FlowRouter.go('login');
     },
     'click .js-workfor': function(e, instance) {
-            Session.set('workfor', e.target.id);
+        Session.set('workfor', e.target.id);
 
-            Session.set('workerRelId', $(e.target)
-                .attr('relid'));
+        Session.set('workerRelId', $(e.target)
+            .attr('relid'));
 
+    },
+    'click .js-reset': function(e, instance) {
+            Accounts.sendResetPasswordEmail(Meteor.userId);
         }
         /*  'click [data-action=loginWithFacebook]': function() {
       Meteor.loginWithFacebook({

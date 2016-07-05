@@ -1,57 +1,77 @@
-import {
-  Meteor
-}
-from 'meteor/meteor';
-
-// import {
-//   Persons
-// }
-// from '../persons.js';
-
-
-
-Meteor.publish("persons.test", function personsTest() {
-  return Persons.find();
-});
-
-
-Meteor.publish('persons.public', function personsPublic() {
-  return Persons.find({}, {
-    fields: {
-      treatedAs: 1,
-      bDay: 1,
-      bMonth: 1,
-      bYear: 1,
-      isMale: 1,
-      lastName: 1,
-      middleName: 1,
-      name: 1,
-      fin: 1,
-      finType: 1,
-      country: 1
+Meteor.publish(null, function personsPublic() {
+    return Persons.find({}, {
+        fields: {
+            treatedAs: 1,
+            bDay: 1,
+            bMonth: 1,
+            bYear: 1,
+            isMale: 1,
+            lastName: 1,
+            middleName: 1,
+            name: 1,
+            fin: 1,
+            finType: 1,
+            country: 1
 
 
-    }
-  });
-});
-
-Meteor.publish('persons.own', function personsOwn() {
-  if (this.userId) {
-    let u = Meteor.users.findOne(this.userId);
-
-    //console.log('USER KEY', r.key);
-
-    // let r = "vBBRrEM8m8PYSjTBM";
-
-    return Persons.find({
-      owner: u.ssok
-    }, {
-      fields: {
-        owner: false
-
-      }
+        }
     });
-  } else {
-    this.ready();
-  }
+    console.log("public persons data published");
+
 });
+// 
+// Meteor.publish('persons.own', function personsOwn() {
+//     if (this.userId) {
+//         let user = Meteor.users.findOne(this.userId);
+// 
+//         //console.log('USER KEY', r.key);
+// 
+//         // let r = "vBBRrEM8m8PYSjTBM";
+// 
+//         return Persons.find({
+//             owner: u.ssok
+//         }, {
+//             fields: {
+//                 owner: false
+// 
+//             }
+//         });
+//     } else {
+//         this.ready();
+//     }
+// });
+
+Meteor.publish('persons.own',
+    function() {
+        let ip = this.connection.clientAddress;
+
+        if (this.userId) {
+            this.autorun(function(computation) {
+                let user = Meteor.users.findOne(this.userId, {
+                    fields: {
+                        ssok: 1
+                    }
+                });
+                console.log("access granted to own personal data");
+                return Persons.find({
+                    owner: user.ssok
+                }, {
+                    fields: {
+                        owner: 0
+                    }
+                });
+            });
+        } else {
+            console.log("ACCESS DENIED : Attempt logged to ip ", ip);
+            Logs.insert({
+                type: 'ACCESS_DENIAL',
+                user: this.userId,
+                ip: ip,
+                createdAt: new Date()
+                    .valueOf(),
+                affects: this.userId,
+                details: 'persons.own publication denied due to keys inconsistency'
+            });
+            this.ready();
+        }
+    });
