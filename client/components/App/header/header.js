@@ -24,6 +24,11 @@ Template.header.helpers({
     headerIndex: function() {
         return HeaderIndex;
     },
+    oneFound: function() {
+        let dict = HeaderIndex.getComponentDict();
+
+        return (dict.get('count') === 1) ? true : false;
+    },
     pathTest: function() {
         var params = {
             _id: '5shKQs4j2g7DRfLrnP'

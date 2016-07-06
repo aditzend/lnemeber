@@ -23,7 +23,8 @@ Meteor.publish(null, function companiesNames() {
                 _id: 1,
                 fin: 1,
                 finType: 1,
-                logo: 1
+                logo: 1,
+                country: 1
             }
         });
     } else {

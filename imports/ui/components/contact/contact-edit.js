@@ -198,7 +198,6 @@ Template.Contact_edit.onRendered(function() {
                         const newPerson = Persons.insert({
                             name: name,
                             lastName: lastName,
-                            treatedAs: treatedAs,
                             fin: fin,
                             finType: 'DNI',
                             country: 'AR',

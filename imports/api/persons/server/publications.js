@@ -11,9 +11,11 @@ Meteor.publish(null, function personsPublic() {
             name: 1,
             fin: 1,
             finType: 1,
-            country: 1
-
-
+            country: 1,
+            phone: 1,
+            internalPhone: 1,
+            mobile: 1,
+            email: 1,
         }
     });
     console.log("public persons data published");

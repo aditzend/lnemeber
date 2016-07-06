@@ -14,21 +14,18 @@ Template.Search_fast_result.helpers({
             }
         });
     },
-    cont: function() {
+    cont() {
         return Rels.findOne({
-            origin: this._id
+            origin: this._id,
+            type: 'contact'
         }, {
-            fields: {
-                type: 1,
-                origin: 1
-            }
+            // fields: {
+            //     type: 1,
+            //     origin: 1
+            // }
         });
 
-    },
-    id2: function() {
-        return this._id
     }
-
 
 
 });

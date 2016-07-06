@@ -196,13 +196,14 @@ FlowRouter.route('/show-2/:_id', {
 
 
 
-FlowRouter.route('/show-/:_id', {
+FlowRouter.route('/show-person-profile/:_id', {
     triggersEnter: [AccountsTemplates.ensureSignedIn],
     name: 'showContact',
-    action() {
+    action(params) {
         BlazeLayout.render('App_body', {
             main: 'Contact_show_profile_page'
         });
+        //Session.set('url_id', params._id);
     }
 });
 //---------------------------------------------------------------

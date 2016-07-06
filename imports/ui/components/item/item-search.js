@@ -10,7 +10,7 @@ Template.Item_search.helpers({
             'id': 'search-input',
             'class': 'form-control',
             'autocomplete': 'off',
-            'placeholder': "Buscar empresa... ",
+            'placeholder': "Buscar producto... ",
             'style': "text-transform:uppercase"
         };
     },
