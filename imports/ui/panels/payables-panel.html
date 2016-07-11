@@ -1,5 +1,44 @@
-<template name="Customers_panel">
-  {{#panel title=(_ "Customers") panelClass="stats" color="hviolet"}}
+<template name="Payables_panel">
+  {{#panel title=(_ "Payables") panelClass="stats" color="hred"}}
+  <div class="table-responsive">
+                            <table cellpadding="1" cellspacing="1" class="table table-condensed table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Phone</th>
+                                    <th>Street</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>Henry</td>
+                                    <td>Purus Gravida Sagittis Limited</td>
+                                    <td>055 1753 4032</td>
+                                </tr>
+                                <tr>
+                                    <td>Shelly</td>
+                                    <td>Posuere Enim Inc.</td>
+                                    <td>0313 143 2317</td>
+                                </tr>
+                                <tr>
+                                    <td>Edan</td>
+                                    <td>Quisque Imperdiet Company</td>
+                                    <td>076 1743 8649</td>
+                                </tr>
+                                <tr>
+                                    <td>Sophia</td>
+                                    <td>Quam Incorporated</td>
+                                    <td>0863 826 7513</td>
+                                </tr>
+                                <tr>
+                                    <td>Griffith</td>
+                                    <td>Tempor Erat Corp.</td>
+                                    <td>0845 46 45</td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
     {{#if selectedCompany}}
     <div class="list-item">
     

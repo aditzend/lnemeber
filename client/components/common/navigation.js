@@ -116,6 +116,11 @@ Template.navigation.helpers({
 });
 
 Template.navigation.events({
+    'click .js-show-treasury': function() {
+        BlazeLayout.render('App_body', {
+            main: 'Treasury_show_page'
+        });
+    },
 
     // Colapse menu in mobile mode after click on element
     'click #side-menu a:not([href$="\\#"])': function() {

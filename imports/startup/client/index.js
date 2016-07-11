@@ -2,6 +2,9 @@
 
 //declarations
 import '../../api/companies/companies.js';
+import '../../api/accounting/accounts/accounts.js';
+import '../../api/transfers/transfers-of-ownership/transfers-of-ownership.js';
+import '../../api/transfers/transfers-of-ownership/details/details.js';
 import '../../api/rels/rels.js';
 import '../../api/items/items.js';
 import '../../api/persons/persons.js';

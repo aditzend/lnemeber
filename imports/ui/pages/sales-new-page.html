@@ -1,0 +1,169 @@
+<template name="Sales_new_page">
+
+    {{#staggering}}
+
+        <div class='row'>
+            {{#pageTitle title=(_ "New Sale")}}
+                <!-- <h2> 
+    {{#if companyLogo workfor}}
+    <img src="{{companyLogo workfor}}" alt="" />
+    {{else}}
+    {{companyName workfor}}
+    {{/if}}
+   </h2> -->
+
+            {{/pageTitle}}
+        </div>
+        <div class='row'>
+            <div class="col-xs-12 col-lg-4">
+                {{#if companyName}}
+
+                    <h3>{{_ "Selling to"}}:
+                        {{companyName}}
+                    </h3>
+                    {{#if showCompanyDetails}}
+                        <button class='btn btn-default js-hide-company-details'>{{_ 'Hide details'}}</button>
+
+                        {{#panel title=(_ "Customer details")}}
+                            {{> Company_DECS customerArgs selectedCompany}}
+                        {{/panel}}
+                    {{else}}
+                        <button class='btn btn-default js-show-company-details'>{{_ 'View details'}}</button>
+                    {{/if}}
+                    <button class='btn btn-default js-show-company-switch'>{{_ 'Switch'}}</button>
+                {{else}}
+                    {{> Company_DECS customerArgs }}
+                {{/if}}
+            </div>
+
+            <div class="col-xs-8 col-lg-2">
+              
+                <label for="emission-date">{{_ "Emission date"}}</label>
+                <input id="emission-date" name='emission-date' type="text" class="date-picker form-control">
+
+                <label for="due-date">{{_ "Due date"}}</label>
+                <input id="due-date" type="text" name='due-date' class="date-picker form-control">
+
+                <div class='row'>
+                    <div class="col-xs-12 ">
+                        <span class="help-block small-font">{{_ "Invoice type"}}</span>
+                        <select class="form-control" id="placeType" name="placeType">
+                            <option value='A'>A</option>
+                            <option value='B'>B</option>
+                            <option value='C'>C</option>
+                            <option value='M'>M</option>
+                            <option value='E'>E</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-xs-12 col-lg-4">
+                {{> Item_DECS productArgs}}
+
+            </div>
+
+        </div>
+        <div class='row'>
+            <div class='col-xs-12 col-lg-12'>
+
+                <div class="table-responsive">
+                    <table cellpadding="1" cellspacing="1" class="table table-condensed table-striped">
+                        <thead>
+                            <tr>
+                                <th>{{_ "Product"}}</th>
+                                <th>{{_ "Amount"}}</th>
+                                <th>{{_ "Price"}}</th>
+                                <th>{{_ "Disc."}}</th>
+                                <th>{{_ "Taxes"}}</th>
+                                <th>{{_ "Total"}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          <tr class='active'>
+                            <td >{{sellingItemName}}</td>
+                            <td > <input class='js-amount' type="number" > </td>
+                            <td > <input class='js-price' type="number" > </td>
+                            <td > <input class='js-discount' type="number" > </td>
+                            <td > <input class='js-taxes' type="number" > </td>
+                            <td > <input class='js-total' type="number" > </td>
+                            <td > <button class='btn btn-success js-add-item'>{{_ "Ok"}}</button> </td>
+                            <td > <button class='btn btn-danger js-cancel-item'>{{_ "Cancel"}}</button> </td>
+                    
+                            
+                          </tr>
+                          {{#each detail in soldProducts}}
+                            <tr>
+                                <td >{{detail.item}}</td>
+                                <td >{{detail.amount}}</td>
+                                <td >{{detail.price}}</td>
+                                <td >{{detail.discount}}</td>
+                                <td >{{detail.taxes}}</td>
+                                <td >{{detail.total}}</td>
+                              
+                            </tr>
+                            {{else}}
+                            
+                          <tr>
+                            {{_ "Add products"}}
+                            
+                          </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- <tfoot> -->
+                <div class='row'>
+                    <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6'>
+                        <h1>Comments</h1>
+                    </div>
+                    <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6'>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <span>{{_ "Subtotal"}}</span>
+
+                                    </td>
+                                    <td>subototal value</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span>{{_ "Subtotal with discount"}}</span>
+
+                                    </td>
+                                    <td>subototal value</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span>{{_ "Net total"}}</span>
+
+                                    </td>
+                                    <td>subototal value</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h3>{{_ "Total sale"}}</h3>
+
+                                    </td>
+                                    <td>
+                                        <h3>total sale value</h3>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                    <!-- </tfoot> -->
+
+                </div>
+            </div>
+        </div>
+        <div class='row'>
+            <h1>final row</h1>
+        </div>
+
+    {{/staggering}}
+</template>

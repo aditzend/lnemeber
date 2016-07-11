@@ -17,6 +17,8 @@ import '../../ui/pages/dashboard.js';
 import '../../ui/pages/login.html';
 import '../../ui/pages/reset-password.js';
 import '../../ui/pages/landing-page.js';
+import '../../ui/pages/treasury-show-page.js';
+import '../../ui/pages/sales-new-page.js';
 import '../../ui/layouts/landing-layout.html';
 
 
@@ -162,7 +164,37 @@ FlowRouter.route('/profile/', {
 });
 
 //---------------------------------------------------------------
+FlowRouter.route('/show-treasury/', {
+    triggersEnter: [AccountsTemplates.ensureSignedIn],
+    name: 'showTreasury',
+    action() {
+        BlazeLayout.render('App_body', {
+            main: 'Treasury_show_page'
+        });
+    }
+});
+FlowRouter.route('/sales/new/', {
+    triggersEnter: [AccountsTemplates.ensureSignedIn],
+    name: 'createSale',
+    action() {
+        let tooId = TransfersOfOwnership.insert({
 
+        });
+        let forward = '/too/' + tooId;
+
+        FlowRouter.go(forward);
+    }
+});
+FlowRouter.route('/too/:_id/', {
+    triggersEnter: [AccountsTemplates.ensureSignedIn],
+    name: 'too',
+    action() {
+        BlazeLayout.render('App_body', {
+            main: 'Sales_new_page'
+        });
+
+    }
+});
 
 
 //--------------------SHOW---------------------------------------
