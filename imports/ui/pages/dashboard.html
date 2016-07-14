@@ -4,7 +4,7 @@
 
     {{#staggering}}
 
-        <div class="">
+        <div class="wrapper">
           
 
 
@@ -24,6 +24,10 @@
 
 
             <div class="row">
+              <a class="btn btn-success" href={{pathForCreateSale}}>{{_ "New sale"}}</a>
+              <a class="btn btn-success" href={{pathForCreateExpense}}>{{_ "New expense"}}</a>
+              <a class="btn btn-default" href={{pathForShowTreasury}}>{{_ "Treasury"}}</a>
+        
         <!--         <div class="col-lg-3">
         
             {{#panel footer="Estado de Genericos"}}
@@ -50,6 +54,10 @@
                 </div>
                 <div class="col-lg-4">
                     {{> Items_panel}}
+                </div>
+                <div class="col-lg-4">
+                  {{> SalesPerformance_panel}}
+                  
                 </div>
             </div>
           

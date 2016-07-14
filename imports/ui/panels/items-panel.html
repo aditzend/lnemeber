@@ -11,7 +11,8 @@
   </div>
     <hr>
         {{#if editingItem}}
-          {{> Item_edit (editItemArgs selectedItem)}}
+        editing
+          {{> Item_edit editItemArgs}}
         {{else}}
     
           <!-- {{> Item_show showthis}} -->
@@ -27,6 +28,7 @@
       
     {{else}} <!-- //selectedItem -->
       {{#if creatingItem}}
+      create
         {{> Item_edit createItemArgs }}
       
       {{else}}

@@ -42,11 +42,7 @@ Template.Items_panel.helpers({
             }
         }
     },
-    // showthis() {
-    //     return {
-    //         foo: 'bar'
-    //     }
-    // },
+
     showItemArgs(selectedItemId) {
         const instance = Template.instance();
         const item = Items.findOne(selectedItemId);
@@ -55,11 +51,11 @@ Template.Items_panel.helpers({
 
             onEdit(itemId) {
                 instance.state.set('editingItem', itemId);
-                // console.log('EDIT CONTACT REL ', relId);
+                console.log('showitemArgs >>>>>>>>>> EDIT ITEM:  ', itemId);
             },
             onDelete(itemId) {
                 instance.state.set('deletingItem', itemId);
-                // console.log('DELETE CONTACT REL ', relId);
+                console.log(' showitemArgs DELETE item ', itemId);
                 swal({
                         title: "Borramos a " + item.name + ' ?',
                         text: "No se puede recuperar esta informacion!",
@@ -84,13 +80,16 @@ Template.Items_panel.helpers({
             }
         }
     },
-    editItemArgs(id) {
+    editItemArgs() {
         const instance = Template.instance();
-        const item = Items.findOne(id);
+        const item = Items.findOne(instance.state.get('editingItem'));
+        console.log('editItemArgs >>>>>>>>> EDIT ITEM :', item);
         return {
             item: item,
-            onSavedData() {
+            onSavedData(itemId) {
                 instance.state.set('editingItem', false);
+                instance.state.set('selectedItem', itemId);
+                console.log('editItemArgs onSavedData', itemId);
 
             },
             onCancel() {
@@ -100,40 +99,7 @@ Template.Items_panel.helpers({
 
         }
     },
-    showVendorRelArgs(itemId) {
-        const instance = Template.instance();
-        const rel = Rels.findOne({
-            type: 'vendor',
-            origin: itemId,
-            destiny: HARDCODE_OWNER
-        });
-        return {
-            rel,
-            onEdit(relId) {
-                instance.state.set('editingVendorRel', relId);
-                // console.log('EDIT CONTACT REL ', relId);
-            }
-        }
 
-    },
-    editVendorRelArgs(itemId) {
-        const instance = Template.instance();
-
-        return {
-            type: 'vendor',
-            origin: itemId,
-            destiny: HARDCODE_OWNER,
-            onSavedData(relId) {
-                instance.state.set('createdRel', relId);
-                instance.state.set('editingVendorRel', false);
-
-            },
-            onCancel() {
-                instance.state.set('editingVendorRel', false);
-                console.log('Cancelado');
-            }
-        }
-    },
     createItemArgs() {
         const instance = Template.instance();
 
@@ -154,101 +120,10 @@ Template.Items_panel.helpers({
         }
     },
 
-    editItemArgs(itemId, personId, relId) {
-        const instance = Template.instance();
-        const item = Items.findOne(itemId);
-        const person = Persons.findOne(personId);
-        const rel = Rels.findOne(relId);
-        return {
-            destiny: itemId,
-            owner: HARDCODE_OWNER,
-            type: 'contact',
-            item: item,
-            person: person,
-            rel: rel,
-            onSavedData() {
-                // console.log('rel created contact', relId);
-                instance.state.set('editingItem', false);
-                instance.state.set('creatingItem', false);
-
-            },
-            onCancel() {
-                // console.log('cancel');
-                instance.state.set('editingItem', false);
-                instance.state.set('creatingItem', false);
-
-            }
-        }
-    },
-    editPlaceArgs(itemId, placeId, relId) {
-        const instance = Template.instance();
-        const item = Items.findOne(itemId);
-        const place = Places.findOne(placeId);
-        const rel = Rels.findOne(relId);
-        return {
-            destiny: itemId,
-            owner: HARDCODE_OWNER,
-            type: 'place',
-            item: item,
-            place: place,
-            rel: rel,
-            onSavedData() {
-                // console.log('rel created contact', relId);
-                instance.state.set('editingPlace', false);
-                instance.state.set('creatingPlace', false);
-
-            },
-            onCancel() {
-                // console.log('cancel');
-                instance.state.set('editingPlace', false);
-                instance.state.set('creatingPlace', false);
-
-            }
-        }
-    },
 
 
-    showPlaceArgs(placeId, relId) {
-        const instance = Template.instance();
-        const place = Places.findOne(placeId);
-        const rel = Rels.findOne(relId);
-        return {
-            place: place,
-            rel: rel,
-            onEdit(relId) {
-                instance.state.set('editingPlace', relId);
-                // console.log('EDIT CONTACT REL ', relId);
-            },
-            onDelete(relId) {
-                instance.state.set('deletingPlace', relId);
-                // console.log('DELETE CONTACT REL ', relId);
-                swal({
-                        title: "Estas seguro?",
-                        text: "No se puede recuperar esta informacion!",
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "Si, borrarlo!",
-                        cancelButtonText: "No, cancelar por favor!",
-                        closeOnConfirm: false,
-                        closeOnCancel: false
-                    },
-                    function(isConfirm) {
-                        if (isConfirm) {
-
-                            const deleted = Rels.remove(relId);
-                            console.log('deleted', deleted);
 
 
-                            swal("Eliminado!", "Este lugar fue eliminado.", "success");
-                        } else {
-                            swal("Cancelado", "Este lugar esta seguro :)", "error");
-                        }
-                    });
-
-            }
-        }
-    },
 
 
 });
@@ -278,55 +153,20 @@ Template.Items_panel.helpers({
     creatingItem() {
         const instance = Template.instance();
         return instance.state.get('creatingItem');
-    },
-    creatingPlace() {
-        const instance = Template.instance();
-        return instance.state.get('creatingPlace');
-    },
-    editingPlace() {
-        const instance = Template.instance();
-        return instance.state.get('editingPlace');
-    },
-    editingItem(relId) {
-        const instance = Template.instance();
-        return (relId == instance.state.get('editingItem')) ? true : false;
     }
+
+
 });
 //vvvvvvvvvvvvvv HELPERS vvvvvvvvvvvvvv
 Template.Items_panel.helpers({
-    rel(item) {
-        const rel = Rels.findOne({
-            type: 'vendor',
-            origin: item,
-            destiny: HARDCODE_OWNER
-        });
-        return rel;
-    },
-    contactRels(item) {
-        const rels = Rels.find({
-            type: 'contact',
-            // origin: item,
-            destiny: item
-        });
-        return rels;
-    },
-    placeRels(item) {
-        const rels = Rels.find({
-            type: 'place',
-            // origin: item,
-            destiny: item
-        });
-        return rels;
-    }
+
 });
 
 Template.Items_panel.events({
     'click .js-deselect-item': function(e, instance) {
         instance.state.set('selectedItem', false);
     },
-    'click .js-rel-vendor-edit': function(e, instance) {
-        instance.state.set('editingVendorRel', true);
-    },
+
     'click .js-item-edit': function(e, instance) {
         instance.state.set('editingItem', true);
     },

@@ -29,9 +29,27 @@ from 'meteor/kadira:flow-router';
 
 import './item-edit.html';
 
+
+
+Template.Item_edit.onCreated(function() {
+    this.autorun(() => {
+        let profitCenterSubscription = this.subscribe('profit_centers.test');
+    });
+});
+
 Template.Item_edit.onRendered(function() {
     const instance = Template.instance();
-    const item = instance.data.person;
+    const item = instance.data.item;
+    console.log('on rendered EDIT ITEM >>>>>>', item);
+    instance.$('#nameInput')
+        .val(item.name);
+
+    // instance.$('#profitCenterSelect')
+    //     .val('ffHRBxE9GjRY2TSzH');
+    // not working   FIXXXXXXXXXXXXX
+
+
+
 
     instance.$('[data-action=form]')
         .validate({
@@ -45,6 +63,10 @@ Template.Item_edit.onRendered(function() {
                     required: false,
                     minlength: 2,
                     maxlength: 30
+
+                },
+                profitcenter: {
+                    required: true
                 }
             },
             messages: {
@@ -57,6 +79,12 @@ Template.Item_edit.onRendered(function() {
                     //required: 'Este campo no puede quedar vacío!',
                     minlength: 'La descripción debe tener mínimo {0} letras!',
                     maxlength: 'La descripción debe tener máximo {0} letras!',
+
+                },
+                profitcenter: {
+                    required: 'Este campo no puede quedar vacío!'
+                        //minlength: 'La descripción debe tener mínimo {0} letras!',
+                        //maxlength: 'La descripción debe tener máximo {0} letras!',
                 }
             },
             showErrors: function(errorMap, errorList) {
@@ -71,11 +99,14 @@ Template.Item_edit.onRendered(function() {
                         .val();
                     let desc = instance.$('#descInput')
                         .val();
-                    if (item == undefined) {
+                    let profitCenter = instance.$('#profitCenterSelect')
+                        .val();
+                    if (item._id == undefined) {
                         console.log("INSERTING...");
                         const newItem = Items.insert({
                             name: name,
                             desc: desc,
+                            profitCenter: profitCenter,
                             owner: Session.get('workfor')
                         });
                         instance.data.onSavedData(newItem);
@@ -88,14 +119,17 @@ Template.Item_edit.onRendered(function() {
                         Items.update({
                             _id: item._id
                         }, {
-                            name: name,
-                            desc: desc,
+                            $set: {
+                                name: name,
+                                desc: desc,
+                                profitCenter: profitCenter,
+                            }
                         });
-                        instance.data.onSavedData();
-                        swal({
-                            title: name + ' actualizado!',
-                            type: "success"
-                        });
+                        instance.data.onSavedData(item._id);
+                        // swal({
+                        //     title: name + ' actualizado!',
+                        //     type: "success"
+                        // });
                     }
                     //insert or edit if
                 }
@@ -104,9 +138,12 @@ Template.Item_edit.onRendered(function() {
 });
 
 Template.Item_edit.helpers({
-    company() {
-        const instance = Template.instance();
-        return instance.data.company;
+
+    profitCenters() {
+
+        return ProfitCenters.find();
+
+
     }
 })
 
@@ -125,74 +162,6 @@ Template.Item_edit.events({
     'submit form': function(e, instance) {
         e.preventDefault();
 
-    },
-    'focus [data-action=phoneInput]': function(e) {
-        //$('#phoneExplanation').show();
-    },
-    'blur [data-action=phoneInput]': function(e, instance) {
-        var intNum = e.target.value;
-        var country = (Phoneformat.countryForE164Number(intNum)) ?
-            Phoneformat.countryForE164Number(intNum) : 'AR';
-        var element = instance.$('#phoneInput');
-        var error = 'TELEFONO INCORRECTO';
-        if (!Phoneformat.isValidNumber(intNum, country) && (intNum != '')) {
-            element.parent("div")
-                .addClass("has-error has-feedback");
-            $(element)
-                .next("span")
-                .next("span")
-                .html(error)
-                .show();
-            $(element)
-                .parent("div")
-                .addClass("has-error has-feedback");
-            // $(element).next("span").addClass("fa fa-2x fa-remove");
-        } else {
-            $(element)
-                .parent("div")
-                .removeClass("has-error has-feedback");
-            // $(element).next("span").removeClass("fa fa-2x fa-remove");
-            $(element)
-                .next("span")
-                .next("span")
-                .hide();
-        }
-        //console.log(Phoneformat.isValidNumber(intNum,country));
-        //console.log(country);
-        //console.log(intNum);
-
-        //$('#phoneExplanation').hide();
-
-
-    },
-    'blur [data-action=mobileInput]': function(e, instance) {
-        var intNum = e.target.value;
-        var country = (Phoneformat.countryForE164Number(intNum)) ?
-            Phoneformat.countryForE164Number(intNum) : 'AR';
-        var element = instance.$('#mobileInput');
-        var error = 'TELEFONO INCORRECTO';
-        if (!Phoneformat.isValidNumber(intNum, country) && (intNum != '')) {
-            element.parent("div")
-                .addClass("has-error has-feedback");
-            $(element)
-                .next("span")
-                .next("span")
-                .html(error)
-                .show();
-            $(element)
-                .parent("div")
-                .addClass("has-error has-feedback");
-            // $(element).next("span").addClass("fa fa-2x fa-remove");
-        } else {
-            $(element)
-                .parent("div")
-                .removeClass("has-error has-feedback");
-            // $(element).next("span").removeClass("fa fa-2x fa-remove");
-            $(element)
-                .next("span")
-                .next("span")
-                .hide();
-        }
     }
 
 });

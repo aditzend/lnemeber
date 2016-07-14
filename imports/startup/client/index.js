@@ -3,6 +3,7 @@
 //declarations
 import '../../api/companies/companies.js';
 import '../../api/accounting/accounts/accounts.js';
+import '../../api/controlling/profit-centers/profit-centers.js';
 import '../../api/transfers/transfers-of-ownership/transfers-of-ownership.js';
 import '../../api/transfers/transfers-of-ownership/details/details.js';
 import '../../api/rels/rels.js';
@@ -32,9 +33,7 @@ Meteor.startup(function() {
         .addClass('fixed-small-header');
 
     TAPi18n.setLanguage('es')
-        .done(function() {
-            console.log('i18n loaded');
-        })
+        .done(function() {})
         .fail(function(error_message) {
             // Handle the situation
             console.log(error_message);

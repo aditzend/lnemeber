@@ -18,12 +18,16 @@ Template.CashAssets_panel.onCreated(function() {
 
 Template.CashAssets_panel.helpers({
     accounts() {
-        return AccountingAccounts.find();
+        return AccountingAccounts.find({
+            type: 'cashAsset'
+        });
     },
     sum() {
         const instance = Template.instance();
 
-        let accounts = AccountingAccounts.find();
+        let accounts = AccountingAccounts.find({
+            type: 'cashAsset'
+        });
         let sum = 0;
         accounts.forEach(function(account) {
             console.log(account.value);

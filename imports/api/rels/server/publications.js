@@ -58,6 +58,22 @@ Meteor.publish('rels.customers',
             }
         });
     });
+Meteor.publish('customerRels',
+    function(workfor) {
+        if (this.userId) {
+            return Rels.find({
+                type: 'customer',
+                destiny: workfor
+            }, {
+                fields: {
+                    owner: false
+                }
+            });
+        } else {
+            this.ready();
+        }
+    });
+
 Meteor.publish('rels.vendors',
     function(workfor, workerRelId) { //f7BXSGPQY3gnKf9zr
         this.autorun(function(computation) {

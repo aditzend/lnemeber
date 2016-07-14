@@ -1,146 +1,40 @@
 <template name="Payables_panel">
   {{#panel title=(_ "Payables") panelClass="stats" color="hred"}}
+  {{#if Template.subscriptionsReady}}
+  <!-- {{#each aa in owes}} -->
+<!-- {{#let perf=performance pc._id }} -->
+    
   <div class="table-responsive">
+    <h3>{{_ 'Vendors balance'}} : {{payable}}</h3>
+    <!-- <h3>{{companyName aa.origin}} {{aa.value}}</h3> -->
+    <!-- <h5>{{_ "Amount sold"}} : {{amountSold pc._id}}</h5>
+    <h5>{{_ "Revenue"}} : {{revenue pc._id}}</h5>
                             <table cellpadding="1" cellspacing="1" class="table table-condensed table-striped">
                                 <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Phone</th>
-                                    <th>Street</th>
+                                    <th>{{_ "Item"}}</th>
+                                    <th>{{_ "Amount"}}</th>
+                                    <th>{{_ "Price"}}</th>
+                              
                                 </tr>
                                 </thead>
                                 <tbody>
+                                    {{#each tood in (sales pc._id)}}
                                 <tr>
-                                    <td>Henry</td>
-                                    <td>Purus Gravida Sagittis Limited</td>
-                                    <td>055 1753 4032</td>
+                                    <td>{{tood.profitCenter}}</td>
+                                    <td>{{tood.item}}</td>
+                                    <td>{{tood.amount}}</td>
+                                    <td>{{tood.price}}</td>
                                 </tr>
-                                <tr>
-                                    <td>Shelly</td>
-                                    <td>Posuere Enim Inc.</td>
-                                    <td>0313 143 2317</td>
-                                </tr>
-                                <tr>
-                                    <td>Edan</td>
-                                    <td>Quisque Imperdiet Company</td>
-                                    <td>076 1743 8649</td>
-                                </tr>
-                                <tr>
-                                    <td>Sophia</td>
-                                    <td>Quam Incorporated</td>
-                                    <td>0863 826 7513</td>
-                                </tr>
-                                <tr>
-                                    <td>Griffith</td>
-                                    <td>Tempor Erat Corp.</td>
-                                    <td>0845 46 45</td>
-                                </tr>
+                      {{/each}}
 
                                 </tbody>
-                            </table>
+                            </table> -->
                         </div>
-    {{#if selectedCompany}}
-    <div class="list-item">
-    
-    <div class="">
-      <button class="js-deselect-company btn btn-primary">
-      <i class='fa fa-arrow-left'></i>
-        Volver a la busqueda
-      </button>
-    </div>
-  </div>
-    <hr>
-        {{#if editingCompany}}
-          {{> Company_edit (editCompanyArgs selectedCompany)}}
-        {{else}}
-          {{> Company_show (showCompanyArgs selectedCompany)}}
-        {{/if}}
-      <hr>
-      <div class="list-item">
-        {{#if rel selectedCompany}}
-          {{#if editingCustomerRel}}
-            {{> Rel_customer_edit (editCustomerRelArgs selectedCompany)}}
-          {{else}}
-            
-            {{> Rel_customer_show (showCustomerRelArgs selectedCompany)}}
-          {{/if}}
-        {{else}}
-          {{#if editingCustomerRel}}
-              {{> Rel_customer_edit (editCustomerRelArgs selectedCompany)}}
-            {{else}}
-              {{> Rel_customer_edit (editCustomerRelArgs selectedCompany)}}
-          {{/if}}
-        {{/if}}
-      </div>
-      <hr>
-      {{#panel title='Lugares' collapsed=true}}
-        <div class="list-item">
-          {{#if creatingPlace}}
-          {{> Place_edit (editPlaceArgs selectedCompany '' '' '' )}}
-          
-          {{else}}
-            <div class="text-center">
-              <button class="js-place-create btn btn-default">
-              <i class='fa fa-map-marker'></i>
-              Crear lugar
-              </button>
-            </div>
-          {{/if}}
-          <hr>
-          </div>
-          <div class="list-item">
-            {{#each placeRels selectedCompany}}
-            <hr>
-              {{#if editingPlace  _id}}
-                {{> Place_edit (editPlaceArgs destiny origin _id)}}
-              {{else}}
-                {{> Place_show (showPlaceArgs origin _id )}}
-              {{/if}}
-            {{/each}}
-        </div>
-      {{/panel}}
-      <hr>
-      {{#panel title='Contactos' }}
-      <div class="list-item">
-        {{#if creatingContact}}
-        {{> Contact_edit (editContactArgs selectedCompany '' '' '' )}}
-        dfg
-        {{else}}
-          <div class="text-center">
-            <button class="js-contact-create btn btn-default">
-            <i class='fa fa-user'></i>
-            Crear contacto
-            </button>
-          </div>
-        {{/if}}
-        <hr>
-        </div>
-        <div class="list-item">
-          {{#each contactRels selectedCompany}}
-          
-          <hr>
-            {{#if editingContact _id}}
-              {{> Contact_edit (editContactArgs destiny origin _id)}}
-            {{else}}
-              {{> Contact_show (showContactArgs origin _id )}}
-            {{/if}}
-            
-          {{/each}}
-      </div>
-      {{/panel}}
-    
-  
-      
-    {{else}} <!-- //selectedCompany -->
-      {{#if creatingCompany}}
-        {{> Company_create createCompanyArgs }}
-      
-      {{else}}
-          <h3>Seleccionar empresa</h3>
-          {{> Company_search searchCompanyArgs }}
-
-      
-      {{/if}}
-    {{/if}} <!-- //selectedCompany -->
+                        
+                        <!-- {{/each}} -->
+                        {{else}}
+                        {{_ "Loading"}}
+                        {{/if}}
 {{/panel}}
 </template>

@@ -19,6 +19,7 @@ import '../../ui/pages/reset-password.js';
 import '../../ui/pages/landing-page.js';
 import '../../ui/pages/treasury-show-page.js';
 import '../../ui/pages/sales-new-page.js';
+import '../../ui/pages/expense-new-page.js';
 import '../../ui/layouts/landing-layout.html';
 
 
@@ -167,31 +168,55 @@ FlowRouter.route('/profile/', {
 FlowRouter.route('/show-treasury/', {
     triggersEnter: [AccountsTemplates.ensureSignedIn],
     name: 'showTreasury',
-    action() {
+    action(params, queryParams) {
         BlazeLayout.render('App_body', {
             main: 'Treasury_show_page'
         });
     }
 });
-FlowRouter.route('/sales/new/', {
+
+// FlowRouter.route('/create-sale/', {
+//     triggersEnter: [AccountsTemplates.ensureSignedIn],
+//     name: 'createSale',
+//     action() {
+// 
+//         let tooId = TransfersOfOwnership.insert({});
+// 
+//         let forward = '/too/' + tooId;
+// 
+//         FlowRouter.go(forward);
+//     }
+// // });
+// FlowRouter.route('/too/:_id/', {
+//     triggersEnter: [AccountsTemplates.ensureSignedIn],
+//     name: 'too',
+//     action(params, queryParams) {
+//         BlazeLayout.render('App_body', {
+//             main: 'Sales_new_page'
+//         });
+//         console.log('params', params);
+// 
+//     }
+// });
+FlowRouter.route('/too/sale/:_id/', {
     triggersEnter: [AccountsTemplates.ensureSignedIn],
     name: 'createSale',
-    action() {
-        let tooId = TransfersOfOwnership.insert({
-
-        });
-        let forward = '/too/' + tooId;
-
-        FlowRouter.go(forward);
-    }
-});
-FlowRouter.route('/too/:_id/', {
-    triggersEnter: [AccountsTemplates.ensureSignedIn],
-    name: 'too',
-    action() {
+    action(params, queryParams) {
         BlazeLayout.render('App_body', {
             main: 'Sales_new_page'
         });
+        //console.log('params', params);
+
+    }
+});
+FlowRouter.route('/too/expense/:_id/', {
+    triggersEnter: [AccountsTemplates.ensureSignedIn],
+    name: 'createExpense',
+    action(params, queryParams) {
+        BlazeLayout.render('App_body', {
+            main: 'Expense_new_page'
+        });
+        //console.log('params', params);
 
     }
 });

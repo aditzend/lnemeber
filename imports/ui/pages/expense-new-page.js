@@ -7,11 +7,11 @@ import '/imports/ui/components/company/company-decs.js';
 import '/imports/ui/components/item/item-decs.js';
 import '/imports/ui/components/too-detail/too-detail-show.js';
 import '/imports/ui/components/too-detail/too-detail-edit.js';
-import './sales-new-page.html';
+import './expense-new-page.html';
 
 
 
-Template.Sales_new_page.onCreated(function() {
+Template.Expense_new_page.onCreated(function() {
 
 
     this.state = new ReactiveDict();
@@ -59,7 +59,7 @@ Template.Sales_new_page.onCreated(function() {
             if (too.destiny) {
                 this.state.set('company', too.destiny);
                 const rel = Rels.findOne({
-                    type: 'customer',
+                    type: 'vendor',
                     origin: too.destiny
                 }, {
                     fields: {
@@ -81,7 +81,7 @@ Template.Sales_new_page.onCreated(function() {
 
 });
 
-Template.Sales_new_page.onRendered(function() {
+Template.Expense_new_page.onRendered(function() {
     const instance = Template.instance();
 
     // $('.date-picker')
@@ -108,7 +108,7 @@ Template.Sales_new_page.onRendered(function() {
 
 });
 
-Template.Sales_new_page.helpers({
+Template.Expense_new_page.helpers({
     invoiceType() {
         const instance = Template.instance();
 
@@ -348,9 +348,11 @@ Template.Sales_new_page.helpers({
     //     instance.state.set('selectedCompany', too.destiny);
     //     return (instance.state.get('switchingCompany')) ? false : company;
     // },
-    productArgs() {
+    inputArgs() {
         const instance = Template.instance();
         return {
+            mode: 'input',
+
             selectedItemId(id) {
                 instance.state.set('sellingItemId', id);
                 // console.log("product", id);
@@ -368,13 +370,13 @@ Template.Sales_new_page.helpers({
         const instance = Template.instance();
         return instance.state.get('paymentDays');
     },
-    customerArgs(companyId) {
+    vendorArgs(companyId) {
         const instance = Template.instance();
 
         return {
-            mode: 'customer',
+            mode: 'vendor',
             params: 'show-details',
-            index: CustomersIndex,
+            index: VendorsIndex,
             selectedCompanyId: companyId,
             selectedCompany(id) {
                 instance.state.set('company', id);
@@ -413,7 +415,7 @@ Template.Sales_new_page.helpers({
 
 });
 
-Template.Sales_new_page.events({
+Template.Expense_new_page.events({
     'click .js-save-sale': function(e, instance) {
 
         FlowRouter.go('home');
@@ -446,7 +448,7 @@ Template.Sales_new_page.events({
 
         });
         AccountingAccounts.insert({
-            name: 'vatPayable', //iva debito
+            name: 'vatReceivable', //iva creadito
             owner: Session.get('workfor'),
             value: amount * price * (1 - discount * 0.01) * taxes * 0.01,
             tood: newTood
@@ -454,8 +456,8 @@ Template.Sales_new_page.events({
         });
         AccountingAccounts.insert({
             name: 'owes', //clientBalance o saldo cuenta corriente del cliente
-            destiny: Session.get('workfor'),
-            origin: company,
+            origin: Session.get('workfor'),
+            destiny: company,
             owner: Session.get('workfor'),
             value: amount * price * (1 - discount * 0.01) * (1 + taxes * 0.01),
 

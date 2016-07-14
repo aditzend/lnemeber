@@ -6,7 +6,6 @@ from 'meteor/useraccounts:core';
 
 
 T9n.setLanguage('es');
-console.log(TAPi18n.__('Log In'));
 
 let myPostSubmitFunc = function(userId, info) {
     if (userId) {

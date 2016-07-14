@@ -1,4 +1,4 @@
-<template name="Sales_new_page">
+<template name="Expense_new_page">
     {{#if Template.subscriptionsReady}}
         {{#staggering}}
             <div class='wrapper'>
@@ -17,7 +17,7 @@
                     <div class="col-xs-12 col-lg-4">
                 
                         {{#if company}}
-                            <h3>{{_ "Selling to"}}:
+                            <h3>{{_ "Buying from"}}:
                                 {{companyName}}
                             </h3>
                             <h6>{{_ "Payment days"}}:
@@ -28,7 +28,7 @@
                                         <button class='btn btn-default js-hide-company-details'>{{_ 'Hide details'}}</button>
 
                                         {{#panel title=(_ "Customer details")}}
-                                            {{> Company_DECS customerArgs company}}
+                                            {{> Company_DECS vendorArgs company}}
                                         {{/panel}}
                                     {{else}}
                                         <button class='btn btn-default js-show-company-details'>{{_ 'View details'}}</button>
@@ -36,7 +36,7 @@
                             <button class='btn btn-default js-show-company-switch'>{{_ 'Switch'}}</button>
                         {{else}}
                       
-                            {{> Company_DECS customerArgs }}
+                            {{> Company_DECS vendorArgs }}
                         {{/if}}
                     </div>
                     <div class="col-xs-8 col-lg-2">
@@ -73,7 +73,7 @@
 
                     </div>
                     <div class="col-xs-12 col-lg-4">
-                        {{> Item_DECS productArgs}}
+                        {{> Item_DECS inputArgs}}
 
                     </div>
 

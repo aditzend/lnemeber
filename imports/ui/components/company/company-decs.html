@@ -23,16 +23,16 @@
         <div class="list-item">
             {{#if rel selectedCompany}}
                 {{#if editingCustomerRel}}
-                    {{> Rel_customer_edit (editCustomerRelArgs selectedCompany)}}
+                    {{> Rel_customer_edit (editRelArgs selectedCompany)}}
                 {{else}}
 
-                    {{> Rel_customer_show (showCustomerRelArgs selectedCompany)}}
+                    {{> Rel_customer_show (showRelArgs selectedCompany)}}
                 {{/if}}
             {{else}}
                 {{#if editingCustomerRel}}
-                    {{> Rel_customer_edit (editCustomerRelArgs selectedCompany)}}
+                    {{> Rel_customer_edit (editRelArgs selectedCompany)}}
                 {{else}}
-                    {{> Rel_customer_edit (editCustomerRelArgs selectedCompany)}}
+                    {{> Rel_customer_edit (editRelArgs selectedCompany)}}
                 {{/if}}
             {{/if}}
         </div>
@@ -41,12 +41,11 @@
             <div class="list-item">
                 {{#if creatingPlace}}
                     {{> Place_edit (editPlaceArgs selectedCompany '' '' '' )}}
-
                 {{else}}
                     <div class="text-center">
                         <button class="js-place-create btn btn-default">
                             <i class='fa fa-map-marker'></i>
-                            Crear lugar
+                            {{_ "New place"}}
                         </button>
                     </div>
                 {{/if}}
@@ -67,13 +66,12 @@
         {{#panel title='Contactos' collapsed=true}}
             <div class="list-item">
                 {{#if creatingContact}}
-                    {{> Contact_edit (editContactArgs selectedCompany '' '' '' )}}
-                    dfg
+                    {{> Contact_edit (editContactArgs selectedCompany  )}}
                 {{else}}
                     <div class="text-center">
                         <button class="js-contact-create btn btn-default">
                             <i class='fa fa-user'></i>
-                            Crear contacto
+                            {{_ "New contact"}}
                         </button>
                     </div>
                 {{/if}}

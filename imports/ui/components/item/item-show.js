@@ -73,10 +73,10 @@ Template.Item_show.events({
 
     },
     'click .js-delete': function(e, instance) {
-        instance.data.onDelete(instance.data.rel._id);
+        instance.data.onDelete(instance.data.item._id);
     },
     'click .js-edit': function(e, instance) {
-        instance.data.onEdit(instance.data.rel._id);
+        instance.data.onEdit(instance.data.item._id);
 
     }
 

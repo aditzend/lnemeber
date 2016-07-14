@@ -6,8 +6,12 @@ Template.Place_edit.onRendered(function() {
     const place = instance.data.place;
     const rel = instance.data.rel;
 
-    $('#placeType')
-        .val(place.placeType);
+    if (place) {
+        $('#placeType')
+            .val(place.placeType);
+    }
+
+
 
     //console.log(instance.data);
 

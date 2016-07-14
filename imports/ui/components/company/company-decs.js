@@ -7,10 +7,12 @@ import '../place/place-show.js';
 import '../place/place-edit.js';
 import '../birthday/birthday-show.js';
 import '../rel/rel-customer-show.js';
+import '../rel/rel-customer-edit.js';
 
 Template.Company_DECS.onCreated(function() {
     this.autorun(() => {
         this.subscribe('rels.customers', Session.get('workfor'), Session.get('workerRelId'));
+        this.subscribe('rels.vendors', Session.get('workfor'), Session.get('workerRelId'));
         this.subscribe('rels.places', Session.get('workfor'), Session.get('workerRelId'));
         this.subscribe('rels.contacts', Session.get('workfor'), Session.get('workerRelId'));
         // this.subscribe('persons.test');
@@ -29,7 +31,8 @@ Template.Company_DECS.onCreated(function() {
         editingContact: false,
         deletingContact: false,
         creatingPlace: false,
-        editingPlace: false
+        editingPlace: false,
+        mode: false
 
     });
 });
@@ -37,7 +40,7 @@ Template.Company_DECS.onCreated(function() {
 Template.Company_DECS.onRendered(function() {
     const instance = Template.instance();
     instance.state.set('selectedCompany', instance.data.selectedCompanyId);
-    console.log("selectedCompany", instance.state.get('selectedCompany'));
+    instance.state.set('mode', instance.data.mode);
 
 });
 
@@ -121,14 +124,14 @@ Template.Company_DECS.helpers({
 
         }
     },
-    showCustomerRelArgs(companyId) {
+    showRelArgs(companyId) {
         const instance = Template.instance();
         const rel = Rels.findOne({
-            type: 'customer',
+            type: instance.state.get('mode'),
             origin: companyId,
             destiny: Session.get('workfor')
         });
-        instance.data.paymentDays(rel.paymentDays);
+        //  instance.data.paymentDays(rel.paymentDays);
         return {
             rel,
             onEdit(relId) {
@@ -138,11 +141,11 @@ Template.Company_DECS.helpers({
         }
 
     },
-    editCustomerRelArgs(companyId) {
+    editRelArgs(companyId) {
         const instance = Template.instance();
 
         return {
-            type: 'customer',
+            type: instance.state.get('mode'),
             origin: companyId,
             destiny: Session.get('workfor'),
             onSavedData(relId) {
@@ -400,6 +403,7 @@ Template.Company_DECS.events({
     },
     'click .js-contact-create': function(e, instance) {
         instance.state.set('creatingContact', true);
+        //console.log('show contact edit to create..........');
     },
     'click .js-place-create': function(e, instance) {
         instance.state.set('creatingPlace', true);

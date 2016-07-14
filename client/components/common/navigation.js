@@ -23,7 +23,6 @@ Template.navigation.onRendered(function() {
     // Initialize metsiMenu plugin to sidebar menu
     $('#side-menu')
         .metisMenu();
-    console.log(TAPi18n.__('Log In'));
 
 
 
@@ -120,6 +119,9 @@ Template.navigation.events({
         BlazeLayout.render('App_body', {
             main: 'Treasury_show_page'
         });
+    },
+    'click .js-create-sale': function() {
+        FlowRouter.go('createSale');
     },
 
     // Colapse menu in mobile mode after click on element
